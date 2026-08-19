@@ -15,3 +15,5 @@
 |Cultura|4|Cronograma iterativo sugiere apertura a ajustes|
 |Equipo del proyecto|4|Equipo pequeño y colocado (estudiantes)|
 |Experiencia y compromiso|3|Equipo aprendiendo metaheurísticas, compromiso académico|
+
+<img width="460" height="312" alt="image" src="https://github.com/user-attachments/assets/f56ea7be-05c1-43a5-81de-4f0fdb0387da" />
