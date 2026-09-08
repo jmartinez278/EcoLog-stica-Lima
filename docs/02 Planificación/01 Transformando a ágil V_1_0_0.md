@@ -169,3 +169,9 @@ EP-05 Sostenibilidad y Gestión Ambiental
 ```
 
 Esta estructura será utilizada como base para el siguiente paso: **descomponer cada RF en Historias de Usuario (US) atómicas con formato Como / Quiero / Para**.
+
+[← Volver al README Principal](../../README.md)
+
+# Transformando a ágil
+
+> Documento correspondiente a la Fase 02: Planificación del Proyecto.
