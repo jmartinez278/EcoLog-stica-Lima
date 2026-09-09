@@ -56,7 +56,6 @@ Las Historias de Usuario fueron estimadas mediante **Story Points** utilizando F
 **Descripción:**  
 El Timeline muestra la planificación temporal de las cinco Épicas del proyecto.
 
-> **Pendiente:** insertar captura del Timeline/Roadmap con las 5 Épicas.
 
 
 ![Evidencia 1 - Roadmap](images/jira/evidencia_01_roadmap.png)
@@ -69,11 +68,10 @@ El Timeline muestra la planificación temporal de las cinco Épicas del proyecto
 **Descripción:**  
 El Product Backlog contiene las Historias de Usuario y Enablers derivados de la línea base de requisitos, con estimación en Story Points y asociación con sus Épicas.
 
-> **Pendiente:** insertar captura del Backlog con Story Points visibles.
 
-```md
+
 ![Evidencia 2 - Backlog](images/jira/evidencia_02_backlog.png)
-```
+
 
 ---
 
@@ -88,11 +86,9 @@ El Product Backlog contiene las Historias de Usuario y Enablers derivados de la 
 
 El Sprint 1 prioriza capacidades de la Épica **EP-01 – Gestión de Operación Logística**.
 
-> **Pendiente:** insertar captura donde se visualicen los ítems del Sprint 1 y el Sprint Goal.
 
-```md
+
 ![Evidencia 3 - Sprint Planning](images/jira/evidencia_03_sprint_planning.png)
-```
 
 ---
 
@@ -118,11 +114,10 @@ La captura evidencia el Sprint activo, Historias de Usuario visibles, Story Poin
 | **Estado** | Unreleased |
 | **Objetivo** | Agrupar el alcance funcional correspondiente a la primera versión del MVP de EcoLogística Lima. |
 
-> **Pendiente:** insertar captura del módulo Releases mostrando `v1.0.0-MVP`.
 
-```md
+
 ![Evidencia 5 - Release](images/jira/evidencia_05_release.png)
-```
+
 
 ---
 
