@@ -58,9 +58,9 @@ El Timeline muestra la planificación temporal de las cinco Épicas del proyecto
 
 > **Pendiente:** insertar captura del Timeline/Roadmap con las 5 Épicas.
 
-```md
+
 ![Evidencia 1 - Roadmap](images/jira/evidencia_01_roadmap.png)
-```
+
 
 ---
 
