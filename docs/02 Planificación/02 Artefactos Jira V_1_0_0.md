@@ -106,7 +106,7 @@ To Do → In Progress → In Review / QA → Done
 
 La captura evidencia el Sprint activo, Historias de Usuario visibles, Story Points y elementos en progreso.
 
-![Evidencia 4 - Tablero Scrum](images/jira/evidencia_04_tablero_scrum.png)
+![Evidencia 4 - Tablero Scrum](images/jira/evidencia_04_tablero_scrum.png) 
 
 ---
 
