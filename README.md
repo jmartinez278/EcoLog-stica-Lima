@@ -1,6 +1,6 @@
 # EcoLogística Lima
 
-**Versión de este README:** 1.0.2 · **Actualizado:** 29/09/2026
+**Versión de este README:** 1.0.3 · **Actualizado:** 29/09/2026
 
 **EcoLogística Lima** es un proyecto de software orientado a la optimización sostenible de rutas de distribución de última milla para el escenario empresarial de **DistriRápido S.A.C.**
 
@@ -181,7 +181,7 @@ EcoLog-stica-Lima/
 | Revisión del Sprint | [03 Revisión del Sprint V_1_0_0](<docs/03 Implementación/03 Revisión del Sprint V_1_0_0.md>) |
 | Retrospectiva del Sprint | [04 Retrospectiva del Sprint V_1_0_0](<docs/03 Implementación/04 Retrospectiva del Sprint V_1_0_0.md>) |
 
-La revisión documenta el estado **antes** de la presentación del 29/09/2026. La retrospectiva es un borrador simulado para discutir con el equipo; aún no es un acta aprobada.
+La revisión documenta el estado **antes** de la presentación del 29/09/2026. La retrospectiva contiene un borrador de análisis y plan de acción pendiente de validación del equipo.
 
 Para ejecutar el proyecto, consultar las instrucciones técnicas del [backend](src/backend/README.md) y el [frontend](src/frontend/README.md). Los criterios oficiales de aceptación y el Definition of Done están en [Transformando a ágil](<docs/02 Planificación/01 Transformando a ágil V_1_0_1.md>). Las capturas de planificación, identificadas según su contenido real, están en [Artefactos Jira](<docs/02 Planificación/02 Artefactos Jira V_1_0_1.md>).
 
@@ -283,7 +283,8 @@ Los documentos de definición inicial se encuentran en `docs/01 Inicio/`, la pla
 |---|---|---|
 | 1.0.0 | 29/09/2026 | Actualización del estado del Sprint 1, distinción entre alcance implementado y objetivo del MVP, y enlaces a los cuatro entregables. |
 | 1.0.1 | 29/09/2026 | Enlaces a la planificación revisada y resultado de la verificación integrada en Docker y navegador. |
-| 1.0.2 | 29/09/2026 | Actualización del equipo actual a cinco integrantes y referencia a la retrospectiva simulada ampliada. |
+| 1.0.2 | 29/09/2026 | Actualización del equipo actual a cinco integrantes y referencia al borrador de retrospectiva ampliado. |
+| 1.0.3 | 29/09/2026 | Ajuste de la descripción del borrador de retrospectiva. |
 
 ---
 

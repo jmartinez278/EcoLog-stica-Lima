@@ -8,7 +8,7 @@
 | Líder del proyecto | Marco Jhair Martinez Llanos, Director del Proyecto según el acta de constitución |
 | Sprint | ECO Sprint 1, gestión de vehículos, pedidos y conductores |
 | Fecha de corte | 29/09/2026, 14:43 (hora de Lima), antes de la presentación prevista para hoy |
-| Versión del documento | 1.0.0 |
+| Versión del documento | 1.0.1 |
 | Estado general | Implementación técnica disponible en `sprint-1`; aceptación formal del Sprint pendiente |
 
 ## Resumen del avance
@@ -58,7 +58,7 @@ El [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) re
 
 1. Ejecutar la comprobación personal y conservar resultados de los diez flujos y casos negativos.
 2. Realizar la demostración ante los interesados y registrar fecha, asistentes, comentarios y decisiones reales.
-3. Celebrar la retrospectiva del equipo y sustituir el [borrador simulado](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md) por acuerdos efectivos.
+3. Celebrar la retrospectiva del equipo y validar el [borrador de análisis](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md) con acuerdos efectivos.
 4. Conservar salidas fechadas de la ejecución sobre PostgreSQL y repetir la comprobación si cambia el código o el entorno de presentación.
 5. Completar el DoD aplicable: análisis estático y seguridad, revisión por un par técnico, HTTPS/TLS para un despliegue externo, staging, accesibilidad y navegadores, aprobación BDD e integración/pipeline cuando el equipo lo autorice.
 
@@ -67,3 +67,4 @@ El [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) re
 | Versión | Fecha | Cambio |
 |---|---|---|
 | 1.0.0 | 29/09/2026 | Informe de corte del Sprint 1 con verificación integrada en Docker/PostgreSQL y pendientes de aceptación formal diferenciados. |
+| 1.0.1 | 29/09/2026 | Referencia al borrador de retrospectiva pendiente de validación; se conserva el nombre de archivo exigido por la consigna. |
