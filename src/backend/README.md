@@ -6,6 +6,17 @@ API FastAPI con capas `api → services → repositories → PostgreSQL`. Implem
 
 Desde la raíz, copiar `.env.example` a `.env` y sustituir **todos** los valores que empiezan por `replace`. `JWT_SECRET` debe ser aleatorio y tener al menos 32 caracteres. El usuario operador se crea solo si aún no existe; cambiar `BOOTSTRAP_OPERATOR_PASSWORD` después no cambia su contraseña almacenada.
 
+### Entorno de desarrollo en VS Code con WSL
+
+Si Pylance muestra `reportMissingImports` para `fastapi` o `sqlalchemy.orm`, el intérprete seleccionado no tiene instaladas las dependencias del backend. Desde la raíz del repositorio, crear el entorno e instalar el mismo `requirements.txt` usado por Docker:
+
+```bash
+python3 -m venv src/backend/.venv
+src/backend/.venv/bin/python -m pip install -r src/backend/requirements.txt
+```
+
+En VS Code conectado a WSL, ejecutar **Python: Select Interpreter** y elegir `src/backend/.venv/bin/python`; después ejecutar **Developer: Reload Window**. La configuración de rutas del paquete `app` está en `pyrightconfig.json`. El entorno `.venv` y los ajustes personales de `.vscode` están excluidos de Git. Si se abre el repositorio desde Windows en vez de WSL, crear un entorno virtual con Python de Windows y seleccionar su `python.exe`.
+
 Iniciar el conjunto con `docker compose up --build`. La migración se aplica al iniciar el backend y el proceso de carga inicial crea los roles, un operador y un cliente de ejemplo de forma idempotente. La API estará en `http://localhost:8000`, la interfaz en `http://localhost:5173` y PostgreSQL en el puerto `5432`. Estos puertos HTTP son solo para desarrollo local; un despliegue externo requiere un terminador HTTPS/TLS.
 
 Para arrancar el backend sin Compose, instalar `requirements.txt`, configurar `DATABASE_URL` apuntando a PostgreSQL, ejecutar `python -m alembic upgrade head`, `python -m app.db.seed_demo` y `python -m uvicorn app.main:app --reload` desde `src/backend`.
