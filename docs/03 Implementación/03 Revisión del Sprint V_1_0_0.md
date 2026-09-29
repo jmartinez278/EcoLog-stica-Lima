@@ -7,12 +7,13 @@
 | Proyecto | EcoLogística Lima – Optimizador de Rutas Sostenibles para DistriRápido S.A.C. |
 | Líder del proyecto | Marco Jhair Martinez Llanos, Director del Proyecto según el acta de constitución |
 | Fecha de corte | 29/09/2026, 14:43 (hora de Lima), antes de la presentación prevista para hoy |
-| Versión del documento | 1.0.0 |
+| Última revalidación técnica | 29/09/2026, 15:04 (hora de Lima) |
+| Versión del documento | 1.0.1 |
 | Objetivo del sprint | Implementar la base operativa para registrar y consultar vehículos, pedidos y conductores |
 
 ## Historias de Usuario completadas en este Sprint
 
-**No hay historias acreditadas como `Done` conforme al Definition of Done global** a la fecha de corte. Las siguientes historias están implementadas en la rama `sprint-1` y tienen pruebas automatizadas de sus flujos principales; su aceptación formal sigue pendiente.
+**No hay historias acreditadas como `Done` conforme al Definition of Done global** a la fecha de corte. Las siguientes historias están implementadas y publicadas en `sprint-1` y `main`, con pruebas automatizadas de sus flujos principales; su aceptación formal sigue pendiente.
 
 | Historia | Comportamiento que se puede mostrar | Escenario crítico automatizado | Estado de aceptación |
 |---|---|---|---|
@@ -39,6 +40,8 @@ En un proyecto Docker Compose aislado se construyeron y arrancaron PostgreSQL, b
 
 Esta verificación fue técnica e interna. **No constituye la demostración ni la aprobación de los stakeholders** exigidas para cerrar la revisión del Sprint.
 
+El 29/09/2026 a las 15:04 (hora de Lima) se repitieron `docker compose config --quiet`, el arranque de PostgreSQL/API/frontend y las respuestas HTTP 200 de `/health`, `/openapi.json` y la interfaz. En una nueva base PostgreSQL aislada volvieron a pasar 9 pruebas backend con 91,35 % de cobertura; pasaron 4 pruebas frontend y el build. En esta repetición no se ejecutó el recorrido HTTP completo ni se recogieron comentarios de interesados.
+
 ### Guion de demostración propuesto
 
 1. Abrir la aplicación local; ingresar con el operador inicial; mostrar la navegación Inicio, Vehículos, Pedidos y Conductores. No mostrar credenciales en la presentación.
@@ -64,3 +67,4 @@ Después del evento, registrar en una revisión versionada de este documento: fe
 | Versión | Fecha | Cambio |
 |---|---|---|
 | 1.0.0 | 29/09/2026 | Revisión previa a la presentación: verificación técnica interna, guion de demo y aceptación formal pendiente. |
+| 1.0.1 | 29/09/2026 | Revalidación técnica independiente a las 15:04, manteniendo pendiente la evidencia de demostración ante interesados. |
