@@ -1,65 +1,79 @@
 [← Volver al README principal](../../README.md)
 
-# Retrospectiva del sprint — borrador simulado para discusión
+# Retrospectiva del Sprint 1 — simulación para el equipo
 
 | Campo | Detalle |
 |---|---|
 | Proyecto | EcoLogística Lima – Optimizador de Rutas Sostenibles para DistriRápido S.A.C. |
-| Líder del proyecto | Marco Jhair Martinez Llanos, Director del Proyecto según el acta de constitución |
 | Sprint | ECO Sprint 1 |
+| Líder del proyecto | Marco Jhair Martinez Llanos, según el acta de constitución |
 | Fecha de elaboración | 29/09/2026 |
-| Versión del documento | 1.0.0 |
-| Estado | Simulación preparada antes de la retrospectiva del equipo; no es un acta de acuerdos |
+| Fecha de reunión real | No realizada a la fecha de elaboración |
+| Versión del documento | 1.0.1 |
+| Estado | **Ejercicio simulado; no es acta de una reunión ni acredita acuerdos** |
 
-**Alcance del borrador.** El equipo todavía no ha realizado la retrospectiva. Las reflexiones y acciones de este documento son **hipótesis y propuestas** basadas en el código, las pruebas y los impedimentos observados. No representan opiniones atribuidas a integrantes concretos ni compromisos aprobados. Tras la reunión real, se deben contrastar, sustituir o descartar y registrar asistentes, fecha, acuerdos y responsables confirmados.
+## Equipo considerado en la simulación
 
-## ¿Qué aprendimos? — hipótesis para validar
+Los cinco integrantes indicados por el usuario en la imagen compartida son:
 
-- El flujo de pedidos depende de un cliente activo: la carga inicial idempotente y `GET /api/v1/clientes` permitieron probar el primer sprint sin adelantar el módulo de gestión de clientes.
-- Las transiciones de estado necesitan pruebas negativas además del flujo feliz. Las pruebas de pedidos comprueban que un pedido `PLANIFICADO` no puede editarse ni cancelarse, y las de vehículos comprueban desactivación inexistente y repetida.
-- La configuración puede bloquear funciones que el código implementa: una clave JWT demasiado corta se manifestó como HTTP 500 durante el intento de login. Verificar variables locales antes de la demo debe formar parte de la preparación.
-- La cobertura y el build obtenidos en una ejecución anterior no prueban que un entorno nuevo esté listo. Docker y las dependencias Windows/WSL bloquearon inicialmente la repetición; al iniciarse Docker Desktop se verificaron los tres servicios, las pruebas sobre PostgreSQL, el build y la navegación a 360 px el 29/09/2026.
-- El Definition of Done exige evidencia social y de despliegue además de pruebas: revisión por pares, staging, aprobación BDD y validación de interfaz no se sustituyen con código o cobertura.
+1. Rodrigo Vladimir Arce Curi.
+2. Piero Pool Chauris Leguia.
+3. Luis Antony Gonzalo Guerrero.
+4. Marco Jhair Martinez Llanos.
+5. Jhon Robert Paitan Montes.
 
-## ¿Qué estamos haciendo bien? — observaciones técnicas, no consenso del equipo
+Esta lista identifica al equipo actual, **no a asistentes de una reunión**. La documentación inicial enumera cuatro integrantes y omite a Piero; no se conoce desde cuándo se incorporó ni corresponde modificar retroactivamente las actas históricas sin ese dato. Ninguna reflexión se atribuye como declaración de una persona concreta. Los responsables del plan son **propuestas para distribuir trabajo**, no compromisos aceptados por ellos.
 
-- La separación `router → servicio → repositorio → base de datos` y la estructura independiente frontend/backend hacen localizables las reglas y pruebas.
-- Los tests cubren registros, consultas vacías, duplicados, rechazos de transición, autenticación, permisos y auditoría; el 29/09/2026 se repitieron contra PostgreSQL aislado con 9 pruebas backend aprobadas y 91,35 % de cobertura, más 4 pruebas frontend aprobadas y build correcto.
-- El alcance se mantuvo en US-001 a US-010; no se introdujo aún el optimizador de rutas ni otras capacidades de sprints posteriores.
-- Los errores de operación, como el login 500, se pudieron relacionar con configuración concreta y documentar para su reproducción.
+## ¿Qué aprendimos? — conclusiones de la simulación basadas en evidencia
 
-## ¿Qué podemos hacer mejor? — propuestas para la reunión
+- El Sprint 1 puede demostrar US-001 a US-010 sin adelantar la gestión de clientes: la carga inicial idempotente y `GET /api/v1/clientes` permiten seleccionar un cliente para los pedidos. Esta solución limita la demo al cliente de ejemplo.
+- Las transiciones de estado requieren pruebas de rechazo: un pedido que ya no está `PENDIENTE` no debe editarse ni cancelarse; la desactivación de vehículos debe conservar el registro. Las pruebas automatizadas cubren estos casos.
+- Una configuración inválida puede impedir el acceso aunque la API esté implementada. El error HTTP 500 de login se relacionó con `JWT_SECRET` demasiado corto; la validación previa del entorno debe entrar en el guion de presentación.
+- El entorno de ejecución forma parte del resultado. Docker Desktop y la mezcla de dependencias Windows/WSL bloquearon temporalmente las verificaciones; al usar Compose y PostgreSQL aislado, el 29/09/2026 pasaron 9 pruebas backend con 91,35 % de cobertura, 4 pruebas frontend, el build y la navegación a 360 px.
+- Las pruebas y la navegación local acreditan funcionamiento técnico, pero no reemplazan la presentación a interesados, la revisión por pares, staging ni la aceptación formal del Definition of Done.
+
+## ¿Qué estamos haciendo bien? — aciertos observables, no consenso del equipo
+
+- La división `router → servicio → repositorio → PostgreSQL` y las carpetas separadas de frontend y backend permiten localizar reglas, errores y pruebas.
+- El alcance implementado se mantuvo en US-001 a US-010. No se agregó el optimizador ni funcionalidades de sprints posteriores.
+- Las pruebas incluyen registros, consultas vacías, duplicados, permisos, auditoría y transiciones prohibidas. Una ejecución integrada en contenedores confirmó que API, base de datos e interfaz arrancan juntas.
+- Los impedimentos de login y herramientas se registraron y se repitió la comprobación tras corregir el entorno.
+
+## ¿Qué podemos hacer mejor? — análisis simulado en cuatro ejes
 
 ### Personas
 
-Definir una persona responsable de preparar la demo y otra de registrar resultados, de modo que la misma persona no deba operar el sistema, contestar preguntas y tomar notas al mismo tiempo. Acordar un par técnico distinto del autor para revisar cambios y comprobar el DoD-04. Los nombres se asignarán únicamente en la reunión real.
+La presentación concentra tareas de operación, explicación, registro de comentarios y respuesta a preguntas. Si una persona asume todo, puede omitir pasos o evidencias. Propuesta: repartir antes de la demo los papeles de presentador, apoyo técnico y relator; practicar el guion y pedir a alguien distinto del autor que revise cada cambio técnico pendiente de aceptación. La participación y disponibilidad reales de cada integrante deben confirmarse.
 
 ### Relaciones
 
-Invitar a los interesados previstos y pedir confirmación explícita de qué escenarios consideran aceptados, rechazados o pendientes. Registrar preguntas y decisiones en la revisión del sprint el mismo día. Si una historia se demuestra solo parcialmente, comunicarlo con ese alcance para evitar estados ambiguos entre equipo y evaluadores.
+La evidencia técnica no equivale a la opinión de docentes o interesados. La revisión debe pedirles observaciones sobre registros, filtros, estados y mensajes de error, y anotar qué aceptan, rechazan o dejan pendiente. Propuesta: usar una hoja de notas con historia, comentario, decisión, responsable y fecha; comunicar sin ambigüedad el alcance que todavía no se ha demostrado.
 
 ### Procesos
 
-Preparar un checklist de entrada a demo: rama `sprint-1`, variables de entorno válidas, contenedores sanos, login, prueba de cada CRUD, casos negativos y respaldo de datos de ejemplo. Ejecutar las pruebas desde un entorno reproducible antes de mover historias a `Done`; guardar salida, fecha y base usada. Revisar el DoD por historia y registrar faltantes, en particular staging, accesibilidad y análisis de seguridad.
+La dependencia de datos iniciales y variables de entorno puede interrumpir una demo improvisada. Propuesta: verificar rama, Docker, `.env`, salud de la API, login y datos de ejemplo antes de presentar; ejecutar US-001 a US-010 y un caso inválido con el mismo guion. Guardar fecha, comandos y resultados de las pruebas. Revisar el DoD por historia antes de marcarla `Done`, especialmente análisis estático, revisión por pares, staging, accesibilidad y aceptación BDD.
 
 ### Herramientas
 
-Estandarizar una sola vía de ejecución por equipo: Compose con Docker Desktop integrado a WSL, o herramientas Linux instaladas completamente en WSL. Evitar correr Node de Windows sobre `node_modules` Linux. Incorporar comandos reproducibles y una comprobación temprana de `JWT_SECRET` y del acceso a Docker. Mantener `.env` fuera de Git y usar `.env.example` como guía.
+La combinación de Node de Windows con `node_modules` de Linux produjo un fallo de dependencia nativa y Docker estuvo inicialmente inaccesible. Propuesta: usar Compose como procedimiento compartido para esta entrega y verificar `docker info` al comenzar. Mantener secretos únicamente en `.env`, validar la longitud de `JWT_SECRET`, conservar `.env.example` sin credenciales y usar una base PostgreSQL aislada para pruebas.
 
-### Acciones a realizar — propuestas sujetas a acuerdo del equipo
+## Plan de acción propuesto — sin acuerdos aprobados
 
-| Acción concreta | Responsable propuesto por rol | Plazo propuesto | Evidencia de cierre |
+Los nombres se usan únicamente para proponer una distribución entre los cinco integrantes. Cada persona debe confirmar o reasignar su actividad y plazo antes de que este plan se considere un acuerdo del equipo.
+
+| Acción concreta | Responsable propuesto | Plazo propuesto | Criterio verificable de cierre |
 |---|---|---|---|
-| Revalidar Docker Desktop/WSL y el login en el equipo que se usará para la presentación; conservar un procedimiento de arranque | Responsable de entorno a designar por el equipo | Antes de la demostración prevista el 29/09/2026 | `docker info`, `docker compose config --quiet`, `/health` y login correctos en ese equipo |
-| Conservar la verificación de Pytest/PostgreSQL, Vitest, build y navegador a 360 px; repetirla tras cualquier cambio | Responsable de pruebas a designar | Antes de solicitar aceptación del Sprint 1 | Salidas fechadas, cobertura ≥ 80 %, resultados de PostgreSQL y fallos registrados |
-| Ejecutar el guion de US-001 a US-010 con interesados y completar el acta de revisión | Presentador y relator a designar | Durante y después de la presentación del 29/09/2026 | Fecha, asistentes, funcionalidades mostradas, comentarios y decisiones en `03 Revisión del Sprint` |
-| Revisar cada historia frente al DoD y solicitar revisión por un par técnico | Autor y revisor a designar | Antes de declarar cualquier historia `Done` | Lista de criterios aprobados, hallazgos resueltos y aprobación de revisión |
-| Celebrar la retrospectiva real y decidir cuáles de estas propuestas se adoptan | Director del proyecto y equipo | Después de la presentación; fecha por acordar | Acta versionada con asistentes, acuerdos, responsables nominales y plazos efectivos |
+| Coordinar el ensayo y presentar el alcance real de US-001 a US-010; recopilar decisiones de los interesados. | Marco Jhair Martinez Llanos | Antes y durante la presentación del Sprint 1 | Guion practicado y revisión del Sprint actualizada con fecha, asistentes, comentarios y decisiones reales. |
+| Comprobar Docker Desktop, Compose, PostgreSQL, `/health`, variables y login en el equipo de la demo. | Rodrigo Vladimir Arce Curi | Antes de iniciar la presentación | `docker info` y `docker compose config --quiet` correctos; API y login accesibles sin mostrar secretos. |
+| Ejecutar y guardar las pruebas backend contra base aislada y revisar los casos negativos de vehículos, pedidos y conductores. | Luis Antony Gonzalo Guerrero | Antes de solicitar aceptación técnica | Resultado fechado de Pytest, cobertura ≥ 80 % y evidencia de rechazos esperados. |
+| Ejecutar Vitest, build y un recorrido de la interfaz a 360 px; anotar fallos de navegación y formularios. | Jhon Robert Paitan Montes | Antes de solicitar aceptación técnica | Resultado fechado de pruebas y build, más lista de flujos observados o defectos. |
+| Revisar el DoD y los documentos con un segundo integrante; registrar faltantes y notas de la presentación. | Piero Pool Chauris Leguia | Después de la presentación y antes de declarar historias `Done` | Registro de revisión por pares, criterios aún pendientes y notas incorporadas a los entregables. |
 
-El equipo debe confirmar o cambiar responsables y fechas en la sesión real. Hasta entonces, este texto no acredita que la retrospectiva haya ocurrido ni que exista un plan aprobado.
+**Estado de las acciones:** propuestas; no asignadas ni aceptadas formalmente. El equipo puede modificar nombres, fechas y alcance cuando converse. La presentación y la retrospectiva reales siguen pendientes; esta simulación no debe presentarse como evidencia de que ocurrieron.
 
 ## Historial de control de cambios
 
 | Versión | Fecha | Cambio |
 |---|---|---|
-| 1.0.0 | 29/09/2026 | Borrador simulado y explícitamente no aprobado para preparar la retrospectiva real del Sprint 1. |
+| 1.0.0 | 29/09/2026 | Borrador simulado para preparar la retrospectiva real del Sprint 1. |
+| 1.0.1 | 29/09/2026 | Simulación estructurada en cuatro ejes, equipo de cinco integrantes según imagen compartida y plan de acción nominal propuesto sin atribuir asistencia ni acuerdos reales. Se conserva el nombre del archivo exigido por la consigna. |

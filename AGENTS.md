@@ -8,6 +8,7 @@ Este archivo orienta a quienes continúen el trabajo en el repositorio. La docum
 - El Sprint 1 comprende US-001 a US-010: registro, consulta, actualización y desactivación de vehículos; registro, consulta, actualización de pendientes y cancelación de pedidos; registro y consulta de conductores.
 - El usuario autorizó integrar y publicar `sprint-1` en `main`, y después corregir la entrega y actualizar ambas ramas. Antes de cada integración, verificar las dos ramas y las pruebas; no hacer push de cambios ajenos a esta corrección.
 - El usuario autorizó preparar los cuatro entregables del Sprint 1 en `docs/03 Implementación/`. Distinguir evidencia técnica de la demostración y retrospectiva del equipo, todavía pendientes al 29/09/2026; cualquier reflexión simulada debe etiquetarse como propuesta.
+- El usuario compartió una imagen con los cinco integrantes actuales; el quinto, Piero Pool Chauris Leguia, está incluido en el README y en la retrospectiva simulada. Los documentos iniciales enumeran cuatro; no se conoce la fecha de incorporación, así que no reescribir actas históricas como si Piero hubiera estado presente entonces.
 - No añadir aún optimizador de rutas, mapa, dashboard avanzado, emisiones, reportes ni reoptimización. No cambiar sin motivo los requisitos, las reglas de negocio, el stack ni la arquitectura documentada.
 - Nunca mostrar ni agregar secretos. `.env` es local e ignorado por Git; `.env.example` contiene solo marcadores de posición.
 
