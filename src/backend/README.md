@@ -15,7 +15,7 @@ python3 -m venv src/backend/.venv
 src/backend/.venv/bin/python -m pip install -r src/backend/requirements.txt
 ```
 
-En VS Code conectado a WSL, ejecutar **Python: Select Interpreter** y elegir `src/backend/.venv/bin/python`; después ejecutar **Developer: Reload Window**. La configuración de rutas del paquete `app` está en `pyrightconfig.json`. El entorno `.venv` y los ajustes personales de `.vscode` están excluidos de Git. Si se abre el repositorio desde Windows en vez de WSL, crear un entorno virtual con Python de Windows y seleccionar su `python.exe`.
+En VS Code conectado a WSL, ejecutar **Python: Select Interpreter** y elegir `src/backend/.venv/bin/python`; después ejecutar **Developer: Reload Window**. La versión `3.12.3` de la barra de estado no distingue el Python global del virtual: comprobar la **ruta completa** del intérprete. `pyrightconfig.json` indica a Pylance dónde están el entorno `.venv` y el paquete `app`. El entorno y los ajustes personales de `.vscode` están excluidos de Git. Si se abre el repositorio desde Windows en vez de WSL, crear un entorno virtual con Python de Windows y seleccionar su `python.exe`.
 
 Iniciar el conjunto con `docker compose up --build`. La migración se aplica al iniciar el backend y el proceso de carga inicial crea los roles, un operador y un cliente de ejemplo de forma idempotente. La API estará en `http://localhost:8000`, la interfaz en `http://localhost:5173` y PostgreSQL en el puerto `5432`. Estos puertos HTTP son solo para desarrollo local; un despliegue externo requiere un terminador HTTPS/TLS.
 
