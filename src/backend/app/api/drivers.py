@@ -1,0 +1,28 @@
+from uuid import UUID
+
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+
+from app.core.security import require_read, require_write
+from app.db.session import get_db
+from app.models import User
+from app.repositories import drivers as repo
+from app.schemas.operations import DriverInput, DriverOut
+from app.services import drivers as service
+
+router = APIRouter(prefix="/api/v1/conductores", tags=["Conductores"])
+
+
+@router.post("", response_model=DriverOut, status_code=201)
+def create(data: DriverInput, db: Session = Depends(get_db), user: User = Depends(require_write)):
+    return service.create(db, user, data)
+
+
+@router.get("", response_model=list[DriverOut])
+def list_all(disponible: bool | None = None, db: Session = Depends(get_db), user: User = Depends(require_read)):
+    return repo.list_all(db, disponible)
+
+
+@router.get("/{driver_id}", response_model=DriverOut)
+def get(driver_id: UUID, db: Session = Depends(get_db), user: User = Depends(require_read)):
+    return service.get_driver(db, driver_id)

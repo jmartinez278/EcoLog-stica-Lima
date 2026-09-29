@@ -1,8 +1,10 @@
 # EcoLogística Lima
 
+**Versión de este README:** 1.0.0 · **Actualizado:** 29/09/2026
+
 **EcoLogística Lima** es un proyecto de software orientado a la optimización sostenible de rutas de distribución de última milla para el escenario empresarial de **DistriRápido S.A.C.**
 
-La solución busca mejorar la planificación logística mediante la gestión de pedidos, vehículos y conductores, generación de rutas optimizadas, re-optimización ante incidencias, visualización cartográfica e indicadores económicos y ambientales.
+La solución busca mejorar la planificación logística mediante la gestión de pedidos, vehículos y conductores. La generación de rutas optimizadas, re-optimización ante incidencias, visualización cartográfica e indicadores económicos y ambientales pertenecen a etapas posteriores del MVP.
 
 ---
 
@@ -47,14 +49,14 @@ El sistema contempla los siguientes módulos:
 | Frontend | React + TypeScript |
 | Backend | Python + FastAPI |
 | Base de datos | PostgreSQL |
-| Optimización | Python |
-| Mapas | Leaflet + OpenStreetMap |
+| Optimización futura | Python |
+| Mapas futuros | Leaflet + OpenStreetMap |
 | API | REST / JSON |
 | Documentación API | OpenAPI |
 | Pruebas Backend | Pytest |
 | Pruebas Frontend | Vitest / React Testing Library |
 | Contenedores | Docker |
-| CI/CD | GitHub Actions |
+| CI/CD previsto | GitHub Actions |
 
 ---
 
@@ -77,7 +79,7 @@ flowchart LR
     FE --> MAP[Leaflet / OpenStreetMap]
 ```
 
-La arquitectura utiliza separación entre:
+El diagrama representa la arquitectura objetivo del MVP; el Sprint 1 implementa interfaz, API, autenticación, servicios y persistencia. El optimizador, las integraciones externas y el mapa quedan pendientes. La arquitectura utiliza separación entre:
 
 - Interfaz de usuario.
 - API.
@@ -133,28 +135,21 @@ La arquitectura debe contemplar crecimiento hasta:
 
 ---
 
-## Estructura Documental
+## Estructura del repositorio
 
 ```text
 EcoLog-stica-Lima/
-│
 ├── README.md
-│
+├── .gitignore
+├── .env.example
+├── docker-compose.yml
+├── src/
+│   ├── backend/
+│   └── frontend/
 └── docs/
-    └── 01 Inicio/
-        ├── 01. Selección del enfoque del proyecto V_1_0_0.md
-        ├── 02. Acta de constitución V_1_0_0.md
-        ├── 03. Declaración de la visión V_1_0_0.md
-        ├── 04. Registro de supuestos y restricciones V_1_0_0.md
-        ├── 05. Registro de interesados V_1_0_0.md
-        ├── 06. Requisitos funcionales V_1_0_0.md
-        ├── 07. Requisitos no funcionales V_1_0_0.md
-        ├── 08. Usuarios V_1_0_0.md
-        ├── 09. Reglas de negocio V_1_0_0.md
-        ├── 10. Stack tecnológico V_1_0_0.md
-        ├── 11. Base de datos V_1_0_0.md
-        ├── 12. Modelo C4 V_1_0_0.md
-        └── 13. Restricciones V_1_0_0.md
+    ├── 01 Inicio/
+    ├── 02 Planificación/
+    └── 03 Implementación/
 ```
 
 ---
@@ -176,6 +171,19 @@ EcoLog-stica-Lima/
 | 11 | Diseño de base de datos |
 | 12 | Arquitectura C4 |
 | 13 | Análisis multidimensional de restricciones |
+
+### Entregables del Sprint 1
+
+| Documento | Enlace relativo |
+|---|---|
+| Informe de estado del proyecto | [01 Informe de estado del proyecto V_1_0_0](<docs/03 Implementación/01 Informe de estado del proyecto V_1_0_0.md>) |
+| Registro de impedimentos | [02 Registro de Impedimentos V_1_0_0](<docs/03 Implementación/02 Registro de Impedimentos V_1_0_0.md>) |
+| Revisión del Sprint | [03 Revisión del Sprint V_1_0_0](<docs/03 Implementación/03 Revisión del Sprint V_1_0_0.md>) |
+| Retrospectiva del Sprint | [04 Retrospectiva del Sprint V_1_0_0](<docs/03 Implementación/04 Retrospectiva del Sprint V_1_0_0.md>) |
+
+La revisión documenta el estado **antes** de la presentación del 29/09/2026. La retrospectiva es un borrador simulado para discutir con el equipo; aún no es un acta aprobada.
+
+Para ejecutar el proyecto, consultar las instrucciones técnicas del [backend](src/backend/README.md) y el [frontend](src/frontend/README.md). Los criterios oficiales de aceptación y el Definition of Done están en [Transformando a ágil](<docs/02 Planificación/01 Transformando a ágil V_1_0_0.md>).
 
 ---
 
@@ -201,9 +209,9 @@ PostgreSQL se utiliza como sistema gestor principal y se contempla **PostGIS** c
 
 ## API
 
-El backend se plantea como una API REST desarrollada con FastAPI.
+El backend del Sprint 1 es una API REST desarrollada con FastAPI.
 
-Principales grupos de recursos:
+Grupos de recursos de la arquitectura objetivo (solo `auth`, `vehiculos`, `conductores`, `clientes` de consulta y `pedidos` están implementados en Sprint 1):
 
 ```text
 /api/v1/auth
@@ -260,9 +268,15 @@ Los principales criterios de evaluación serán:
 
 ## Estado
 
-**Fase actual:** Inicio, arquitectura e ingeniería de requisitos.
+**Fase actual:** implementación técnica del Sprint 1; presentación, retrospectiva y aceptación formal pendientes a la fecha de corte.
 
-Los documentos de definición inicial del proyecto se encuentran dentro de `docs/01 Inicio/`.
+Los documentos de definición inicial se encuentran en `docs/01 Inicio/`, la planificación en `docs/02 Planificación/` y los entregables de esta iteración en `docs/03 Implementación/`.
+
+## Historial de control de cambios del README
+
+| Versión | Fecha | Cambio |
+|---|---|---|
+| 1.0.0 | 29/09/2026 | Actualización del estado del Sprint 1, distinción entre alcance implementado y objetivo del MVP, y enlaces a los cuatro entregables. |
 
 ---
 
