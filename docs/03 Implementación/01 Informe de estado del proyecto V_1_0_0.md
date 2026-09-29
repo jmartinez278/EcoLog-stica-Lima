@@ -8,8 +8,9 @@
 | Líder del proyecto | Marco Jhair Martinez Llanos, Director del Proyecto según el acta de constitución |
 | Sprint | ECO Sprint 1, gestión de vehículos, pedidos y conductores |
 | Fecha de corte | 29/09/2026, 14:43 (hora de Lima), antes de la presentación prevista para hoy |
-| Versión del documento | 1.0.1 |
-| Estado general | Implementación técnica disponible en `sprint-1`; aceptación formal del Sprint pendiente |
+| Última revalidación técnica | 29/09/2026, 15:04 (hora de Lima) |
+| Versión del documento | 1.0.2 |
+| Estado general | Implementación técnica publicada en `sprint-1` y `main`; aceptación formal del Sprint pendiente |
 
 ## Resumen del avance
 
@@ -41,7 +42,7 @@ Las rutas HTTP y sus restricciones están descritas en los [README del backend](
 | Comprobación | Evidencia / resultado | Límite |
 |---|---|---|
 | Pytest y cobertura sobre PostgreSQL | `docker compose ... exec backend` con `TEST_DATABASE_URL` de la base `ecologistica_test`: 9 pruebas aprobadas, cobertura 91,35 % de `app`; umbral ≥ 80 % alcanzado | La base de prueba se creó en un proyecto Compose aislado; no se usaron los datos habituales del usuario |
-| Vitest y build | Dentro del contenedor frontend: 4 pruebas aprobadas y `npm run build` correcto | Las pruebas de componentes usan API simulada; el recorrido HTTP integrado se comprobó aparte |
+| Vitest y build | Dentro del contenedor frontend: 4 pruebas aprobadas y `npm run build` correcto | Las pruebas de componentes usan dobles de prueba para la API; el recorrido HTTP integrado se comprobó aparte |
 | Docker Compose, PostgreSQL y arranque | `docker compose config --quiet` correcto; tres servicios activos, PostgreSQL sano; `/health`, `/openapi.json` y frontend respondieron HTTP 200 | Entorno local de desarrollo; no acredita staging ni HTTPS/TLS externo |
 | Recorrido HTTP integrado | Login del operador inicial y registro, consulta, edición y desactivación/cancelación o filtro de US-001 a US-010 sobre PostgreSQL: correcto | Prueba técnica interna; no equivale a aceptación BDD por interesados |
 | Navegador a 360 px | Login y navegación Inicio, Vehículos, Pedidos y Conductores; ancho del documento de 360 px en las cuatro vistas, sin errores de página observados | Comprobación en un navegador; no acredita WCAG 2.1 AA ni compatibilidad entre navegadores |
@@ -49,6 +50,8 @@ Las rutas HTTP y sus restricciones están descritas en los [README del backend](
 | Prueba personal y demostración | Pendientes; presentación prevista más tarde el 29/09/2026 | Registrar asistentes, resultados y observaciones después del evento |
 
 Las pruebas repetidas el 29/09/2026 confirman la suite automatizada y la operación integrada con PostgreSQL. La [revisión del sprint](03%20Revisión%20del%20Sprint%20V_1_0_0.md) distingue esta verificación interna de la demostración pendiente ante interesados.
+
+**Revalidación de las 15:04 (hora de Lima):** `docker compose config --quiet` pasó. En un nuevo proyecto Compose aislado, PostgreSQL estuvo sano y `/health`, `/openapi.json` y la interfaz respondieron HTTP 200. Se ejecutaron 9 pruebas backend contra una base PostgreSQL de prueba aislada, con 91,35 % de cobertura; pasaron 4 pruebas frontend y el build. Esta repetición no incluyó una nueva demostración ante interesados ni una nueva evaluación de accesibilidad.
 
 ## Impedimentos y decisiones inmediatas
 
@@ -58,7 +61,7 @@ El [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) re
 
 1. Ejecutar la comprobación personal y conservar resultados de los diez flujos y casos negativos.
 2. Realizar la demostración ante los interesados y registrar fecha, asistentes, comentarios y decisiones reales.
-3. Celebrar la retrospectiva del equipo y validar el [borrador de análisis](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md) con acuerdos efectivos.
+3. Celebrar la retrospectiva del equipo y confirmar los responsables y acuerdos del [análisis retrospectivo](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md).
 4. Conservar salidas fechadas de la ejecución sobre PostgreSQL y repetir la comprobación si cambia el código o el entorno de presentación.
 5. Completar el DoD aplicable: análisis estático y seguridad, revisión por un par técnico, HTTPS/TLS para un despliegue externo, staging, accesibilidad y navegadores, aprobación BDD e integración/pipeline cuando el equipo lo autorice.
 
@@ -67,4 +70,5 @@ El [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) re
 | Versión | Fecha | Cambio |
 |---|---|---|
 | 1.0.0 | 29/09/2026 | Informe de corte del Sprint 1 con verificación integrada en Docker/PostgreSQL y pendientes de aceptación formal diferenciados. |
-| 1.0.1 | 29/09/2026 | Referencia al borrador de retrospectiva pendiente de validación; se conserva el nombre de archivo exigido por la consigna. |
+| 1.0.1 | 29/09/2026 | Referencia al análisis retrospectivo pendiente de validación; se conserva el nombre de archivo exigido por la consigna. |
+| 1.0.2 | 29/09/2026 | Revalidación técnica a las 15:04, ramas publicadas y referencia al análisis retrospectivo. |

@@ -9,8 +9,9 @@
 | Líder del proyecto | Marco Jhair Martinez Llanos, según el acta de constitución |
 | Fecha de elaboración | 29/09/2026 |
 | Reunión del equipo | Pendiente a la fecha de elaboración |
-| Versión del documento | 1.0.2 |
-| Estado | Borrador de análisis y plan de acción, pendiente de validación del equipo |
+| Versión del documento | 1.0.3 |
+| Estado | Análisis retrospectivo documentado; acuerdos del equipo pendientes de confirmación |
+| Base del análisis | [Informe de estado](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md), [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) y pruebas del Sprint 1 |
 
 ## Equipo del proyecto
 
@@ -22,7 +23,7 @@ Los cinco integrantes indicados por el usuario son:
 4. Marco Jhair Martinez Llanos.
 5. Jhon Robert Paitan Montes.
 
-La documentación inicial enumera cuatro integrantes y omite a Piero; no se conoce desde cuándo se incorporó. Este borrador no atribuye declaraciones a ninguno de ellos.
+La documentación inicial enumera cuatro integrantes y omite a Piero; no se conoce desde cuándo se incorporó. Este análisis no atribuye declaraciones a ninguno de ellos.
 
 ## ¿Qué aprendimos?
 
@@ -43,21 +44,21 @@ La documentación inicial enumera cuatro integrantes y omite a Piero; no se cono
 
 ### Personas
 
-La presentación concentra tareas de operación, explicación, registro de comentarios y respuesta a preguntas. Si una persona asume todo, puede omitir pasos o evidencias. Propuesta: repartir antes de la demo los papeles de presentador, apoyo técnico y relator; practicar el guion y pedir a alguien distinto del autor que revise cada cambio técnico pendiente de aceptación. La participación y disponibilidad reales de cada integrante deben confirmarse.
+La presentación concentra tareas de operación, explicación, registro de comentarios y respuesta a preguntas. Si una persona asume todo, puede omitir pasos o evidencias. Distribuir los papeles de presentador, apoyo técnico y relator, y practicar el guion. Un integrante distinto del autor debe revisar cada cambio técnico pendiente de aceptación. El cierre se comprobará con una asignación confirmada de los tres papeles y una revisión por pares registrada; ninguna de las dos consta todavía.
 
 ### Relaciones
 
-La evidencia técnica no equivale a la opinión de docentes o interesados. La revisión debe pedirles observaciones sobre registros, filtros, estados y mensajes de error, y anotar qué aceptan, rechazan o dejan pendiente. Propuesta: usar una hoja de notas con historia, comentario, decisión, responsable y fecha; comunicar sin ambigüedad el alcance que todavía no se ha demostrado.
+La evidencia técnica no recoge la opinión de docentes o interesados: faltan observaciones y decisiones sobre los diez flujos. Durante la revisión del Sprint, registrar por historia lo mostrado, la pregunta o comentario recibido, la decisión de aceptación o rechazo y cualquier compromiso con responsable y plazo. El cierre se comprobará con diez resultados trazables, incluso cuando alguno quede pendiente o sea rechazado.
 
 ### Procesos
 
-La dependencia de datos iniciales y variables de entorno puede interrumpir una demo improvisada. Propuesta: verificar rama, Docker, `.env`, salud de la API, login y datos de ejemplo antes de presentar; ejecutar US-001 a US-010 y un caso inválido con el mismo guion. Guardar fecha, comandos y resultados de las pruebas. Revisar el DoD por historia antes de marcarla `Done`, especialmente análisis estático, revisión por pares, staging, accesibilidad y aceptación BDD.
+La dependencia de datos iniciales y variables de entorno puede interrumpir una demostración improvisada; el fallo de login y el bloqueo de Docker ya causaron retrasos de verificación. Antes de presentar, comprobar rama, Docker, `.env`, salud de la API, login y datos de ejemplo; después, ejecutar US-001 a US-010 y al menos un caso inválido con un guion común. Conservar comandos, fecha y resultados. Revisar los doce criterios del DoD por historia antes de marcarla `Done`, con especial atención a análisis estático, revisión por pares, staging, accesibilidad y aceptación BDD.
 
 ### Herramientas
 
-La combinación de Node de Windows con `node_modules` de Linux produjo un fallo de dependencia nativa y Docker estuvo inicialmente inaccesible. Propuesta: usar Compose como procedimiento compartido para esta entrega y verificar `docker info` al comenzar. Mantener secretos únicamente en `.env`, validar la longitud de `JWT_SECRET`, conservar `.env.example` sin credenciales y usar una base PostgreSQL aislada para pruebas.
+La combinación de Node de Windows con `node_modules` de Linux produjo un fallo de dependencia nativa y Docker estuvo inicialmente inaccesible. Usar Compose como procedimiento compartido y verificar `docker info` al comenzar; el 29/09/2026 esta vía permitió repetir 9 pruebas backend, 4 frontend y el build. Mantener secretos únicamente en `.env`, validar la longitud de `JWT_SECRET`, conservar `.env.example` sin credenciales y usar una base PostgreSQL aislada para pruebas. La comprobación de cierre es un arranque reproducible y una suite sin fallos en el equipo de presentación.
 
-## Plan de acción
+## Plan de acción derivado del análisis
 
 La siguiente distribución de responsabilidades y plazos requiere validación del equipo.
 
@@ -75,6 +76,7 @@ La siguiente distribución de responsabilidades y plazos requiere validación de
 
 | Versión | Fecha | Cambio |
 |---|---|---|
-| 1.0.0 | 29/09/2026 | Borrador inicial para preparar la retrospectiva del Sprint 1. |
+| 1.0.0 | 29/09/2026 | Análisis inicial de la retrospectiva del Sprint 1. |
 | 1.0.1 | 29/09/2026 | Análisis estructurado en cuatro ejes, equipo de cinco integrantes y plan de acción con responsables sugeridos. |
-| 1.0.2 | 29/09/2026 | Redacción simplificada como borrador de retrospectiva pendiente de validación. Se conserva el nombre del archivo exigido por la consigna. |
+| 1.0.2 | 29/09/2026 | Redacción simplificada del análisis retrospectivo pendiente de validación. Se conserva el nombre del archivo exigido por la consigna. |
+| 1.0.3 | 29/09/2026 | Análisis de causas, efectos y comprobaciones de cierre en los cuatro ejes; acuerdos del equipo aún por confirmar. |
