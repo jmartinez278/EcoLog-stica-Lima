@@ -7,7 +7,8 @@
 | **Proyecto** | EcoLogística Lima – Optimizador de Rutas Sostenibles para DistriRápido S.A.C. |
 | **Integrantes** | Luis Antony Gonzalo Guerrero, Jhon Robert Paitan Montes, Marco Jhair Martinez Llanos, Rodrigo Vladimir Arce Curi |
 | **Fecha** | 08/09/2026 |
-| **Versión** | 1.0.0 |
+| **Última revisión** | 29/09/2026 |
+| **Versión** | 1.0.1 |
 | **Fase** | 02 – Planificación del Proyecto |
 
 ---
@@ -1398,6 +1399,8 @@ Al trasladar este backlog a Jira Software se mantendrán los mismos identificado
 
 # 12. Validación de cumplimiento del Artefacto 1
 
+Esta matriz verifica que el **artefacto de planificación define** los elementos solicitados. Un `✅` en esta tabla no acredita la ejecución de pruebas, análisis de seguridad, revisión por pares, staging ni aceptación de historias en el Sprint 1. El avance real se describe en el [informe de estado](../03%20Implementación/01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md).
+
 | Criterio de la consigna | Evidencia en este documento | Estado |
 |---|---|---|
 | RF mapeados a Épicas | Secciones 3 y 4 | ✅ |
@@ -1406,11 +1409,11 @@ Al trasladar este backlog a Jira Software se mantendrán los mismos identificado
 | RNF transformados en Enablers o DoD | Secciones 7, 8 y 9 | ✅ |
 | Mínimo 2 escenarios Gherkin por US | Sección 5 | ✅ |
 | Mínimo 2 escenarios Gherkin por Enabler | Sección 7 | ✅ |
-| Cobertura unitaria ≥ 80% | DoD-01 | ✅ |
-| Análisis estático sin vulnerabilidades críticas | DoD-02 | ✅ |
-| Peer Review mediante Pull Request | DoD-04 | ✅ |
-| Despliegue en Staging / Pruebas | DoD-07 | ✅ |
-| OpenAPI / Swagger actualizado | DoD-06 | ✅ |
+| Cobertura unitaria ≥ 80% | DoD-01 | ✅ Criterio definido; resultado del Sprint en el informe |
+| Análisis estático sin vulnerabilidades críticas | DoD-02 | ✅ Criterio definido; ejecución formal pendiente |
+| Peer Review mediante Pull Request | DoD-04 | ✅ Criterio definido; aprobación por un par pendiente |
+| Despliegue en Staging / Pruebas | DoD-07 | ✅ Criterio definido; despliegue en staging pendiente |
+| OpenAPI / Swagger actualizado | DoD-06 | ✅ Criterio definido; `/openapi.json` respondió 200 en la verificación local del Sprint |
 | Trazabilidad RF/RNF | Secciones 4, 6 y 8 | ✅ |
 
 ---
@@ -1420,6 +1423,7 @@ Al trasladar este backlog a Jira Software se mantendrán los mismos identificado
 | Versión | Fecha | Descripción | Responsable |
 |---|---|---|---|
 | **1.0.0** | 08/09/2026 | Creación inicial del artefacto de transformación ágil a partir de la línea base RF/RNF. | Equipo EcoLogística Lima |
+| **1.0.1** | 29/09/2026 | Aclaración de que la matriz valida el diseño del DoD y no su ejecución durante el Sprint 1. | Revisión técnica del repositorio |
 
 ---
 

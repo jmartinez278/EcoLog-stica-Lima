@@ -7,15 +7,15 @@
 | Proyecto | EcoLogística Lima – Optimizador de Rutas Sostenibles para DistriRápido S.A.C. |
 | Líder del proyecto | Marco Jhair Martinez Llanos, Director del Proyecto según el acta de constitución |
 | Sprint | ECO Sprint 1, gestión de vehículos, pedidos y conductores |
-| Fecha de corte | 29/09/2026, antes de la presentación prevista para hoy |
+| Fecha de corte | 29/09/2026, 14:43 (hora de Lima), antes de la presentación prevista para hoy |
 | Versión del documento | 1.0.0 |
 | Estado general | Implementación técnica disponible en `sprint-1`; aceptación formal del Sprint pendiente |
 
 ## Resumen del avance
 
-El [Sprint Goal](../02%20Planificación/02%20Artefactos%20Jira%20V_1_0_0.md) busca establecer la base operativa para registrar y consultar vehículos, pedidos y conductores. Hay código y pruebas automatizadas para US-001 a US-010 en `src/backend/` y `src/frontend/`. La API incluye autenticación, roles, auditoría y contratos OpenAPI; la interfaz permite los flujos solicitados. La generación de rutas y los módulos posteriores no forman parte de este incremento.
+El [Sprint Goal](../02%20Planificación/02%20Artefactos%20Jira%20V_1_0_1.md) busca establecer la base operativa para registrar y consultar vehículos, pedidos y conductores. Hay código y pruebas automatizadas para US-001 a US-010 en `src/backend/` y `src/frontend/`. La API incluye autenticación, roles, auditoría y contratos OpenAPI; la interfaz permite los flujos solicitados. La generación de rutas y los módulos posteriores no forman parte de este incremento.
 
-**Estado de aceptación:** ninguna historia se declara formalmente `Done` en este informe. La [definición global de terminado](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_0.md) requiere, entre otros, revisión por pares, análisis de seguridad, staging, compatibilidad y aprobación de escenarios BDD. No constan esas evidencias completas ni una demostración ante interesados. Esta distinción evita convertir la existencia de código en una aprobación del sprint.
+**Estado de aceptación:** ninguna historia se declara formalmente `Done` en este informe. La [definición global de terminado](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md) requiere, entre otros, revisión por pares, análisis de seguridad, staging, compatibilidad y aprobación de escenarios BDD. No constan esas evidencias completas ni una demostración ante interesados. Esta distinción evita convertir la existencia de código en una aprobación del sprint.
 
 ## Historias de Usuario completadas en este Sprint
 
@@ -34,35 +34,36 @@ El [Sprint Goal](../02%20Planificación/02%20Artefactos%20Jira%20V_1_0_0.md) bus
 | US-009 | Registrar conductor; validar campos y licencia única | `src/backend/tests/test_drivers.py`; flujo UI de conductores | Implementada; aceptación pendiente |
 | US-010 | Consultar conductores y filtrar disponibilidad, incluido resultado vacío | `test_drivers.py`; flujo UI de filtro | Implementada; aceptación pendiente |
 
-Las rutas HTTP y sus restricciones están descritas en los [README del backend](../../src/backend/README.md) y [frontend](../../src/frontend/README.md). Las pruebas del backend usan SQLite temporal de forma predeterminada; no constituyen por sí solas prueba de persistencia en PostgreSQL.
+Las rutas HTTP y sus restricciones están descritas en los [README del backend](../../src/backend/README.md) y [frontend](../../src/frontend/README.md). Las pruebas del backend usan SQLite temporal de forma predeterminada. El 29/09/2026 también se ejecutaron contra una base PostgreSQL de prueba aislada mediante `TEST_DATABASE_URL`.
 
 ## Verificación técnica
 
 | Comprobación | Evidencia / resultado | Límite |
 |---|---|---|
-| Pytest y cobertura | Repetido el 29/09/2026 con entorno Python temporal en WSL: 9 pruebas aprobadas y 91,35 % de cobertura de `app`; umbral ≥ 80 % alcanzado | Las pruebas usan SQLite temporal; persistencia PostgreSQL aún no comprobada en esta ejecución |
-| Vitest | Repetido el 29/09/2026 con Node nativo de Linux: 4 pruebas aprobadas | Cubre flujos principales con API simulada; no sustituye una prueba integrada |
-| Build de Vite | Repetido el 29/09/2026: `npm run build` correcto | Compilación de frontend, sin validación visual en navegadores soportados |
-| Sintaxis de Compose | `docker.exe compose ... config --quiet` con `.env.example`: correcto el 29/09/2026 | Valida configuración, no arranca contenedores ni comprueba PostgreSQL |
-| PostgreSQL y arranque de API | Sin nueva verificación el 29/09/2026 | Docker Desktop no responde y Docker no está integrado en esta distribución WSL |
+| Pytest y cobertura sobre PostgreSQL | `docker compose ... exec backend` con `TEST_DATABASE_URL` de la base `ecologistica_test`: 9 pruebas aprobadas, cobertura 91,35 % de `app`; umbral ≥ 80 % alcanzado | La base de prueba se creó en un proyecto Compose aislado; no se usaron los datos habituales del usuario |
+| Vitest y build | Dentro del contenedor frontend: 4 pruebas aprobadas y `npm run build` correcto | Las pruebas de componentes usan API simulada; el recorrido HTTP integrado se comprobó aparte |
+| Docker Compose, PostgreSQL y arranque | `docker compose config --quiet` correcto; tres servicios activos, PostgreSQL sano; `/health`, `/openapi.json` y frontend respondieron HTTP 200 | Entorno local de desarrollo; no acredita staging ni HTTPS/TLS externo |
+| Recorrido HTTP integrado | Login del operador inicial y registro, consulta, edición y desactivación/cancelación o filtro de US-001 a US-010 sobre PostgreSQL: correcto | Prueba técnica interna; no equivale a aceptación BDD por interesados |
+| Navegador a 360 px | Login y navegación Inicio, Vehículos, Pedidos y Conductores; ancho del documento de 360 px en las cuatro vistas, sin errores de página observados | Comprobación en un navegador; no acredita WCAG 2.1 AA ni compatibilidad entre navegadores |
+| Auditoría de dependencias frontend de producción | `npm audit --omit=dev --audit-level=high`: 0 vulnerabilidades reportadas | No sustituye el análisis estático del código exigido por DoD-02 |
 | Prueba personal y demostración | Pendientes; presentación prevista más tarde el 29/09/2026 | Registrar asistentes, resultados y observaciones después del evento |
 
-Las pruebas repetidas el 29/09/2026 confirman la suite automatizada en WSL, pero no la ejecución integrada con PostgreSQL ni la aceptación de interesados. La [revisión del sprint](03%20Revisión%20del%20Sprint%20V_1_0_0.md) detalla el guion y la evidencia pendiente de la demostración.
+Las pruebas repetidas el 29/09/2026 confirman la suite automatizada y la operación integrada con PostgreSQL. La [revisión del sprint](03%20Revisión%20del%20Sprint%20V_1_0_0.md) distingue esta verificación interna de la demostración pendiente ante interesados.
 
 ## Impedimentos y decisiones inmediatas
 
-El [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) recoge el error 500 de inicio de sesión ya tratado, el bloqueo de Docker Desktop/WSL aún abierto y la incompatibilidad inicial de herramientas Windows/Linux mitigada con un entorno temporal Linux. Antes de presentar, conviene iniciar Docker Desktop con integración WSL, reconstruir los contenedores y repetir login y los flujos integrados de US-001 a US-010. Esta acción se propone al equipo; aún no consta como acuerdo formal.
+El [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) recoge el error 500 de inicio de sesión ya tratado, el bloqueo de Docker Desktop/WSL resuelto tras iniciarlo el usuario y la incompatibilidad de herramientas Windows/Linux evitada al ejecutar pruebas en contenedores. Antes de presentar, conviene repetir el guion en el equipo y datos de demostración definitivos; esta acción todavía no consta como acuerdo formal del equipo.
 
 ## Pendientes
 
 1. Ejecutar la comprobación personal y conservar resultados de los diez flujos y casos negativos.
 2. Realizar la demostración ante los interesados y registrar fecha, asistentes, comentarios y decisiones reales.
 3. Celebrar la retrospectiva del equipo y sustituir el [borrador simulado](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md) por acuerdos efectivos.
-4. Incorporar una base PostgreSQL **aislada de prueba** y validar arranque/API con Compose. La sintaxis de Compose, Pytest, cobertura, Vitest y build ya pasaron la comprobación local.
+4. Conservar salidas fechadas de la ejecución sobre PostgreSQL y repetir la comprobación si cambia el código o el entorno de presentación.
 5. Completar el DoD aplicable: análisis estático y seguridad, revisión por un par técnico, HTTPS/TLS para un despliegue externo, staging, accesibilidad y navegadores, aprobación BDD e integración/pipeline cuando el equipo lo autorice.
 
 ## Historial de control de cambios
 
 | Versión | Fecha | Cambio |
 |---|---|---|
-| 1.0.0 | 29/09/2026 | Primer informe de corte del Sprint 1; estado técnico y pendientes diferenciados de la aceptación formal. |
+| 1.0.0 | 29/09/2026 | Informe de corte del Sprint 1 con verificación integrada en Docker/PostgreSQL y pendientes de aceptación formal diferenciados. |

@@ -7,7 +7,8 @@
 | **Proyecto** | EcoLogística Lima – Optimizador de Rutas Sostenibles para DistriRápido S.A.C. |
 | **Integrantes** | Luis Antony Gonzalo Guerrero, Jhon Robert Paitan Montes, Marco Jhair Martinez Llanos, Rodrigo Vladimir Arce Curi |
 | **Fecha** | 08/09/2026 |
-| **Versión** | 1.0.0 |
+| **Última revisión** | 29/09/2026 |
+| **Versión** | 1.0.1 |
 | **Herramienta ALM** | Atlassian Jira Software |
 | **Metodología** | Scrum |
 
@@ -54,7 +55,7 @@ Las Historias de Usuario fueron estimadas mediante **Story Points** utilizando F
 ## 3.1. Evidencia 1 – Roadmap / Timeline
 
 **Descripción:**  
-El Timeline muestra la planificación temporal de las cinco Épicas del proyecto.
+La captura del Timeline muestra las cinco épicas y el Sprint 1 en la planificación de septiembre. Corresponde al momento de la captura; no acredita el estado actual de las historias.
 
 
 
@@ -66,7 +67,7 @@ El Timeline muestra la planificación temporal de las cinco Épicas del proyecto
 ## 3.2. Evidencia 2 – Backlog Priorizado
 
 **Descripción:**  
-El Product Backlog contiene las Historias de Usuario y Enablers derivados de la línea base de requisitos, con estimación en Story Points y asociación con sus Épicas.
+La captura del Backlog muestra US-001 a US-010 dentro de ECO Sprint 1, su estimación en Story Points y su asociación con EP-01. Se trata de evidencia de planificación, no de aceptación final.
 
 
 
@@ -82,17 +83,17 @@ El Product Backlog contiene las Historias de Usuario y Enablers derivados de la 
 
 ### Sprint Goal
 
-> **Implementar la base operativa de EcoLogística Lima para registrar y consultar vehículos, pedidos y conductores.**
+> **Implementar la base operativa segura de EcoLogística Lima permitiendo registrar y consultar vehículos, pedidos y conductores.**
 
-El Sprint 1 prioriza capacidades de la Épica **EP-01 – Gestión de Operación Logística**.
+El Sprint 1 prioriza capacidades de la Épica **EP-01 – Gestión de Operación Logística**. La misma captura de Backlog usada arriba muestra el nombre del Sprint, las diez historias y el Sprint Goal. No existe una captura independiente de la reunión de planificación.
 
 
 
-![Evidencia 3 - Sprint Planning](images/jira/evidencia_03_sprint_planning.png)
+![Evidencia del Sprint Goal y las historias del Sprint 1 en el Backlog](images/jira/evidencia_02_backlog.png)
 
 ---
 
-## 3.4. Evidencia 4 – Tablero Scrum Activo
+## 3.4. Evidencia 4 – Tablero Scrum en la captura de planificación
 
 El tablero Scrum utiliza el flujo:
 
@@ -100,7 +101,7 @@ El tablero Scrum utiliza el flujo:
 To Do → In Progress → In Review / QA → Done
 ```
 
-La captura evidencia el Sprint activo, Historias de Usuario visibles, Story Points y elementos en progreso.
+La captura histórica muestra el Sprint activo en ese momento, las historias visibles, Story Points y elementos en progreso. No se utiliza para afirmar que las historias estén `Done` el 29/09/2026.
 
 ![Evidencia 4 - Tablero Scrum](images/jira/evidencia_04_tablero_scrum.png) 
 
@@ -121,7 +122,9 @@ La captura evidencia el Sprint activo, Historias de Usuario visibles, Story Poin
 
 ---
 
-# 4. Resumen de cumplimiento
+# 4. Resumen de evidencias de planificación
+
+Los estados siguientes indican qué se **ve en las capturas guardadas**. No certifican el estado actual de Jira ni el Definition of Done de las historias del Sprint 1.
 
 | Requisito | Estado |
 |---|---|
@@ -132,27 +135,27 @@ La captura evidencia el Sprint activo, Historias de Usuario visibles, Story Poin
 | Sprint 1 creado | ✅ |
 | Sprint de 2 semanas | ✅ |
 | Sprint Goal definido | ✅ |
-| Tablero Scrum activo | ✅ |
+| Tablero Scrum de la planificación capturado | ✅ |
 | Flujo `To Do → In Progress → In Review / QA → Done` | ✅ |
 | Release `v1.0.0-MVP` creada | ✅ |
 | Evidencia del tablero | ✅ |
-| Evidencia de Roadmap | ⚠️ Pendiente |
-| Evidencia de Backlog | ⚠️ Pendiente |
-| Evidencia de Sprint Goal | ⚠️ Pendiente |
-| Evidencia de Release | ⚠️ Pendiente |
+| Evidencia de Roadmap / Timeline | ✅ `evidencia_01_roadmap.png` |
+| Evidencia de Backlog | ✅ `evidencia_02_backlog.png` |
+| Evidencia de Sprint Goal | ✅ Visible en `evidencia_02_backlog.png`; sin captura independiente de la reunión |
+| Evidencia de Release | ✅ `evidencia_05_release.png` |
 
 ---
 
-# 5. Capturas pendientes antes de entregar
+# 5. Alcance temporal de las capturas
 
-Solo faltan estas cuatro capturas:
+Las capturas guardadas muestran la configuración de Jira en la fase de planificación:
 
-1. `evidencia_01_roadmap.png` – Timeline con las 5 Épicas.
-2. `evidencia_02_backlog.png` – Backlog con Story Points visibles.
-3. `evidencia_03_sprint_planning.png` – Sprint 1 y Sprint Goal.
-4. `evidencia_05_release.png` – Release `v1.0.0-MVP`.
+1. `evidencia_01_roadmap.png`: Timeline con las cinco épicas y ECO Sprint 1.
+2. `evidencia_02_backlog.png`: Backlog con US-001 a US-010, Story Points y Sprint Goal; sirve para las secciones 3.2 y 3.3.
+3. `evidencia_04_tablero_scrum.png`: tablero con historias en `To Do` e `In Progress` en la fecha de captura.
+4. `evidencia_05_release.png`: release `v1.0.0-MVP` en estado `Unreleased`.
 
-Las capturas deben estar recortadas solo al contenido relevante de Jira, sin escritorio, barra de tareas ni pestañas del navegador.
+`evidencia_00_resumen.png` conserva la captura anterior del resumen de Jira, que estaba etiquetada erróneamente como Roadmap. No se usa como prueba del Timeline. El estado del código y las verificaciones del 29/09/2026 se registran en el [informe del Sprint 1](../03%20Implementación/01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md); el estado actual de las tarjetas de Jira requiere una consulta nueva del tablero.
 
 ---
 
@@ -161,6 +164,7 @@ Las capturas deben estar recortadas solo al contenido relevante de Jira, sin esc
 | Versión | Fecha | Descripción |
 |---|---|---|
 | 1.0.0 | 08/09/2026 | Creación inicial del informe de evidencias Jira para la Fase 02 de Planificación. |
+| 1.0.1 | 29/09/2026 | Corrección de referencias a capturas, estados de evidencia y distinción entre planificación histórica y avance del Sprint 1. |
 
 ---
 

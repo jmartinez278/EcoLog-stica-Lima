@@ -1,6 +1,6 @@
 # EcoLogística Lima
 
-**Versión de este README:** 1.0.0 · **Actualizado:** 29/09/2026
+**Versión de este README:** 1.0.1 · **Actualizado:** 29/09/2026
 
 **EcoLogística Lima** es un proyecto de software orientado a la optimización sostenible de rutas de distribución de última milla para el escenario empresarial de **DistriRápido S.A.C.**
 
@@ -183,7 +183,9 @@ EcoLog-stica-Lima/
 
 La revisión documenta el estado **antes** de la presentación del 29/09/2026. La retrospectiva es un borrador simulado para discutir con el equipo; aún no es un acta aprobada.
 
-Para ejecutar el proyecto, consultar las instrucciones técnicas del [backend](src/backend/README.md) y el [frontend](src/frontend/README.md). Los criterios oficiales de aceptación y el Definition of Done están en [Transformando a ágil](<docs/02 Planificación/01 Transformando a ágil V_1_0_0.md>).
+Para ejecutar el proyecto, consultar las instrucciones técnicas del [backend](src/backend/README.md) y el [frontend](src/frontend/README.md). Los criterios oficiales de aceptación y el Definition of Done están en [Transformando a ágil](<docs/02 Planificación/01 Transformando a ágil V_1_0_1.md>). Las capturas de planificación, identificadas según su contenido real, están en [Artefactos Jira](<docs/02 Planificación/02 Artefactos Jira V_1_0_1.md>).
+
+La verificación técnica del 29/09/2026 pasó con Docker Compose, PostgreSQL aislado, API y frontend: 9 pruebas backend (91,35 % de cobertura), 4 pruebas frontend, build y un recorrido HTTP de US-001 a US-010. La interfaz cargó y navegó sin desbordamiento horizontal a 360 px en el navegador probado. La demostración ante interesados y la retrospectiva del equipo aún no se han realizado.
 
 ---
 
@@ -277,6 +279,7 @@ Los documentos de definición inicial se encuentran en `docs/01 Inicio/`, la pla
 | Versión | Fecha | Cambio |
 |---|---|---|
 | 1.0.0 | 29/09/2026 | Actualización del estado del Sprint 1, distinción entre alcance implementado y objetivo del MVP, y enlaces a los cuatro entregables. |
+| 1.0.1 | 29/09/2026 | Enlaces a la planificación revisada y resultado de la verificación integrada en Docker y navegador. |
 
 ---
 

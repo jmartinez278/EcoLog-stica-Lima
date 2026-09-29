@@ -6,7 +6,7 @@
 |---|---|
 | Proyecto | EcoLogística Lima – Optimizador de Rutas Sostenibles para DistriRápido S.A.C. |
 | Líder del proyecto | Marco Jhair Martinez Llanos, Director del Proyecto según el acta de constitución |
-| Fecha de corte | 29/09/2026, antes de la presentación prevista para hoy |
+| Fecha de corte | 29/09/2026, 14:43 (hora de Lima), antes de la presentación prevista para hoy |
 | Versión del documento | 1.0.0 |
 | Objetivo del sprint | Implementar la base operativa para registrar y consultar vehículos, pedidos y conductores |
 
@@ -27,11 +27,17 @@
 | US-009 Registrar conductor | Alta con licencia y disponibilidad | Registro válido, inválido y licencia duplicada | Pendiente de aprobación BDD/DoD |
 | US-010 Consultar conductores | Lista, detalle y filtro `disponible=true` | Disponibles y resultado vacío si ninguno lo está | Pendiente de aprobación BDD/DoD |
 
-La referencia oficial para aprobar cada escenario es [Transformando a ágil, US-001 a US-010 y DoD](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_0.md). Las pruebas se encuentran en `src/backend/tests/test_vehicles.py`, `test_orders.py`, `test_drivers.py`, `test_auth.py` y `src/frontend/src/App.test.tsx`. Los resultados de ejecuciones previas y los límites de la verificación actual constan en el [informe de estado](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md).
+La referencia oficial para aprobar cada escenario es [Transformando a ágil, US-001 a US-010 y DoD](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md). Las pruebas se encuentran en `src/backend/tests/test_vehicles.py`, `test_orders.py`, `test_drivers.py`, `test_auth.py` y `src/frontend/src/App.test.tsx`. Los resultados ejecutados el 29/09/2026 y sus límites constan en el [informe de estado](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md).
 
 ## Demostración del trabajo completado
 
 **Estado de la demo ante stakeholders:** aún no realizada a la fecha de corte. El usuario indicó que la presentación está prevista para más tarde el 29/09/2026. Por tanto, no hay asistentes, observaciones, aceptación ni decisiones que puedan atribuirse a los interesados. Las pruebas automatizadas son evidencia técnica interna, no evidencia de una demostración ante interesados.
+
+### Verificación técnica interna realizada el 29/09/2026
+
+En un proyecto Docker Compose aislado se construyeron y arrancaron PostgreSQL, backend y frontend. `/health`, `/openapi.json` y la interfaz respondieron HTTP 200. Las 9 pruebas backend pasaron contra una base PostgreSQL de prueba separada con 91,35 % de cobertura; Vitest aprobó 4 pruebas y el build de Vite terminó correctamente. Un recorrido HTTP real verificó login y las operaciones de vehículos, conductores y pedidos de US-001 a US-010. En navegador se comprobó la carga, el inicio de sesión y la navegación por los cuatro módulos a 360 px, sin desbordamiento horizontal ni errores de página observados.
+
+Esta verificación fue técnica e interna. **No constituye la demostración ni la aprobación de los stakeholders** exigidas para cerrar la revisión del Sprint.
 
 ### Guion de demostración propuesto
 
@@ -48,7 +54,7 @@ Después del evento, registrar en una revisión versionada de este documento: fe
 
 ## Pendientes
 
-- Resolver el impedimento de Docker del [registro](02%20Registro%20de%20Impedimentos%20V_1_0_0.md), arrancar API y PostgreSQL y probar los flujos integrados. Pytest, cobertura, Vitest, build y sintaxis de Compose ya se repitieron el 29/09/2026.
+- Repetir el guion en el entorno y con los datos que se usarán en la presentación. Los impedimentos técnicos de Docker y dependencias quedaron resueltos en el [registro](02%20Registro%20de%20Impedimentos%20V_1_0_0.md), pero deben revalidarse antes del evento.
 - Realizar pruebas personales con datos válidos e inválidos y, si corresponde, corregir defectos encontrados antes de solicitar aceptación.
 - Completar demostración y registrar la reacción de los interesados, incluida cualquier variación del guion anterior.
 - Ejecutar y evidenciar los criterios del DoD aún no acreditados: análisis de seguridad, revisión por pares, HTTPS/TLS fuera del entorno local, staging, compatibilidad y accesibilidad, aprobación BDD e integración/pipeline autorizados.
@@ -57,4 +63,4 @@ Después del evento, registrar en una revisión versionada de este documento: fe
 
 | Versión | Fecha | Cambio |
 |---|---|---|
-| 1.0.0 | 29/09/2026 | Revisión previa a la presentación: implementación técnica, guion de demo y aceptación formal pendiente. |
+| 1.0.0 | 29/09/2026 | Revisión previa a la presentación: verificación técnica interna, guion de demo y aceptación formal pendiente. |

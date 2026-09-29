@@ -18,13 +18,13 @@
 - El flujo de pedidos depende de un cliente activo: la carga inicial idempotente y `GET /api/v1/clientes` permitieron probar el primer sprint sin adelantar el módulo de gestión de clientes.
 - Las transiciones de estado necesitan pruebas negativas además del flujo feliz. Las pruebas de pedidos comprueban que un pedido `PLANIFICADO` no puede editarse ni cancelarse, y las de vehículos comprueban desactivación inexistente y repetida.
 - La configuración puede bloquear funciones que el código implementa: una clave JWT demasiado corta se manifestó como HTTP 500 durante el intento de login. Verificar variables locales antes de la demo debe formar parte de la preparación.
-- La cobertura y el build obtenidos en una ejecución anterior no prueban que un entorno nuevo esté listo. La ausencia de Docker y la incompatibilidad de dependencias nativas entre Windows y WSL bloquearon inicialmente la repetición; se mitigó esta última con herramientas temporales nativas de WSL y se repitieron las pruebas automatizadas el 29/09/2026.
+- La cobertura y el build obtenidos en una ejecución anterior no prueban que un entorno nuevo esté listo. Docker y las dependencias Windows/WSL bloquearon inicialmente la repetición; al iniciarse Docker Desktop se verificaron los tres servicios, las pruebas sobre PostgreSQL, el build y la navegación a 360 px el 29/09/2026.
 - El Definition of Done exige evidencia social y de despliegue además de pruebas: revisión por pares, staging, aprobación BDD y validación de interfaz no se sustituyen con código o cobertura.
 
 ## ¿Qué estamos haciendo bien? — observaciones técnicas, no consenso del equipo
 
 - La separación `router → servicio → repositorio → base de datos` y la estructura independiente frontend/backend hacen localizables las reglas y pruebas.
-- Los tests cubren registros, consultas vacías, duplicados, rechazos de transición, autenticación, permisos y auditoría; el 29/09/2026 se repitieron con 9 pruebas backend aprobadas y 91,35 % de cobertura, más 4 pruebas frontend aprobadas y build correcto.
+- Los tests cubren registros, consultas vacías, duplicados, rechazos de transición, autenticación, permisos y auditoría; el 29/09/2026 se repitieron contra PostgreSQL aislado con 9 pruebas backend aprobadas y 91,35 % de cobertura, más 4 pruebas frontend aprobadas y build correcto.
 - El alcance se mantuvo en US-001 a US-010; no se introdujo aún el optimizador de rutas ni otras capacidades de sprints posteriores.
 - Los errores de operación, como el login 500, se pudieron relacionar con configuración concreta y documentar para su reproducción.
 
@@ -50,8 +50,8 @@ Estandarizar una sola vía de ejecución por equipo: Compose con Docker Desktop 
 
 | Acción concreta | Responsable propuesto por rol | Plazo propuesto | Evidencia de cierre |
 |---|---|---|---|
-| Recuperar Docker Desktop/WSL o un entorno Linux equivalente y ejecutar backend, frontend y PostgreSQL juntos | Responsable de entorno a designar por el equipo | Antes de la demostración prevista el 29/09/2026 | `docker info`, `docker compose config --quiet`, `/health` y login correctos |
-| Conservar la verificación de Pytest, Vitest y build ya repetida en WSL; agregar prueba PostgreSQL aislada | Responsable de pruebas a designar | Antes de solicitar aceptación del Sprint 1 | Salidas fechadas, cobertura ≥ 80 %, resultados de PostgreSQL y fallos registrados |
+| Revalidar Docker Desktop/WSL y el login en el equipo que se usará para la presentación; conservar un procedimiento de arranque | Responsable de entorno a designar por el equipo | Antes de la demostración prevista el 29/09/2026 | `docker info`, `docker compose config --quiet`, `/health` y login correctos en ese equipo |
+| Conservar la verificación de Pytest/PostgreSQL, Vitest, build y navegador a 360 px; repetirla tras cualquier cambio | Responsable de pruebas a designar | Antes de solicitar aceptación del Sprint 1 | Salidas fechadas, cobertura ≥ 80 %, resultados de PostgreSQL y fallos registrados |
 | Ejecutar el guion de US-001 a US-010 con interesados y completar el acta de revisión | Presentador y relator a designar | Durante y después de la presentación del 29/09/2026 | Fecha, asistentes, funcionalidades mostradas, comentarios y decisiones en `03 Revisión del Sprint` |
 | Revisar cada historia frente al DoD y solicitar revisión por un par técnico | Autor y revisor a designar | Antes de declarar cualquier historia `Done` | Lista de criterios aprobados, hallazgos resueltos y aprobación de revisión |
 | Celebrar la retrospectiva real y decidir cuáles de estas propuestas se adoptan | Director del proyecto y equipo | Después de la presentación; fecha por acordar | Acta versionada con asistentes, acuerdos, responsables nominales y plazos efectivos |
