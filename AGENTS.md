@@ -6,7 +6,7 @@ Este archivo orienta a quienes continúen el trabajo en el repositorio. La docum
 
 - Trabajar únicamente en la rama `sprint-1`. Confirmar `git branch --show-current` y `git status` antes de editar; detenerse si la rama actual es otra. No modificar `main`.
 - El Sprint 1 comprende US-001 a US-010: registro, consulta, actualización y desactivación de vehículos; registro, consulta, actualización de pendientes y cancelación de pedidos; registro y consulta de conductores.
-- No hacer commit, push ni merge sin una petición expresa del usuario. Los archivos del Sprint 1 pueden aparecer como nuevos y sin seguimiento en `git status`.
+- El usuario autorizó integrar y publicar `sprint-1` en `main`, y después corregir la entrega y actualizar ambas ramas. Antes de cada integración, verificar las dos ramas y las pruebas; no hacer push de cambios ajenos a esta corrección.
 - El usuario autorizó preparar los cuatro entregables del Sprint 1 en `docs/03 Implementación/`. Distinguir evidencia técnica de la demostración y retrospectiva del equipo, todavía pendientes al 29/09/2026; cualquier reflexión simulada debe etiquetarse como propuesta.
 - No añadir aún optimizador de rutas, mapa, dashboard avanzado, emisiones, reportes ni reoptimización. No cambiar sin motivo los requisitos, las reglas de negocio, el stack ni la arquitectura documentada.
 - Nunca mostrar ni agregar secretos. `.env` es local e ignorado por Git; `.env.example` contiene solo marcadores de posición.
@@ -22,9 +22,9 @@ Leer antes de cambiar comportamiento o estructura:
 5. `docs/01 Inicio/10. Stack tecnológico V_1_0_0.md`.
 6. `docs/01 Inicio/11. Base de datos V_1_0_0.md`.
 7. `docs/01 Inicio/12. Modelo C4 V_1_0_0.md`.
-8. `docs/02 Planificación/01 Transformando a ágil V_1_0_0.md`, especialmente los criterios BDD de US-001 a US-010, EN-006 y el Definition of Done.
+8. `docs/02 Planificación/01 Transformando a ágil V_1_0_1.md`, especialmente los criterios BDD de US-001 a US-010, EN-006 y el Definition of Done.
 
-Para cambios visuales, consultar también `DESIGN.md`. El `README.md` principal enlaza los entregables de implementación. La validación personal, la demostración ante interesados y la retrospectiva del equipo siguen pendientes de evidencia real.
+Para cambios visuales, consultar también `DESIGN.md`. El `README.md` principal enlaza los entregables de implementación. El 29/09/2026 se verificaron servicios integrados, PostgreSQL y navegador local; la demostración ante interesados y la retrospectiva del equipo siguen pendientes de evidencia real.
 
 ## Arquitectura actual
 
