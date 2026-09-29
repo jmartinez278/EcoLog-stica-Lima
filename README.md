@@ -1,6 +1,6 @@
 # EcoLogística Lima
 
-**Versión de este README:** 1.0.1 · **Actualizado:** 29/09/2026
+**Versión de este README:** 1.0.2 · **Actualizado:** 29/09/2026
 
 **EcoLogística Lima** es un proyecto de software orientado a la optimización sostenible de rutas de distribución de última milla para el escenario empresarial de **DistriRápido S.A.C.**
 
@@ -264,7 +264,10 @@ Los principales criterios de evaluación serán:
 - Luis Antony Gonzalo Guerrero
 - Jhon Robert Paitan Montes
 - Marco Jhair Martinez Llanos
+- Piero Pool Chauris Leguia
 - Rodrigo Vladimir Arce Curi
+
+La lista actual de cinco integrantes fue confirmada por el usuario mediante una imagen el 29/09/2026. Los documentos iniciales enumeran cuatro; falta confirmar desde cuándo participa Piero antes de corregir registros históricos.
 
 ---
 
@@ -280,6 +283,7 @@ Los documentos de definición inicial se encuentran en `docs/01 Inicio/`, la pla
 |---|---|---|
 | 1.0.0 | 29/09/2026 | Actualización del estado del Sprint 1, distinción entre alcance implementado y objetivo del MVP, y enlaces a los cuatro entregables. |
 | 1.0.1 | 29/09/2026 | Enlaces a la planificación revisada y resultado de la verificación integrada en Docker y navegador. |
+| 1.0.2 | 29/09/2026 | Actualización del equipo actual a cinco integrantes y referencia a la retrospectiva simulada ampliada. |
 
 ---
 
