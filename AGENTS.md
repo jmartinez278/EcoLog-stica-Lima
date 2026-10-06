@@ -4,12 +4,12 @@ Este archivo orienta a quienes continúen el trabajo en el repositorio. La docum
 
 ## Estado y límites acordados
 
-- Trabajar únicamente en la rama `sprint-1`. Confirmar `git branch --show-current` y `git status` antes de editar; detenerse si la rama actual es otra. No modificar `main`.
-- El Sprint 1 comprende US-001 a US-010: registro, consulta, actualización y desactivación de vehículos; registro, consulta, actualización de pendientes y cancelación de pedidos; registro y consulta de conductores.
+- Trabajar en la rama correspondiente al Sprint activo. El Sprint 2 se desarrolla en `sprint-2`; confirmar `git branch --show-current` y `git status` antes de editar. No modificar `main` directamente.
+- El Sprint 1 comprende US-001 a US-010. El Sprint 2 añade US-011 a US-015: actualización y desactivación de conductores, y registro, consulta y actualización de clientes y sus condiciones de entrega.
 - El usuario autorizó integrar y publicar `sprint-1` en `main`, y después corregir la entrega y actualizar ambas ramas. Antes de cada integración, verificar las dos ramas y las pruebas; no hacer push de cambios ajenos a esta corrección.
 - El usuario autorizó preparar los cuatro entregables del Sprint 1 en `docs/03 Implementación/`. Distinguir evidencia técnica de la demostración y reunión de retrospectiva del equipo, todavía sin evidencia de realización al 29/09/2026. El análisis retrospectivo está documentado; sus acuerdos requieren confirmación del equipo.
 - El usuario compartió una imagen con los cinco integrantes actuales; el quinto, Piero Pool Chauris Leguia, está incluido en el README y en el análisis retrospectivo. Los documentos iniciales enumeran cuatro; no se conoce la fecha de incorporación, así que no reescribir actas históricas como si Piero hubiera estado presente entonces.
-- No añadir aún optimizador de rutas, mapa, dashboard avanzado, emisiones, reportes ni reoptimización. No cambiar sin motivo los requisitos, las reglas de negocio, el stack ni la arquitectura documentada.
+- No añadir aún optimizador de rutas, mapa, dashboard avanzado, emisiones, reportes ni reoptimización. Estas capacidades comienzan en US-016. No cambiar sin motivo los requisitos, las reglas de negocio, el stack ni la arquitectura documentada.
 - Nunca mostrar ni agregar secretos. `.env` es local e ignorado por Git; `.env.example` contiene solo marcadores de posición.
 
 ## Fuentes de verdad
@@ -36,7 +36,7 @@ Para cambios visuales, consultar también `DESIGN.md`. El `README.md` principal 
 - Vehículos: `/api/v1/vehiculos` y acción `/desactivar`. La desactivación es lógica.
 - Pedidos: `/api/v1/pedidos` y acción `/cancelar`. Solo `PENDIENTE` admite edición o cancelación; hay filtro por estado.
 - Conductores: `/api/v1/conductores`, con filtro `disponible`.
-- `GET /api/v1/clientes` solo permite consultar el cliente de ejemplo para seleccionar un cliente al registrar pedidos.
+- Clientes: `/api/v1/clientes` permite registrar, consultar y actualizar datos, preferencias, restricciones y estado. Los pedidos solo admiten clientes activos.
 - Las mutaciones exitosas y su auditoría se confirman juntas; los fallos de escritura se auditan aparte. Conservar este comportamiento al modificar servicios.
 
 ## Verificación antes de entregar cambios

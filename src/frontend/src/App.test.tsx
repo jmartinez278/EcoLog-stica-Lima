@@ -72,7 +72,7 @@ describe('flujos principales', () => {
     const orders: Record<string, unknown>[] = []
     vi.stubGlobal('fetch', vi.fn(async (input: string, init?: RequestInit) => {
       if (input.endsWith('/auth/login')) return json({ access_token: 'token' })
-      if (input.endsWith('/clientes')) return json([{ cliente_id: 'c1', nombre: 'Cliente de ejemplo' }])
+      if (input.includes('/clientes?activo=true')) return json([{ cliente_id: 'c1', nombre: 'Cliente de ejemplo' }])
       if (input.endsWith('/pedidos') && !init?.method) return json(orders)
       if (input.endsWith('/pedidos') && init?.method === 'POST') {
         const order = { ...JSON.parse(init.body as string), pedido_id: 'p1', estado: 'PENDIENTE' }
@@ -109,7 +109,7 @@ describe('flujos principales', () => {
     await waitFor(() => expect(orders[0].estado).toBe('CANCELADO'))
   })
 
-  it('registra conductor y filtra los disponibles', async () => {
+  it('registra, actualiza, desactiva y filtra conductores', async () => {
     const drivers: Record<string, unknown>[] = []
     const fetchMock = vi.fn(async (input: string, init?: RequestInit) => {
       if (input.endsWith('/auth/login')) return json({ access_token: 'token' })
@@ -117,6 +117,12 @@ describe('flujos principales', () => {
       if (input.endsWith('/conductores') && init?.method === 'POST') {
         const driver = { ...JSON.parse(init.body as string), conductor_id: 'd1' }
         drivers.push(driver); return json(driver, 201)
+      }
+      if (input.endsWith('/conductores/d1') && init?.method === 'PUT') {
+        Object.assign(drivers[0], JSON.parse(init.body as string)); return json(drivers[0])
+      }
+      if (input.endsWith('/conductores/d1/desactivar') && init?.method === 'PATCH') {
+        drivers[0].estado = 'INACTIVO'; return json(drivers[0])
       }
       throw new Error(`Unexpected request ${input}`)
     })
@@ -130,7 +136,46 @@ describe('flujos principales', () => {
     await userEvent.type(screen.getByLabelText('Categoría de licencia'), 'A-IIb')
     await userEvent.click(screen.getByRole('button', { name: 'Registrar' }))
     expect(await screen.findByText('Ana Pérez')).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'Editar' }))
+    await userEvent.clear(screen.getByLabelText('Teléfono'))
+    await userEvent.type(screen.getByLabelText('Teléfono'), '999111222')
+    await userEvent.click(screen.getByRole('button', { name: 'Guardar cambios' }))
+    expect(await screen.findByText('999111222')).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'Desactivar' }))
+    await waitFor(() => expect(drivers[0].estado).toBe('INACTIVO'))
     await userEvent.click(screen.getByLabelText('Solo disponibles'))
     await waitFor(() => expect(fetchMock).toHaveBeenCalledWith(expect.stringContaining('disponible=true'), expect.anything()))
+  })
+
+  it('registra, consulta y actualiza las condiciones de un cliente', async () => {
+    const clients: Record<string, unknown>[] = []
+    vi.stubGlobal('fetch', vi.fn(async (input: string, init?: RequestInit) => {
+      if (input.endsWith('/auth/login')) return json({ access_token: 'token' })
+      if (input.includes('/clientes') && !init?.method) return json(input.includes('activo=true') ? clients.filter(item => item.estado === 'ACTIVO') : clients)
+      if (input.endsWith('/clientes') && init?.method === 'POST') {
+        const client = { ...JSON.parse(init.body as string), cliente_id: 'c1', creado_en: '2026-10-06T12:00:00Z' }
+        clients.push(client); return json(client, 201)
+      }
+      if (input.endsWith('/clientes/c1') && init?.method === 'PUT') {
+        Object.assign(clients[0], JSON.parse(init.body as string)); return json(clients[0])
+      }
+      throw new Error(`Unexpected request ${input}`)
+    }))
+    render(<App />); await login()
+    await userEvent.click(screen.getByRole('button', { name: 'Clientes' }))
+    await screen.findByText('No existen clientes registrados.')
+    await userEvent.type(screen.getByLabelText('Nombre'), 'Bodega Central')
+    await userEvent.type(screen.getByLabelText('Correo electrónico'), 'entregas@bodega.test')
+    await userEvent.type(screen.getByLabelText('Preferencia de entrega'), 'Llamar antes')
+    await userEvent.type(screen.getByLabelText('Restricción de acceso'), 'Acceso lateral')
+    await userEvent.click(screen.getByRole('button', { name: 'Registrar' }))
+    expect(await screen.findByText('Bodega Central')).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'Editar' }))
+    await userEvent.clear(screen.getByLabelText('Preferencia de entrega'))
+    await userEvent.type(screen.getByLabelText('Preferencia de entrega'), 'Entregar por la mañana')
+    await userEvent.click(screen.getByRole('button', { name: 'Guardar cambios' }))
+    expect(await screen.findByText(/Entregar por la mañana/)).toBeInTheDocument()
+    await userEvent.click(screen.getByLabelText('Solo activos'))
+    await waitFor(() => expect(fetch).toHaveBeenCalledWith(expect.stringContaining('activo=true'), expect.anything()))
   })
 })

@@ -1,6 +1,6 @@
-# Backend Sprint 1
+# Backend Sprints 1 y 2
 
-API FastAPI con capas `api → services → repositories → PostgreSQL`. Implementa US-001 a US-010. La documentación interactiva está en `/docs`, el contrato JSON en `/openapi.json` y la comprobación de base de datos en `/health`.
+API FastAPI con capas `api → services → repositories → PostgreSQL`. Implementa US-001 a US-015. La documentación interactiva está en `/docs`, el contrato JSON en `/openapi.json` y la comprobación de base de datos en `/health`.
 
 ## Configuración y ejecución
 
@@ -25,7 +25,7 @@ Para arrancar el backend sin Compose, instalar `requirements.txt`, configurar `D
 
 `POST /api/v1/auth/login` recibe JSON con `email` y `password`, y devuelve un token Bearer. Las operaciones de lectura aceptan los roles documentados de lectura; las escrituras requieren `ADMINISTRADOR` u `OPERADOR_LOGISTICO`. La consulta global de estos módulos no se permite a `CONDUCTOR` porque aún no existen asignaciones para aplicar la restricción por atributos.
 
-Los registros usan UUID. Los pedidos requieren un `cliente_id` activo; `GET /api/v1/clientes` expone el cliente inicial sin habilitar gestión de clientes. Solo los pedidos `PENDIENTE` pueden editarse o cancelarse. Los registros de vehículo se desactivan lógicamente. Una mutación exitosa y su auditoría se confirman en la misma transacción; los fallos HTTP de mutaciones se auditan aparte.
+Los registros usan UUID. Los pedidos requieren un `cliente_id` activo. `/api/v1/clientes` permite registrar, consultar, filtrar y actualizar clientes y sus condiciones de entrega. Los conductores pueden actualizarse y desactivarse, salvo que estén asignados. Solo los pedidos `PENDIENTE` pueden editarse o cancelarse. Los registros de vehículo y conductor se desactivan lógicamente. Una mutación exitosa y su auditoría se confirman en la misma transacción; los fallos HTTP de mutaciones se auditan aparte.
 
 ## Pruebas
 

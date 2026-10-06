@@ -19,5 +19,8 @@ def list_all(db: Session, available: bool | None = None) -> list[Driver]:
     return list(db.scalars(query))
 
 
-def license_exists(db: Session, license_number: str) -> bool:
-    return db.scalar(select(Driver.conductor_id).where(Driver.numero_licencia == license_number)) is not None
+def license_exists(db: Session, license_number: str, exclude_id: UUID | None = None) -> bool:
+    query = select(Driver.conductor_id).where(Driver.numero_licencia == license_number)
+    if exclude_id:
+        query = query.where(Driver.conductor_id != exclude_id)
+    return db.scalar(query) is not None
