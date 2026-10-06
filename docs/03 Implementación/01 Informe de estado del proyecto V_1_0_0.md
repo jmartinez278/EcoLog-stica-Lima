@@ -6,15 +6,17 @@
 
 **Líder del Proyecto:** Marco Jhair Martinez Llanos (según el acta de constitución)
 
-**Sprint:** ECO Sprint 2 · **Fecha de corte:** 06/10/2026, 17:10 (Lima) · **Versión del documento:** 1.0.0
+**Sprint:** ECO Sprint 2 · **Fecha de corte:** 06/10/2026 (Lima) · **Versión interna del documento:** 1.0.1
+
+El nombre del archivo conserva `V_1_0_0` porque la consigna exige ese nombre exacto; las revisiones se identifican en este encabezado y en el historial.
 
 ## Estado general
 
-El incremento técnico de US-011 a US-015 está publicado en la rama `sprint-2` (commit `53642da`) y fue integrado a `main` mediante el PR #1 (`51b8c59`). Amplía la gestión de conductores y clientes sin retirar las operaciones del Sprint 1. La entrega formal continúa **en proceso**: en Jira las cinco historias permanecen en `To Do`, el Sprint 2 figura como `future` y no consta aceptación de sus criterios BDD ni cumplimiento íntegro del [Definition of Done](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md). La integración de código no equivale al cierre de historias.
+El incremento técnico de US-011 a US-015 está publicado en la rama `sprint-2` (commit `53642da`) y fue integrado a `main` mediante el PR #1 (`51b8c59`). Amplía la gestión de conductores y clientes sin retirar las operaciones del Sprint 1. La entrega formal continúa **en proceso**: en Jira las cinco historias permanecen en `To Do` y el Sprint 2 figura como `future`. **El único criterio para declarar una historia terminada es cumplir todos los puntos aplicables del [Definition of Done](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md).** Los escenarios BDD se comprueban dentro de DoD-10; un commit, un merge o una demostración por sí solos no cierran una historia.
 
 ## Historias de Usuario completadas en este Sprint
 
-**Acreditadas como `Done`: ninguna al corte.** Hay implementación funcional para las cinco historias; se detallan aquí por separado de su aceptación.
+**Acreditadas como `Done` según el DoD: ninguna al corte.** Hay implementación funcional para las cinco historias; la evidencia incompleta se detalla sin usar otra definición de terminado.
 
 | Historia / Jira | Alcance verificable en el código | Estado de aceptación |
 |---|---|---|
@@ -33,9 +35,48 @@ La [planificación](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_
 | `git diff 02e8f05...origin/sprint-2` | Cambios de US-011 a US-015 en backend, frontend y pruebas; sin cambios en `docs/03 Implementación/` antes de esta actualización documental. | Comparación de commits. |
 | `python -m pytest -q --cov=app --cov-report=term --cov-fail-under=80` | 14 pruebas aprobadas; cobertura total de backend **92,41 %**. | Ejecutado sobre copia temporal del commit, con SQLite. No acredita PostgreSQL ni la interfaz completa. |
 | Pruebas frontend y Compose | No ejecutadas en esta revisión: `npm` invocó Windows desde WSL y `docker` no estaba disponible en la distribución. | Los flujos nuevos sí tienen pruebas en `App.test.tsx`, pero su éxito no se afirma aquí. |
-| Jira `ECO board`, sprint ID 37 | 5 historias, 0 `Done`, 0 `In Progress`, 5 `To Do`, 5 sin responsable; sprint `future`. Sprint Goal registrado con aprobación del usuario. | Consulta inicial a las 17:02 y verificación del objetivo a las 17:10 (Lima). [Detalle y fuentes](../02%20Planificación/04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_1.md). |
+| Jira `ECO board`, sprint ID 37 | 5 historias, 0 `Done`, 0 `In Progress`, 5 `To Do`, 5 sin responsable; sprint `future`. Sprint Goal registrado con aprobación del usuario. | Consulta inicial a las 17:02 y verificación del objetivo a las 17:10 (Lima). [Detalle y fuentes](../02%20Planificación/04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_2.md). |
 
 El PR #1 acredita la integración en `main`; no se verificó una aprobación de revisión por pares ni un pipeline satisfactorio. Tampoco constan en esta revisión análisis estático, staging, aceptación BDD por interesados, compatibilidad entre navegadores o evaluación WCAG.
+
+## Detalle técnico para reproducir y revisar el incremento
+
+| Historia | Contrato HTTP | Implementación | Prueba concreta |
+|---|---|---|---|
+| US-011 | `PUT /api/v1/conductores/{id}` | `api/drivers.py` → `services/drivers.py` → `repositories/drivers.py`; `DriverInput` valida datos y el servicio rechaza licencia duplicada e inactivos. | `test_driver_update_and_deactivation`, `test_driver_update_rejections_preserve_state` |
+| US-012 | `PATCH /api/v1/conductores/{id}/desactivar` | Desactivación lógica a `INACTIVO`; rechazo de ID ausente, estado inactivo o `ASIGNADO`. | Las mismas pruebas de actualización y desactivación de `test_drivers.py`. |
+| US-013 | `POST /api/v1/clientes` | `api/clients.py` → `services/clients.py` → `repositories/clients.py`; `ClientInput` valida nombre y formato de correo; el servicio comprueba duplicado. | `test_client_registration_query_and_update`, `test_client_rejections_and_filters` |
+| US-014 | `GET /api/v1/clientes`, `GET /api/v1/clientes/{id}` | Consulta ordenada y filtro `activo`; ficha inexistente devuelve 404. | `test_client_registration_query_and_update`, `test_client_rejections_and_filters` |
+| US-015 | `PUT /api/v1/clientes/{id}` | Actualiza contacto, preferencias, restricciones y estado; rechaza correo inválido o duplicado. | `test_client_registration_query_and_update`, `test_client_rejections_and_filters` |
+
+Las rutas usan permisos de lectura o escritura mediante dependencias de FastAPI; las mutaciones pasan por `commit_change`, que persiste entidad y auditoría en una transacción. Los modelos SQLAlchemy `conductores` y `clientes` ya existían en la base del Sprint 1: este incremento no añadió una migración. Los pedidos conservan la comprobación de `cliente_id` activo. Los archivos citados se encuentran bajo `src/backend/app/` y `src/backend/tests/`; las acciones de la interfaz están en `src/frontend/src/App.tsx` y el cliente HTTP en `src/frontend/src/api.ts`. La API documenta sus rutas en `/docs` y `/openapi.json`. Para repetir la suite: desde `src/backend`, ejecutar `python -m pytest -q --cov=app --cov-report=term --cov-fail-under=80`; usar una base de prueba aislada si se configura `TEST_DATABASE_URL` para PostgreSQL.
+
+## Seguimiento del Definition of Done
+
+**Criterio único:** una US pasa a `Done` solo cuando **todos** sus criterios aplicables están verificados. `Parcial` y `sin evidencia` significan que la historia sigue abierta. La matriz aplica a US-011 a US-015 y sigue la numeración de la planificación.
+
+| DoD | Evidencia al 06/10/2026 | Estado |
+|---|---|---|
+| 01 · Cobertura ≥80 % del código afectado | 14 pruebas backend aprobadas; la cobertura total del backend fue 92,41 % en SQLite. No se desglosó aquí la cobertura de los módulos afectados por US-011 a US-015. | Parcial; pendiente comprobar el umbral por código afectado. |
+| 02 · Análisis estático y seguridad | No consta resultado de SonarQube, CodeQL o equivalente para el incremento. | Sin evidencia. |
+| 03 · Pruebas críticas | Pasó Pytest; Vitest, build e integración PostgreSQL no se repitieron en esta revisión. | Parcial. |
+| 04 · Revisión por pares | El PR #1 solicitó revisor, pero la consulta de reviews de GitHub devolvió `[]`. | No acreditado. |
+| 05 · Acceso y TLS | La API conserva `require_read` y `require_write`; `test_client_write_permissions` cubre un rechazo 403. No consta verificación TLS externa. | Parcial. |
+| 06 · Documentación / OpenAPI | README técnicos y esquemas actualizados; rutas en FastAPI. No se verificó `/openapi.json` en un arranque del Sprint 2. | Parcial. |
+| 07 · Staging | No consta despliegue ni prueba en staging. | Sin evidencia. |
+| 08 · UI, 360 px y navegadores | Hay pruebas nuevas en `App.test.tsx`, pero Vitest y revisión de 360 px/navegadores no se ejecutaron en esta pasada. | Sin evidencia suficiente. |
+| 09 · Auditoría e integridad | `test_drivers.py` y `test_clients.py` comprueban eventos de auditoría exitosos; falta comprobación integrada de fallos y reversión en PostgreSQL. | Parcial. |
+| 10 · Escenarios BDD | Hay pruebas automatizadas de los escenarios principales; no consta aprobación de todos los escenarios oficiales por historia. | Parcial. |
+| 11 · Sin defectos bloqueantes | No hay una comprobación cerrada de defectos críticos asociados a las cinco tarjetas. | Sin evidencia. |
+| 12 · Integración y pipeline | PR #1 fusionado; la consulta de ejecuciones de workflow para `53642da` devolvió `[]`. | Parcial. |
+
+Las consultas de PR, reviews y workflows se hicieron en GitHub el 06/10/2026. No se interpreta `[]` como aprobación tácita. La [revisión del Sprint](03%20Revisión%20del%20Sprint%20V_1_0_0.md) vincula estas brechas con las cinco historias.
+
+## Calendario y desviación de seguimiento
+
+Jira programó ECO Sprint 2 del **22/09/2026 a las 19:59:45** al **06/10/2026 a las 19:59:35**, hora de Lima. El commit de implementación está fechado el **06/10 a las 13:53**, el PR se abrió a las **14:08** y se fusionó a las **16:23**. Esas son fechas comprobadas; no se dispone de evidencia para repartir el desarrollo entre los días anteriores. Jira conserva el sprint en `future` pese a que el intervalo programado ya comenzó. Las acciones todavía abiertas carecen de fecha propia en Jira y requieren replanificación si no se completan antes del fin programado; no se les asigna una fecha efectiva ficticia. Véase la [línea de tiempo](../02%20Planificación/04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_2.md).
+
+La observación del profesor sobre información técnica insuficiente señala un riesgo de retraso por tiempo de reconstrucción y aclaración. No se recibió una medición de días perdidos; el [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) lo documenta como observación y acción de mejora, sin cuantificarlo como retraso ocurrido.
 
 ## Demostración del trabajo completado
 
@@ -58,3 +99,4 @@ El [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) do
 | Versión | Fecha | Cambio |
 |---|---|---|
 | 1.0.0 | 06/10/2026 | Informe inicial del Sprint 2 con avance técnico, estado real de Jira, comprobaciones y pendientes de aceptación. |
+| 1.0.1 | 06/10/2026 | DoD como criterio único de cierre, detalle técnico por historia, matriz de evidencia y calendario exacto de Jira frente a fechas comprobadas. |
