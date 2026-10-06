@@ -1,74 +1,104 @@
 [← Volver al README principal](../../README.md)
 
-# Informe de estado del proyecto — Sprint 1
+# Informe de estado del proyecto — Sprint 2
 
-| Campo | Detalle |
-|---|---|
-| Proyecto | EcoLogística Lima – Optimizador de Rutas Sostenibles para DistriRápido S.A.C. |
-| Líder del proyecto | Marco Jhair Martinez Llanos, Director del Proyecto según el acta de constitución |
-| Sprint | ECO Sprint 1, gestión de vehículos, pedidos y conductores |
-| Fecha de corte | 29/09/2026, 14:43 (hora de Lima), antes de la presentación prevista para hoy |
-| Última revalidación técnica | 29/09/2026, 15:04 (hora de Lima) |
-| Versión del documento | 1.0.2 |
-| Estado general | Implementación técnica publicada en `sprint-1` y `main`; aceptación formal del Sprint pendiente |
+**Nombre del Proyecto:** EcoLogística Lima – Optimizador de Rutas Sostenibles para DistriRápido S.A.C.
 
-## Resumen del avance
+**Líder del Proyecto:** Marco Jhair Martinez Llanos (según el acta de constitución)
 
-El [Sprint Goal](../02%20Planificación/02%20Artefactos%20Jira%20V_1_0_1.md) busca establecer la base operativa para registrar y consultar vehículos, pedidos y conductores. Hay código y pruebas automatizadas para US-001 a US-010 en `src/backend/` y `src/frontend/`. La API incluye autenticación, roles, auditoría y contratos OpenAPI; la interfaz permite los flujos solicitados. La generación de rutas y los módulos posteriores no forman parte de este incremento.
+**Sprint:** ECO Sprint 2 · **Fecha de corte:** 06/10/2026 (Lima) · **Versión interna del documento:** 1.0.2
 
-**Estado de aceptación:** ninguna historia se declara formalmente `Done` en este informe. La [definición global de terminado](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md) requiere, entre otros, revisión por pares, análisis de seguridad, staging, compatibilidad y aprobación de escenarios BDD. No constan esas evidencias completas ni una demostración ante interesados. Esta distinción evita convertir la existencia de código en una aprobación del sprint.
+El nombre del archivo conserva `V_1_0_0` porque la consigna exige ese nombre exacto; las revisiones se identifican en este encabezado y en el historial.
+
+## Estado general
+
+El incremento técnico de US-011 a US-015 está publicado en la rama `sprint-2` (commit `53642da`) y fue integrado a `main` mediante el PR #1 (`51b8c59`). Amplía la gestión de conductores y clientes sin retirar las operaciones del Sprint 1. La entrega formal continúa **en proceso**: las cinco historias pasaron de `To Do` a `In Review / QA` en Jira el 06/10/2026; el Sprint 2 aún figura como `future`. **El único criterio para declarar una historia terminada es cumplir todos los puntos aplicables del [Definition of Done](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md).** Los escenarios BDD se comprueban dentro de DoD-10; un commit, un merge o una demostración por sí solos no cierran una historia.
 
 ## Historias de Usuario completadas en este Sprint
 
-**Completadas conforme al Definition of Done global: ninguna acreditada a la fecha de corte.** El siguiente cuadro refleja implementación funcional y cobertura de escenarios automatizados, pendientes de la validación formal:
+**Acreditadas como `Done` según el DoD: ninguna al corte.** Hay implementación funcional para las cinco historias; la evidencia incompleta se detalla sin usar otra definición de terminado.
 
-| Historia | Incremento implementado | Evidencia técnica disponible | Estado |
-|---|---|---|---|
-| US-001 | Registrar vehículo; validar datos y placa única | `src/backend/tests/test_vehicles.py`; flujo UI en `src/frontend/src/App.test.tsx` | Implementada; aceptación pendiente |
-| US-002 | Consultar flota, detalle y lista vacía | `test_vehicles.py`; flujo UI de vehículos | Implementada; aceptación pendiente |
-| US-003 | Actualizar datos válidos y rechazar inválidos conservando el estado | `test_vehicles.py`; flujo UI de edición | Implementada; aceptación pendiente |
-| US-004 | Desactivación lógica y rechazo de ID inexistente | `test_vehicles.py`; flujo UI de desactivación | Implementada; aceptación pendiente |
-| US-005 | Registrar pedido y rechazar ventana de tiempo inválida | `src/backend/tests/test_orders.py`; flujo UI de pedidos | Implementada; aceptación pendiente |
-| US-006 | Consultar pedidos, filtrar por estado y obtener resultado vacío | `test_orders.py`; flujo UI de pedidos | Implementada; aceptación pendiente |
-| US-007 | Actualizar solo pedido `PENDIENTE` | `test_orders.py`; flujo UI de edición | Implementada; aceptación pendiente |
-| US-008 | Cancelar solo pedido `PENDIENTE` | `test_orders.py`; flujo UI de cancelación | Implementada; aceptación pendiente |
-| US-009 | Registrar conductor; validar campos y licencia única | `src/backend/tests/test_drivers.py`; flujo UI de conductores | Implementada; aceptación pendiente |
-| US-010 | Consultar conductores y filtrar disponibilidad, incluido resultado vacío | `test_drivers.py`; flujo UI de filtro | Implementada; aceptación pendiente |
-
-Las rutas HTTP y sus restricciones están descritas en los [README del backend](../../src/backend/README.md) y [frontend](../../src/frontend/README.md). Las pruebas del backend usan SQLite temporal de forma predeterminada. El 29/09/2026 también se ejecutaron contra una base PostgreSQL de prueba aislada mediante `TEST_DATABASE_URL`.
-
-## Verificación técnica
-
-| Comprobación | Evidencia / resultado | Límite |
+| Historia / Jira | Alcance verificable en el código | Estado de aceptación |
 |---|---|---|
-| Pytest y cobertura sobre PostgreSQL | `docker compose ... exec backend` con `TEST_DATABASE_URL` de la base `ecologistica_test`: 9 pruebas aprobadas, cobertura 91,35 % de `app`; umbral ≥ 80 % alcanzado | La base de prueba se creó en un proyecto Compose aislado; no se usaron los datos habituales del usuario |
-| Vitest y build | Dentro del contenedor frontend: 4 pruebas aprobadas y `npm run build` correcto | Las pruebas de componentes usan dobles de prueba para la API; el recorrido HTTP integrado se comprobó aparte |
-| Docker Compose, PostgreSQL y arranque | `docker compose config --quiet` correcto; tres servicios activos, PostgreSQL sano; `/health`, `/openapi.json` y frontend respondieron HTTP 200 | Entorno local de desarrollo; no acredita staging ni HTTPS/TLS externo |
-| Recorrido HTTP integrado | Login del operador inicial y registro, consulta, edición y desactivación/cancelación o filtro de US-001 a US-010 sobre PostgreSQL: correcto | Prueba técnica interna; no equivale a aceptación BDD por interesados |
-| Navegador a 360 px | Login y navegación Inicio, Vehículos, Pedidos y Conductores; ancho del documento de 360 px en las cuatro vistas, sin errores de página observados | Comprobación en un navegador; no acredita WCAG 2.1 AA ni compatibilidad entre navegadores |
-| Auditoría de dependencias frontend de producción | `npm audit --omit=dev --audit-level=high`: 0 vulnerabilidades reportadas | No sustituye el análisis estático del código exigido por DoD-02 |
-| Prueba personal y demostración | Pendientes; presentación prevista más tarde el 29/09/2026 | Registrar asistentes, resultados y observaciones después del evento |
+| US-011 / [ECO-17](https://jhonpaitanrcm.atlassian.net/browse/ECO-17) | Actualizar conductor y disponibilidad; rechazar datos inválidos, licencia duplicada e inactivos. | Implementada; `In Review / QA` y DoD pendiente. |
+| US-012 / [ECO-18](https://jhonpaitanrcm.atlassian.net/browse/ECO-18) | Desactivación lógica; respuesta 404 para ID inexistente y rechazo de conductor asignado. | Implementada; `In Review / QA` y DoD pendiente. |
+| US-013 / [ECO-19](https://jhonpaitanrcm.atlassian.net/browse/ECO-19) | Alta de cliente con preferencias y restricciones; validación de nombre y correo. | Implementada; `In Review / QA` y DoD pendiente. |
+| US-014 / [ECO-20](https://jhonpaitanrcm.atlassian.net/browse/ECO-20) | Lista, filtro de activos y ficha de cliente; 404 si no existe. | Implementada; `In Review / QA` y DoD pendiente. |
+| US-015 / [ECO-21](https://jhonpaitanrcm.atlassian.net/browse/ECO-21) | Actualización de datos y condiciones de entrega; rechazo de correo inválido o duplicado. | Implementada; `In Review / QA` y DoD pendiente. |
 
-Las pruebas repetidas el 29/09/2026 confirman la suite automatizada y la operación integrada con PostgreSQL. La [revisión del sprint](03%20Revisión%20del%20Sprint%20V_1_0_0.md) distingue esta verificación interna de la demostración pendiente ante interesados.
+La [planificación](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md) define los escenarios oficiales de estas historias. El código incorpora rutas, servicios, repositorios, esquemas y formularios; los pedidos mantienen la regla del Sprint 1 de exigir un cliente activo. El Sprint 2 no incorpora optimización, mapas, emisiones ni reportes.
 
-**Revalidación de las 15:04 (hora de Lima):** `docker compose config --quiet` pasó. En un nuevo proyecto Compose aislado, PostgreSQL estuvo sano y `/health`, `/openapi.json` y la interfaz respondieron HTTP 200. Se ejecutaron 9 pruebas backend contra una base PostgreSQL de prueba aislada, con 91,35 % de cobertura; pasaron 4 pruebas frontend y el build. Esta repetición no incluyó una nueva demostración ante interesados ni una nueva evaluación de accesibilidad.
+## Evidencia técnica y límites
 
-## Impedimentos y decisiones inmediatas
+| Comprobación al corte | Resultado | Alcance |
+|---|---|---|
+| `git diff 02e8f05...origin/sprint-2` | Cambios de US-011 a US-015 en backend, frontend y pruebas; sin cambios en `docs/03 Implementación/` antes de esta actualización documental. | Comparación de commits. |
+| `python -m pytest -q --cov=app --cov-report=term --cov-fail-under=80` | 14 pruebas aprobadas y **92,41 %** de cobertura total tanto sobre SQLite como sobre PostgreSQL aislado. | Base PostgreSQL temporal creada solo para la suite y eliminada al terminar. Los módulos nuevos de conductores y clientes alcanzaron 96–100 %. |
+| Vitest, build y Compose | 5 pruebas frontend aprobadas; `npm run build` completado; servicios PostgreSQL, backend y frontend activos. | Ejecutados dentro de contenedores el 06/10/2026. `docker compose config --quiet` pasó. |
+| `localhost` | `/health`, `/openapi.json` y frontend respondieron 200; login bootstrap 200; las cuatro listas autenticadas y el proxy Vite respondieron 200; petición sin token 401. | Comprobación HTTP de lectura; las mutaciones se verificaron en la base de prueba aislada. |
+| Jira `ECO board`, sprint ID 37 | 5 historias, 0 `Done`, 5 `In Review / QA`, 5 sin responsable; sprint `future`. Sprint Goal registrado. | Estado comprobado tras las transiciones del 06/10/2026. [Detalle y fuentes](../02%20Planificación/04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_3.md). |
 
-El [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) recoge el error 500 de inicio de sesión ya tratado, el bloqueo de Docker Desktop/WSL resuelto tras iniciarlo el usuario y la incompatibilidad de herramientas Windows/Linux evitada al ejecutar pruebas en contenedores. Antes de presentar, conviene repetir el guion en el equipo y datos de demostración definitivos; esta acción todavía no consta como acuerdo formal del equipo.
+El PR #1 acredita la integración en `main`; no se verificó una aprobación de revisión por pares ni un pipeline satisfactorio. Tampoco constan en esta revisión análisis estático, staging, aceptación BDD por interesados, compatibilidad entre navegadores o evaluación WCAG.
+
+## Detalle técnico para reproducir y revisar el incremento
+
+| Historia | Contrato HTTP | Implementación | Prueba concreta |
+|---|---|---|---|
+| US-011 | `PUT /api/v1/conductores/{id}` | `api/drivers.py` → `services/drivers.py` → `repositories/drivers.py`; `DriverInput` valida datos y el servicio rechaza licencia duplicada e inactivos. | `test_driver_update_and_deactivation`, `test_driver_update_rejections_preserve_state` |
+| US-012 | `PATCH /api/v1/conductores/{id}/desactivar` | Desactivación lógica a `INACTIVO`; rechazo de ID ausente, estado inactivo o `ASIGNADO`. | Las mismas pruebas de actualización y desactivación de `test_drivers.py`. |
+| US-013 | `POST /api/v1/clientes` | `api/clients.py` → `services/clients.py` → `repositories/clients.py`; `ClientInput` valida nombre y formato de correo; el servicio comprueba duplicado. | `test_client_registration_query_and_update`, `test_client_rejections_and_filters` |
+| US-014 | `GET /api/v1/clientes`, `GET /api/v1/clientes/{id}` | Consulta ordenada y filtro `activo`; ficha inexistente devuelve 404. | `test_client_registration_query_and_update`, `test_client_rejections_and_filters` |
+| US-015 | `PUT /api/v1/clientes/{id}` | Actualiza contacto, preferencias, restricciones y estado; rechaza correo inválido o duplicado. | `test_client_registration_query_and_update`, `test_client_rejections_and_filters` |
+
+Las rutas usan permisos de lectura o escritura mediante dependencias de FastAPI; las mutaciones pasan por `commit_change`, que persiste entidad y auditoría en una transacción. Los modelos SQLAlchemy `conductores` y `clientes` ya existían en la base del Sprint 1: este incremento no añadió una migración. Los pedidos conservan la comprobación de `cliente_id` activo. Los archivos citados se encuentran bajo `src/backend/app/` y `src/backend/tests/`; las acciones de la interfaz están en `src/frontend/src/App.tsx` y el cliente HTTP en `src/frontend/src/api.ts`. La API documenta sus rutas en `/docs` y `/openapi.json`. Para repetir la suite: desde `src/backend`, ejecutar `python -m pytest -q --cov=app --cov-report=term --cov-fail-under=80`; usar una base de prueba aislada si se configura `TEST_DATABASE_URL` para PostgreSQL.
+
+## Seguimiento del Definition of Done
+
+**Criterio único:** una US pasa a `Done` solo cuando **todos** sus criterios aplicables están verificados. `Parcial` y `sin evidencia` significan que la historia sigue abierta. La matriz aplica a US-011 a US-015 y sigue la numeración de la planificación.
+
+| DoD | Evidencia al 06/10/2026 | Estado |
+|---|---|---|
+| 01 · Cobertura ≥80 % del código afectado | 14 pruebas backend aprobadas en SQLite y PostgreSQL; cobertura total 92,41 %. API y repositorios de conductores/clientes: 100 %; servicios: 100 % y 96 %; esquemas de operaciones: 100 %. | Verificado para los módulos backend afectados. |
+| 02 · Análisis estático y seguridad | No consta resultado de SonarQube, CodeQL o equivalente para el incremento. | Sin evidencia. |
+| 03 · Pruebas críticas | Pasaron 14 pruebas backend sobre SQLite y PostgreSQL, 5 pruebas frontend y build. Falta una matriz formal de todas las pruebas críticas aplicables por historia. | Parcial. |
+| 04 · Revisión por pares | El PR #1 solicitó revisor, pero la consulta de reviews de GitHub devolvió `[]`. | No acreditado. |
+| 05 · Acceso y TLS | La API conserva `require_read` y `require_write`; `test_client_write_permissions` cubre un rechazo 403. No consta verificación TLS externa. | Parcial. |
+| 06 · Documentación / OpenAPI | README técnicos y esquemas actualizados; `/openapi.json` respondió 200 en el backend arrancado. | Verificado en el entorno local. |
+| 07 · Staging | No consta despliegue ni prueba en staging. | Sin evidencia. |
+| 08 · UI, 360 px y navegadores | Vitest pasó 5 flujos; no consta revisión visual a 360 px, accesibilidad ni compatibilidad entre navegadores. | Parcial. |
+| 09 · Auditoría e integridad | `test_drivers.py` y `test_clients.py` comprueban eventos de auditoría exitosos; falta comprobación integrada de fallos y reversión en PostgreSQL. | Parcial. |
+| 10 · Escenarios BDD | Hay pruebas automatizadas de los escenarios principales; no consta aprobación de todos los escenarios oficiales por historia. | Parcial. |
+| 11 · Sin defectos bloqueantes | No hay una comprobación cerrada de defectos críticos asociados a las cinco tarjetas. | Sin evidencia. |
+| 12 · Integración y pipeline | PR #1 fusionado; la consulta de ejecuciones de workflow para `53642da` devolvió `[]`. | Parcial. |
+
+Las consultas de PR, reviews y workflows se hicieron en GitHub el 06/10/2026. No se interpreta `[]` como aprobación tácita. La [revisión del Sprint](03%20Revisión%20del%20Sprint%20V_1_0_0.md) vincula estas brechas con las cinco historias.
+
+## Calendario y desviación de seguimiento
+
+Jira programó ECO Sprint 2 del **22/09/2026 a las 19:59:45** al **06/10/2026 a las 19:59:35**, hora de Lima. El commit de implementación está fechado el **06/10 a las 13:53**, el PR se abrió a las **14:08** y se fusionó a las **16:23**. Esas son fechas comprobadas; no se dispone de evidencia para repartir el desarrollo entre los días anteriores. Jira conserva el sprint en `future` pese a que el intervalo programado ya comenzó; las cinco tarjetas ahora están en revisión. Las acciones todavía abiertas carecen de fecha propia en Jira y requieren replanificación si no se completan antes del fin programado; no se les asigna una fecha efectiva ficticia. Véase la [línea de tiempo](../02%20Planificación/04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_3.md).
+
+La observación del profesor sobre información técnica insuficiente señala un riesgo de retraso por tiempo de reconstrucción y aclaración. No se recibió una medición de días perdidos; el [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) lo documenta como observación y acción de mejora, sin cuantificarlo como retraso ocurrido.
+
+## Demostración del trabajo completado
+
+La [revisión del Sprint 2](03%20Revisión%20del%20Sprint%20V_1_0_0.md) contiene un recorrido propuesto de conductores y clientes. **No hay evidencia de una demostración ya realizada ante stakeholders** al corte de este informe, por lo que no se atribuyen asistentes, comentarios ni decisiones.
+
+## Impedimentos
+
+El [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) documenta la desalineación de Jira frente al código integrado, la ausencia inicial de entregables del Sprint 2, la verificación del entorno ya completada y la falta de evidencia para cerrar el DoD. Incluye impacto, prioridad, estado y acciones propuestas.
 
 ## Pendientes
 
-1. Ejecutar la comprobación personal y conservar resultados de los diez flujos y casos negativos.
-2. Realizar la demostración ante los interesados y registrar fecha, asistentes, comentarios y decisiones reales.
-3. Celebrar la retrospectiva del equipo y confirmar los responsables y acuerdos del [análisis retrospectivo](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md).
-4. Conservar salidas fechadas de la ejecución sobre PostgreSQL y repetir la comprobación si cambia el código o el entorno de presentación.
-5. Completar el DoD aplicable: análisis estático y seguridad, revisión por un par técnico, HTTPS/TLS para un despliegue externo, staging, accesibilidad y navegadores, aprobación BDD e integración/pipeline cuando el equipo lo autorice.
+1. Resolver la discordancia entre fechas y estado `future` del sprint en Jira; asignar responsables confirmados y revisar las evidencias de las cinco tarjetas en `In Review / QA`.
+2. Conservar las salidas de Vitest, build, Compose y pruebas PostgreSQL del 06/10/2026; completar la revisión visual de 360 px y navegadores.
+3. Ejecutar la demostración con interesados y registrar asistentes, casos mostrados, observaciones, decisiones y compromisos reales.
+4. Celebrar la retrospectiva del equipo y confirmar o corregir el [análisis y plan de acción](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md).
+5. Completar las evidencias aplicables del DoD antes de declarar US-011 a US-015 como `Done`.
 
 ## Historial de control de cambios
 
 | Versión | Fecha | Cambio |
 |---|---|---|
-| 1.0.0 | 29/09/2026 | Informe de corte del Sprint 1 con verificación integrada en Docker/PostgreSQL y pendientes de aceptación formal diferenciados. |
-| 1.0.1 | 29/09/2026 | Referencia al análisis retrospectivo pendiente de validación; se conserva el nombre de archivo exigido por la consigna. |
-| 1.0.2 | 29/09/2026 | Revalidación técnica a las 15:04, ramas publicadas y referencia al análisis retrospectivo. |
+| 1.0.0 | 06/10/2026 | Informe inicial del Sprint 2 con avance técnico, estado real de Jira, comprobaciones y pendientes de aceptación. |
+| 1.0.1 | 06/10/2026 | DoD como criterio único de cierre, detalle técnico por historia, matriz de evidencia y calendario exacto de Jira frente a fechas comprobadas. |
+| 1.0.2 | 06/10/2026 | Verificación local con Docker, PostgreSQL aislado, frontend y API; actualización de las cinco tarjetas a revisión en Jira. |

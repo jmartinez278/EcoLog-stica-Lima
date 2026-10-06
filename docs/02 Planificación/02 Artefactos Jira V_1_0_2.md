@@ -5,10 +5,10 @@
 | Campo | Detalle |
 |---|---|
 | **Proyecto** | EcoLogística Lima – Optimizador de Rutas Sostenibles para DistriRápido S.A.C. |
-| **Integrantes** | Luis Antony Gonzalo Guerrero, Jhon Robert Paitan Montes, Marco Jhair Martinez Llanos, Rodrigo Vladimir Arce Curi |
+| **Integrantes consignados en la planificación inicial** | Luis Antony Gonzalo Guerrero, Jhon Robert Paitan Montes, Marco Jhair Martinez Llanos, Rodrigo Vladimir Arce Curi |
 | **Fecha** | 08/09/2026 |
-| **Última revisión** | 29/09/2026 |
-| **Versión** | 1.0.1 |
+| **Última revisión** | 06/10/2026 |
+| **Versión** | 1.0.2 |
 | **Herramienta ALM** | Atlassian Jira Software |
 | **Metodología** | Scrum |
 
@@ -19,6 +19,8 @@
 Documentar la configuración operativa de **EcoLogística Lima** en Atlassian Jira Software y presentar evidencia visual de los principales artefactos de planificación ágil exigidos para la Fase 02 del PFA.
 
 La configuración contempla Épicas, Historias de Usuario, Enablers, Product Backlog, Story Points, Sprint 1, Sprint Goal, tablero Scrum, Timeline/Roadmap y Releases.
+
+Este documento conserva la evidencia histórica del Sprint 1. El equipo actual de cinco integrantes figura en el [README principal](../../README.md); no se conoce la fecha de incorporación del quinto integrante y por ello no se altera la lista original. El estado del Sprint 2 se registra en el [seguimiento separado](04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_3.md).
 
 ---
 
@@ -155,7 +157,7 @@ Las capturas guardadas muestran la configuración de Jira en la fase de planific
 3. `evidencia_04_tablero_scrum.png`: tablero con historias en `To Do` e `In Progress` en la fecha de captura.
 4. `evidencia_05_release.png`: release `v1.0.0-MVP` en estado `Unreleased`.
 
-`evidencia_00_resumen.png` conserva la captura anterior del resumen de Jira, que estaba etiquetada erróneamente como Roadmap. No se usa como prueba del Timeline. El estado del código y las verificaciones del 29/09/2026 se registran en el [informe del Sprint 1](../03%20Implementación/01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md); el estado actual de las tarjetas de Jira requiere una consulta nueva del tablero.
+`evidencia_00_resumen.png` conserva la captura anterior del resumen de Jira, que estaba etiquetada erróneamente como Roadmap. No se usa como prueba del Timeline. El estado del código y las verificaciones del 29/09/2026 se registran en el [informe del Sprint 1](../03%20Implementación/Sprint%201/01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md). El [seguimiento de Jira del Sprint 2](04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_3.md) documenta una consulta nueva; no reinterpreta estas capturas históricas como evidencia del Sprint 2.
 
 ---
 
@@ -165,6 +167,7 @@ Las capturas guardadas muestran la configuración de Jira en la fase de planific
 |---|---|---|
 | 1.0.0 | 08/09/2026 | Creación inicial del informe de evidencias Jira para la Fase 02 de Planificación. |
 | 1.0.1 | 29/09/2026 | Corrección de referencias a capturas, estados de evidencia y distinción entre planificación histórica y avance del Sprint 1. |
+| 1.0.2 | 06/10/2026 | Actualización del enlace al informe histórico del Sprint 1; distinción entre equipo inicial y actual, y referencia al seguimiento verificado del Sprint 2. |
 
 ---
 
