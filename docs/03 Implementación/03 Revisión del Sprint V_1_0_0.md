@@ -6,13 +6,13 @@
 
 **Líder del Proyecto:** Marco Jhair Martinez Llanos (según el acta de constitución)
 
-**Fecha de corte:** 06/10/2026 · **Versión interna del documento:** 1.0.1
+**Fecha de corte:** 06/10/2026 · **Versión interna del documento:** 1.0.2
 
 Se conserva `V_1_0_0` en el nombre del archivo por exigencia de la consigna; el historial registra esta revisión.
 
 ## Historias de Usuario completadas en este Sprint
 
-**Terminadas según el Definition of Done: ninguna acreditada.** Las cinco historias están implementadas en el commit `53642da` y aparecen en [ECO Sprint 2](../02%20Planificación/04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_2.md), pero Jira aún las muestra en `To Do`. El DoD es el único criterio de cierre; BDD se verifica dentro de DoD-10. La tabla separa funcionalidad disponible de una historia terminada.
+**Terminadas según el Definition of Done: ninguna acreditada.** Las cinco historias están implementadas en el commit `53642da` y aparecen en [ECO Sprint 2](../02%20Planificación/04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_3.md). Jira las muestra ahora en `In Review / QA`, pendientes del DoD. El DoD es el único criterio de cierre; BDD se verifica dentro de DoD-10. La tabla separa funcionalidad disponible de una historia terminada.
 
 | Historia | Jira | Trabajo disponible para demostrar | Evidencia técnica y límite |
 |---|---|---|---|
@@ -22,7 +22,7 @@ Se conserva `V_1_0_0` en el nombre del archivo por exigencia de la consigna; el 
 | US-014 Consultar cliente | [ECO-20](https://jhonpaitanrcm.atlassian.net/browse/ECO-20) | Ver lista, ficha y filtro de activos; comprobar 404 para ID inexistente. | `test_clients.py` prueba consulta y filtro; pendiente aceptación BDD. |
 | US-015 Actualizar condiciones | [ECO-21](https://jhonpaitanrcm.atlassian.net/browse/ECO-21) | Modificar preferencia o restricción y observar el dato actualizado. | `test_clients.py` prueba actualización y datos inválidos; la utilización futura por el planificador aún no puede demostrarse porque US-016 está fuera de este sprint. |
 
-Los escenarios oficiales se encuentran en la [planificación, US-011 a US-015](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md). La suite backend ejecutada al corte pasó 14 pruebas con 92,41 % de cobertura sobre SQLite. La interfaz tiene pruebas de flujos añadidas, pero Vitest no se pudo ejecutar en este entorno durante esta revisión. La existencia de pruebas no acredita por sí sola los doce puntos del DoD.
+Los escenarios oficiales se encuentran en la [planificación, US-011 a US-015](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md). La suite backend pasó 14 pruebas con 92,41 % de cobertura total tanto sobre SQLite como sobre PostgreSQL aislado; Vitest pasó 5 pruebas y el build de Vite completó. Docker Compose arrancó los tres servicios; el acceso por `localhost` respondió correctamente. La existencia de pruebas no acredita por sí sola los doce puntos del DoD.
 
 Para localizar el trabajo sin ambigüedad, el [informe de estado](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md) relaciona cada historia con su endpoint, archivo de router, servicio, repositorio y prueba, y presenta la evidencia disponible de DoD-01 a DoD-12. El PR #1 está integrado, pero GitHub devolvió cero reviews y cero ejecuciones de workflow asociadas al commit de implementación; no se acredita DoD-04 ni la parte de pipeline de DoD-12.
 
@@ -41,7 +41,7 @@ Tras la demostración, registrar fecha y hora, asistentes, historias efectivamen
 
 ## Pendientes
 
-- Ejecutar Vitest, build, Docker Compose y pruebas con PostgreSQL aislado en un entorno habilitado; adjuntar resultados fechados.
+- Conservar las salidas de Vitest, build, Docker Compose y pruebas con PostgreSQL aislado del 06/10/2026; completar las comprobaciones visuales y de compatibilidad pendientes.
 - Completar aprobación por pares, análisis de seguridad, staging, compatibilidad y accesibilidad aplicables, auditoría y aceptación BDD antes de mover historias a `Done`.
 - Revisar fechas y estado del Sprint 2 en Jira; el Sprint Goal ya quedó registrado. Asignar responsables solo después de confirmarlos.
 - Tomar el intervalo de Jira como referencia: inicio **22/09/2026 19:59:45** y fin **06/10/2026 19:59:35** en Lima. Cualquier acción posterior debe replanificarse en Jira; no debe presentarse como trabajo completado dentro del plazo original.
@@ -54,3 +54,4 @@ Tras la demostración, registrar fecha y hora, asistentes, historias efectivamen
 |---|---|---|
 | 1.0.0 | 06/10/2026 | Revisión inicial del Sprint 2 con US-011 a US-015, evidencia técnica, recorrido de demo y aceptación pendiente. |
 | 1.0.1 | 06/10/2026 | DoD como criterio único de terminado, rutas técnicas en el recorrido y fechas convertidas del calendario Jira. |
+| 1.0.2 | 06/10/2026 | Incorporación de pruebas locales completas y transición de cinco historias a `In Review / QA`. |

@@ -10,7 +10,7 @@
 | Fecha de corte técnico | 06/10/2026 (hora de Lima) |
 | Rama | `sprint-2` |
 | Commit publicado | `53642da` – `Implement Sprint 2 driver and client management` |
-| Versión interna del documento | 1.0.1; el nombre `V_1_0_0` se conserva por la consigna |
+| Versión interna del documento | 1.0.2; el nombre `V_1_0_0` se conserva por la consigna |
 | Estado | Implementación técnica publicada; revisión por pares y aceptación formal pendientes |
 
 ## Objetivo del Sprint
@@ -98,7 +98,7 @@ El modelo de datos del Sprint 1 ya contenía todos los campos requeridos en `con
 | Comprobación | Resultado |
 |---|---|
 | Pruebas backend | 14 pruebas aprobadas |
-| Cobertura backend total | 92,41 %; falta desglose del código afectado para acreditar DoD-01 |
+| Cobertura backend total | 92,41 %; módulos afectados de conductores/clientes y esquemas: 96–100 % |
 | Pruebas frontend | 5 pruebas aprobadas |
 | Build frontend | TypeScript y Vite completados correctamente |
 | Docker Compose | PostgreSQL, backend y frontend construidos y activos |
@@ -107,7 +107,7 @@ El modelo de datos del Sprint 1 ya contenía todos los campos requeridos en `con
 | Contrato API | OpenAPI disponible con versión `0.2.0` |
 | Recorrido integrado | Registro y actualización de cliente, y registro y desactivación de conductor verificados sobre PostgreSQL local |
 
-La tabla conserva los resultados **registrados al elaborar la versión 1.0.0**. Esta revisión documental no recibió salidas fechadas ni repitió Vitest, build, Compose o PostgreSQL en su entorno WSL; por ello no los presenta como comprobaciones independientes. La ejecución local de Pytest de esta revisión sí confirmó 14 pruebas y 92,41 % de cobertura total sobre SQLite, según el [informe de estado](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md). La cobertura total no demuestra por sí sola el mínimo del 80 % sobre el código afectado exigido por DoD-01.
+La tabla conserva los resultados **registrados al elaborar la versión 1.0.0**. El 06/10/2026 esta revisión repitió dentro de Docker las 14 pruebas backend sobre SQLite y PostgreSQL aislado, las 5 pruebas frontend, el build y el arranque de Compose. `/health`, `/openapi.json`, login, listas autenticadas y proxy de Vite respondieron correctamente en `localhost`; una lectura sin token devolvió 401. La base PostgreSQL temporal se eliminó al terminar. El desglose de cobertura mostró `api/clients.py`, `api/drivers.py`, ambos repositorios, `services/drivers.py` y `schemas/operations.py` al 100 %, y `services/clients.py` al 96 %. Véase el [informe de estado](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md). El recorrido de mutaciones sobre PostgreSQL de la versión 1.0.0 no se repitió vía HTTP; las mutaciones quedaron cubiertas en la suite aislada.
 
 Comandos principales utilizados:
 
@@ -132,18 +132,18 @@ Las pruebas backend están en `src/backend/tests/test_drivers.py` y `src/backend
 
 ## Estado frente al Definition of Done
 
-La implementación y las pruebas backend ejecutadas en esta revisión cuentan con evidencia; los demás resultados de la tabla requieren conservar sus salidas para una verificación independiente. Este informe no declara las historias formalmente `Done`: el [Definition of Done](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md) es el único criterio de cierre y exige cumplir todos los puntos aplicables. Los escenarios BDD se verifican dentro de DoD-10. Aún deben registrarse, según corresponda:
+La implementación, las pruebas automatizadas y el arranque local cuentan con evidencia de esta revisión; conservar sus salidas facilita una revisión externa. Este informe no declara las historias formalmente `Done`: el [Definition of Done](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md) es el único criterio de cierre y exige cumplir todos los puntos aplicables. Los escenarios BDD se verifican dentro de DoD-10. Aún deben registrarse, según corresponda:
 
 1. Revisión y aprobación por otro integrante del equipo mediante Pull Request.
 2. Análisis estático o de seguridad acordado por el equipo.
 3. Validación formal de accesibilidad, responsive desde 360 px y navegadores soportados.
 4. Despliegue y comprobación en el ambiente de staging definido.
 5. Demostración, aprobación BDD y aceptación de los interesados.
-6. Actualización de las incidencias `ECO-17` a `ECO-21` en Jira conforme avance su validación.
+6. Asignación de responsables confirmados y cierre de las incidencias `ECO-17` a `ECO-21` en Jira solo cuando se complete el DoD; actualmente están en `In Review / QA`.
 
 ## Publicación
 
-El incremento está disponible en la rama remota `sprint-2` y fue integrado a `main` mediante el [PR #1](https://github.com/jmartinez278/EcoLog-stica-Lima/pull/1) el 06/10/2026 a las 16:23:33 (Lima). La consulta de GitHub no encontró aprobación de review ni ejecuciones de workflow para el commit `53642da`; el merge no acredita por sí solo el DoD. Jira mantenía ECO-17 a ECO-21 en `To Do` y sin responsable al corte. El commit de implementación data del 06/10/2026 a las 13:53:08; no hay evidencia para asignar desarrollo a días anteriores del intervalo programado.
+El incremento está disponible en la rama remota `sprint-2` y fue integrado a `main` mediante el [PR #1](https://github.com/jmartinez278/EcoLog-stica-Lima/pull/1) el 06/10/2026 a las 16:23:33 (Lima). La consulta de GitHub no encontró aprobación de review ni ejecuciones de workflow para el commit `53642da`; el merge no acredita por sí solo el DoD. Jira mostró ECO-17 a ECO-21 en `In Review / QA` y sin responsable tras las pruebas locales. El commit de implementación data del 06/10/2026 a las 13:53:08; no hay evidencia para asignar desarrollo a días anteriores del intervalo programado.
 
 ## Historial de control de cambios
 
@@ -151,3 +151,4 @@ El incremento está disponible en la rama remota `sprint-2` y fue integrado a `m
 |---|---|---|
 | 1.0.0 | 06/10/2026 | Informe inicial de implementación de US-011 a US-015, evidencia técnica, trazabilidad y pendientes de aceptación. |
 | 1.0.1 | 06/10/2026 | Alineación con Jira y el PR fusionado, distinción entre resultados registrados y repetidos, y DoD como criterio único de cierre. |
+| 1.0.2 | 06/10/2026 | Repetición de pruebas y servicios con Docker, cobertura de módulos afectados y actualización del estado de Jira. |

@@ -1,6 +1,6 @@
 # EcoLogística Lima
 
-**Versión de este README:** 1.2.2 · **Actualizado:** 06/10/2026
+**Versión de este README:** 1.2.3 · **Actualizado:** 06/10/2026
 
 **EcoLogística Lima** es un proyecto de software orientado a la optimización sostenible de rutas de distribución de última milla para el escenario empresarial de **DistriRápido S.A.C.**
 
@@ -193,7 +193,7 @@ La revisión documenta el estado **antes** de la presentación del 29/09/2026. L
 | Retrospectiva del Sprint | [04 Retrospectiva del Sprint V_1_0_0](<docs/03 Implementación/04 Retrospectiva del Sprint V_1_0_0.md>) |
 | Informe de implementación | [05 Informe de implementación del Sprint 2 V_1_0_0](<docs/03 Implementación/05 Informe de implementación del Sprint 2 V_1_0_0.md>) |
 
-El [seguimiento Jira del Sprint 2](<docs/02 Planificación/04 Seguimiento Jira Sprint 2 V_1_0_2.md>) recoge las cinco historias, Story Points y estado del tablero consultado el 06/10/2026. La documentación distingue funcionalidades implementadas de historias formalmente aceptadas; la demostración y retrospectiva del equipo siguen sin evidencia de realización.
+El [seguimiento Jira del Sprint 2](<docs/02 Planificación/04 Seguimiento Jira Sprint 2 V_1_0_3.md>) recoge las cinco historias, Story Points y estado del tablero consultado el 06/10/2026. La documentación distingue funcionalidades implementadas de historias formalmente aceptadas; la demostración y retrospectiva del equipo siguen sin evidencia de realización.
 
 Jira programó el Sprint 2 del **22/09/2026 a las 19:59:45** al **06/10/2026 a las 19:59:35**, hora de Lima. El commit y el PR de implementación tienen fecha del 06/10; no se atribuye desarrollo a días anteriores sin evidencia. **Una historia solo se cierra cuando cumple todos los puntos aplicables del Definition of Done**; los escenarios BDD están incluidos en DoD-10. Los pendientes sin fecha propia en Jira requieren replanificación si exceden el fin programado.
 
@@ -201,7 +201,7 @@ Para ejecutar el proyecto, consultar las instrucciones técnicas del [backend](s
 
 La verificación técnica del 29/09/2026 pasó con Docker Compose, PostgreSQL aislado, API y frontend: 9 pruebas backend (91,35 % de cobertura), 4 pruebas frontend, build y un recorrido HTTP de US-001 a US-010. La interfaz cargó y navegó sin desbordamiento horizontal a 360 px en el navegador probado. A las 15:04 (hora de Lima) se repitieron el arranque, las pruebas y el build en otro proyecto Compose aislado. La demostración ante interesados y la reunión de retrospectiva del equipo siguen sin evidencia de realización.
 
-Para Sprint 2, la revisión del 06/10/2026 ejecutó 14 pruebas backend con 92,41 % de cobertura total sobre SQLite. En ese entorno no se pudieron repetir Vitest, build, Compose ni PostgreSQL; el [informe técnico de implementación](<docs/03 Implementación/05 Informe de implementación del Sprint 2 V_1_0_0.md>) registra resultados de otra ejecución sin salidas adjuntas en esta revisión. La cobertura total no acredita por sí sola el umbral del código afectado. En Jira, ECO-17 a ECO-21 siguen `To Do`, sin responsable, y el sprint permanece `future`.
+Para Sprint 2, la revisión del 06/10/2026 ejecutó 14 pruebas backend con 92,41 % de cobertura total sobre SQLite y PostgreSQL aislado, 5 pruebas frontend, build y arranque de Compose. Los módulos backend afectados por conductores y clientes obtuvieron 96–100 % de cobertura. API, OpenAPI, inicio de sesión, listas y proxy respondieron en `localhost`; los detalles están en el [informe técnico de implementación](<docs/03 Implementación/05 Informe de implementación del Sprint 2 V_1_0_0.md>). En Jira, ECO-17 a ECO-21 están en `In Review / QA`, sin responsable; el sprint permanece `future` y el DoD está incompleto.
 
 ---
 
@@ -306,6 +306,7 @@ Los documentos de definición inicial se encuentran en `docs/01 Inicio/`, la pla
 | 1.2.0 | 06/10/2026 | Entregables del Sprint 2, conservación de los del Sprint 1, seguimiento del tablero Jira y distinción entre integración técnica y aceptación formal. |
 | 1.2.1 | 06/10/2026 | Incorporación del informe técnico de implementación del Sprint 2. |
 | 1.2.2 | 06/10/2026 | Calendario exacto de Jira, DoD como criterio único de cierre, seguimiento revisado y alcance de las verificaciones del informe técnico. |
+| 1.2.3 | 06/10/2026 | Resultados locales con Docker, PostgreSQL y frontend, y estado de revisión de las cinco historias en Jira. |
 
 ---
 

@@ -6,13 +6,13 @@
 
 **Líder del Proyecto:** Marco Jhair Martinez Llanos (según el acta de constitución)
 
-**Sprint:** ECO Sprint 2 · **Fecha de corte:** 06/10/2026 (Lima) · **Versión interna del documento:** 1.0.1
+**Sprint:** ECO Sprint 2 · **Fecha de corte:** 06/10/2026 (Lima) · **Versión interna del documento:** 1.0.2
 
 El nombre del archivo conserva `V_1_0_0` porque la consigna exige ese nombre exacto; las revisiones se identifican en este encabezado y en el historial.
 
 ## Estado general
 
-El incremento técnico de US-011 a US-015 está publicado en la rama `sprint-2` (commit `53642da`) y fue integrado a `main` mediante el PR #1 (`51b8c59`). Amplía la gestión de conductores y clientes sin retirar las operaciones del Sprint 1. La entrega formal continúa **en proceso**: en Jira las cinco historias permanecen en `To Do` y el Sprint 2 figura como `future`. **El único criterio para declarar una historia terminada es cumplir todos los puntos aplicables del [Definition of Done](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md).** Los escenarios BDD se comprueban dentro de DoD-10; un commit, un merge o una demostración por sí solos no cierran una historia.
+El incremento técnico de US-011 a US-015 está publicado en la rama `sprint-2` (commit `53642da`) y fue integrado a `main` mediante el PR #1 (`51b8c59`). Amplía la gestión de conductores y clientes sin retirar las operaciones del Sprint 1. La entrega formal continúa **en proceso**: las cinco historias pasaron de `To Do` a `In Review / QA` en Jira el 06/10/2026; el Sprint 2 aún figura como `future`. **El único criterio para declarar una historia terminada es cumplir todos los puntos aplicables del [Definition of Done](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md).** Los escenarios BDD se comprueban dentro de DoD-10; un commit, un merge o una demostración por sí solos no cierran una historia.
 
 ## Historias de Usuario completadas en este Sprint
 
@@ -20,11 +20,11 @@ El incremento técnico de US-011 a US-015 está publicado en la rama `sprint-2` 
 
 | Historia / Jira | Alcance verificable en el código | Estado de aceptación |
 |---|---|---|
-| US-011 / [ECO-17](https://jhonpaitanrcm.atlassian.net/browse/ECO-17) | Actualizar conductor y disponibilidad; rechazar datos inválidos, licencia duplicada e inactivos. | Implementada; `To Do` en Jira y DoD pendiente. |
-| US-012 / [ECO-18](https://jhonpaitanrcm.atlassian.net/browse/ECO-18) | Desactivación lógica; respuesta 404 para ID inexistente y rechazo de conductor asignado. | Implementada; `To Do` en Jira y DoD pendiente. |
-| US-013 / [ECO-19](https://jhonpaitanrcm.atlassian.net/browse/ECO-19) | Alta de cliente con preferencias y restricciones; validación de nombre y correo. | Implementada; `To Do` en Jira y DoD pendiente. |
-| US-014 / [ECO-20](https://jhonpaitanrcm.atlassian.net/browse/ECO-20) | Lista, filtro de activos y ficha de cliente; 404 si no existe. | Implementada; `To Do` en Jira y DoD pendiente. |
-| US-015 / [ECO-21](https://jhonpaitanrcm.atlassian.net/browse/ECO-21) | Actualización de datos y condiciones de entrega; rechazo de correo inválido o duplicado. | Implementada; `To Do` en Jira y DoD pendiente. |
+| US-011 / [ECO-17](https://jhonpaitanrcm.atlassian.net/browse/ECO-17) | Actualizar conductor y disponibilidad; rechazar datos inválidos, licencia duplicada e inactivos. | Implementada; `In Review / QA` y DoD pendiente. |
+| US-012 / [ECO-18](https://jhonpaitanrcm.atlassian.net/browse/ECO-18) | Desactivación lógica; respuesta 404 para ID inexistente y rechazo de conductor asignado. | Implementada; `In Review / QA` y DoD pendiente. |
+| US-013 / [ECO-19](https://jhonpaitanrcm.atlassian.net/browse/ECO-19) | Alta de cliente con preferencias y restricciones; validación de nombre y correo. | Implementada; `In Review / QA` y DoD pendiente. |
+| US-014 / [ECO-20](https://jhonpaitanrcm.atlassian.net/browse/ECO-20) | Lista, filtro de activos y ficha de cliente; 404 si no existe. | Implementada; `In Review / QA` y DoD pendiente. |
+| US-015 / [ECO-21](https://jhonpaitanrcm.atlassian.net/browse/ECO-21) | Actualización de datos y condiciones de entrega; rechazo de correo inválido o duplicado. | Implementada; `In Review / QA` y DoD pendiente. |
 
 La [planificación](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md) define los escenarios oficiales de estas historias. El código incorpora rutas, servicios, repositorios, esquemas y formularios; los pedidos mantienen la regla del Sprint 1 de exigir un cliente activo. El Sprint 2 no incorpora optimización, mapas, emisiones ni reportes.
 
@@ -33,9 +33,10 @@ La [planificación](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_
 | Comprobación al corte | Resultado | Alcance |
 |---|---|---|
 | `git diff 02e8f05...origin/sprint-2` | Cambios de US-011 a US-015 en backend, frontend y pruebas; sin cambios en `docs/03 Implementación/` antes de esta actualización documental. | Comparación de commits. |
-| `python -m pytest -q --cov=app --cov-report=term --cov-fail-under=80` | 14 pruebas aprobadas; cobertura total de backend **92,41 %**. | Ejecutado sobre copia temporal del commit, con SQLite. No acredita PostgreSQL ni la interfaz completa. |
-| Pruebas frontend y Compose | No ejecutadas en esta revisión: `npm` invocó Windows desde WSL y `docker` no estaba disponible en la distribución. | Los flujos nuevos sí tienen pruebas en `App.test.tsx`, pero su éxito no se afirma aquí. |
-| Jira `ECO board`, sprint ID 37 | 5 historias, 0 `Done`, 0 `In Progress`, 5 `To Do`, 5 sin responsable; sprint `future`. Sprint Goal registrado con aprobación del usuario. | Consulta inicial a las 17:02 y verificación del objetivo a las 17:10 (Lima). [Detalle y fuentes](../02%20Planificación/04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_2.md). |
+| `python -m pytest -q --cov=app --cov-report=term --cov-fail-under=80` | 14 pruebas aprobadas y **92,41 %** de cobertura total tanto sobre SQLite como sobre PostgreSQL aislado. | Base PostgreSQL temporal creada solo para la suite y eliminada al terminar. Los módulos nuevos de conductores y clientes alcanzaron 96–100 %. |
+| Vitest, build y Compose | 5 pruebas frontend aprobadas; `npm run build` completado; servicios PostgreSQL, backend y frontend activos. | Ejecutados dentro de contenedores el 06/10/2026. `docker compose config --quiet` pasó. |
+| `localhost` | `/health`, `/openapi.json` y frontend respondieron 200; login bootstrap 200; las cuatro listas autenticadas y el proxy Vite respondieron 200; petición sin token 401. | Comprobación HTTP de lectura; las mutaciones se verificaron en la base de prueba aislada. |
+| Jira `ECO board`, sprint ID 37 | 5 historias, 0 `Done`, 5 `In Review / QA`, 5 sin responsable; sprint `future`. Sprint Goal registrado. | Estado comprobado tras las transiciones del 06/10/2026. [Detalle y fuentes](../02%20Planificación/04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_3.md). |
 
 El PR #1 acredita la integración en `main`; no se verificó una aprobación de revisión por pares ni un pipeline satisfactorio. Tampoco constan en esta revisión análisis estático, staging, aceptación BDD por interesados, compatibilidad entre navegadores o evaluación WCAG.
 
@@ -57,14 +58,14 @@ Las rutas usan permisos de lectura o escritura mediante dependencias de FastAPI;
 
 | DoD | Evidencia al 06/10/2026 | Estado |
 |---|---|---|
-| 01 · Cobertura ≥80 % del código afectado | 14 pruebas backend aprobadas; la cobertura total del backend fue 92,41 % en SQLite. No se desglosó aquí la cobertura de los módulos afectados por US-011 a US-015. | Parcial; pendiente comprobar el umbral por código afectado. |
+| 01 · Cobertura ≥80 % del código afectado | 14 pruebas backend aprobadas en SQLite y PostgreSQL; cobertura total 92,41 %. API y repositorios de conductores/clientes: 100 %; servicios: 100 % y 96 %; esquemas de operaciones: 100 %. | Verificado para los módulos backend afectados. |
 | 02 · Análisis estático y seguridad | No consta resultado de SonarQube, CodeQL o equivalente para el incremento. | Sin evidencia. |
-| 03 · Pruebas críticas | Pasó Pytest; Vitest, build e integración PostgreSQL no se repitieron en esta revisión. | Parcial. |
+| 03 · Pruebas críticas | Pasaron 14 pruebas backend sobre SQLite y PostgreSQL, 5 pruebas frontend y build. Falta una matriz formal de todas las pruebas críticas aplicables por historia. | Parcial. |
 | 04 · Revisión por pares | El PR #1 solicitó revisor, pero la consulta de reviews de GitHub devolvió `[]`. | No acreditado. |
 | 05 · Acceso y TLS | La API conserva `require_read` y `require_write`; `test_client_write_permissions` cubre un rechazo 403. No consta verificación TLS externa. | Parcial. |
-| 06 · Documentación / OpenAPI | README técnicos y esquemas actualizados; rutas en FastAPI. No se verificó `/openapi.json` en un arranque del Sprint 2. | Parcial. |
+| 06 · Documentación / OpenAPI | README técnicos y esquemas actualizados; `/openapi.json` respondió 200 en el backend arrancado. | Verificado en el entorno local. |
 | 07 · Staging | No consta despliegue ni prueba en staging. | Sin evidencia. |
-| 08 · UI, 360 px y navegadores | Hay pruebas nuevas en `App.test.tsx`, pero Vitest y revisión de 360 px/navegadores no se ejecutaron en esta pasada. | Sin evidencia suficiente. |
+| 08 · UI, 360 px y navegadores | Vitest pasó 5 flujos; no consta revisión visual a 360 px, accesibilidad ni compatibilidad entre navegadores. | Parcial. |
 | 09 · Auditoría e integridad | `test_drivers.py` y `test_clients.py` comprueban eventos de auditoría exitosos; falta comprobación integrada de fallos y reversión en PostgreSQL. | Parcial. |
 | 10 · Escenarios BDD | Hay pruebas automatizadas de los escenarios principales; no consta aprobación de todos los escenarios oficiales por historia. | Parcial. |
 | 11 · Sin defectos bloqueantes | No hay una comprobación cerrada de defectos críticos asociados a las cinco tarjetas. | Sin evidencia. |
@@ -74,7 +75,7 @@ Las consultas de PR, reviews y workflows se hicieron en GitHub el 06/10/2026. No
 
 ## Calendario y desviación de seguimiento
 
-Jira programó ECO Sprint 2 del **22/09/2026 a las 19:59:45** al **06/10/2026 a las 19:59:35**, hora de Lima. El commit de implementación está fechado el **06/10 a las 13:53**, el PR se abrió a las **14:08** y se fusionó a las **16:23**. Esas son fechas comprobadas; no se dispone de evidencia para repartir el desarrollo entre los días anteriores. Jira conserva el sprint en `future` pese a que el intervalo programado ya comenzó. Las acciones todavía abiertas carecen de fecha propia en Jira y requieren replanificación si no se completan antes del fin programado; no se les asigna una fecha efectiva ficticia. Véase la [línea de tiempo](../02%20Planificación/04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_2.md).
+Jira programó ECO Sprint 2 del **22/09/2026 a las 19:59:45** al **06/10/2026 a las 19:59:35**, hora de Lima. El commit de implementación está fechado el **06/10 a las 13:53**, el PR se abrió a las **14:08** y se fusionó a las **16:23**. Esas son fechas comprobadas; no se dispone de evidencia para repartir el desarrollo entre los días anteriores. Jira conserva el sprint en `future` pese a que el intervalo programado ya comenzó; las cinco tarjetas ahora están en revisión. Las acciones todavía abiertas carecen de fecha propia en Jira y requieren replanificación si no se completan antes del fin programado; no se les asigna una fecha efectiva ficticia. Véase la [línea de tiempo](../02%20Planificación/04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_3.md).
 
 La observación del profesor sobre información técnica insuficiente señala un riesgo de retraso por tiempo de reconstrucción y aclaración. No se recibió una medición de días perdidos; el [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) lo documenta como observación y acción de mejora, sin cuantificarlo como retraso ocurrido.
 
@@ -84,12 +85,12 @@ La [revisión del Sprint 2](03%20Revisión%20del%20Sprint%20V_1_0_0.md) contiene
 
 ## Impedimentos
 
-El [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) documenta la desalineación de Jira frente al código integrado, la ausencia inicial de entregables del Sprint 2, la verificación incompleta del entorno WSL y la falta de evidencia para cerrar el DoD. Incluye impacto, prioridad, estado y acciones propuestas sin declarar resueltos los puntos aún abiertos.
+El [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) documenta la desalineación de Jira frente al código integrado, la ausencia inicial de entregables del Sprint 2, la verificación del entorno ya completada y la falta de evidencia para cerrar el DoD. Incluye impacto, prioridad, estado y acciones propuestas.
 
 ## Pendientes
 
-1. Revisar fechas y estado reales del Sprint 2 en Jira; actualizar las tarjetas con responsables y evidencias de acuerdo con el trabajo efectivamente validado. El Sprint Goal ya quedó registrado.
-2. Repetir Vitest, build, Compose y pruebas integradas con PostgreSQL aislado en un entorno operativo; conservar resultados fechados.
+1. Resolver la discordancia entre fechas y estado `future` del sprint en Jira; asignar responsables confirmados y revisar las evidencias de las cinco tarjetas en `In Review / QA`.
+2. Conservar las salidas de Vitest, build, Compose y pruebas PostgreSQL del 06/10/2026; completar la revisión visual de 360 px y navegadores.
 3. Ejecutar la demostración con interesados y registrar asistentes, casos mostrados, observaciones, decisiones y compromisos reales.
 4. Celebrar la retrospectiva del equipo y confirmar o corregir el [análisis y plan de acción](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md).
 5. Completar las evidencias aplicables del DoD antes de declarar US-011 a US-015 como `Done`.
@@ -100,3 +101,4 @@ El [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) do
 |---|---|---|
 | 1.0.0 | 06/10/2026 | Informe inicial del Sprint 2 con avance técnico, estado real de Jira, comprobaciones y pendientes de aceptación. |
 | 1.0.1 | 06/10/2026 | DoD como criterio único de cierre, detalle técnico por historia, matriz de evidencia y calendario exacto de Jira frente a fechas comprobadas. |
+| 1.0.2 | 06/10/2026 | Verificación local con Docker, PostgreSQL aislado, frontend y API; actualización de las cinco tarjetas a revisión en Jira. |
