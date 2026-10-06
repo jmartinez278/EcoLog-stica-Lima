@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { api, type Client, type Driver, type Order, type Vehicle } from './api'
 
-type Page = 'Inicio' | 'Vehículos' | 'Pedidos' | 'Conductores'
+type Page = 'Inicio' | 'Vehículos' | 'Pedidos' | 'Conductores' | 'Clientes'
 type Notice = { text: string; error: boolean } | null
 
 function Field({ label, children }: { label: string; children: ReactNode }) {
@@ -16,7 +16,7 @@ function PageIntro({ number, title, description }: { number: string; title: Page
   return <div className="page-intro">
     <div><p className="eyebrow"><span className="eyebrow-mark" /> MÓDULO / {number}</p>
       <h1>{title}<span className="heading-dot" aria-hidden="true">.</span></h1><p className="page-description">{description}</p></div>
-    <span className="edition-tag">ECOLOGÍSTICA · SPRINT 01</span>
+    <span className="edition-tag">ECOLOGÍSTICA · SPRINT 02</span>
   </div>
 }
 
@@ -48,11 +48,12 @@ function Login({ onLogin }: { onLogin: (token: string) => void }) {
       <h1 id="login-title">La operación,<br /><span>en orden.</span></h1>
       <p className="login-lead">Vehículos, pedidos y conductores en un mismo lugar. Una base clara para cada entrega.</p>
       <div className="preview-window" aria-hidden="true">
-        <div className="window-bar"><span className="window-controls"><i /><i /><i /></span><span>OPERACIÓN / SPRINT_01</span><span>● ACTIVO</span></div>
+        <div className="window-bar"><span className="window-controls"><i /><i /><i /></span><span>OPERACIÓN / SPRINT_02</span><span>● ACTIVO</span></div>
         <div className="preview-body"><span className="preview-kicker">PANEL OPERATIVO</span><strong>Todo listo para avanzar<span className="heading-dot">.</span></strong>
           <div className="preview-row"><span className="preview-icon">01</span><span>Vehículos</span><span>↗</span></div>
           <div className="preview-row"><span className="preview-icon">02</span><span>Pedidos</span><span>↗</span></div>
           <div className="preview-row"><span className="preview-icon">03</span><span>Conductores</span><span>↗</span></div>
+          <div className="preview-row"><span className="preview-icon">04</span><span>Clientes</span><span>↗</span></div>
         </div>
       </div>
     </section>
@@ -154,6 +155,7 @@ const emptyDriver: DriverForm = {
 function DriversPage({ token }: { token: string }) {
   const [items, setItems] = useState<Driver[]>([])
   const [form, setForm] = useState<DriverForm>(emptyDriver)
+  const [editing, setEditing] = useState<string | null>(null)
   const [onlyAvailable, setOnlyAvailable] = useState(false)
   const [notice, setNotice] = useState<Notice>(null)
   const [busy, setBusy] = useState(false)
@@ -166,13 +168,23 @@ function DriversPage({ token }: { token: string }) {
   async function submit(event: FormEvent) {
     event.preventDefault(); setBusy(true); setNotice(null)
     try {
-      await api('/conductores', token, { method: 'POST', body: JSON.stringify(form) })
-      setNotice({ text: 'Conductor registrado.', error: false }); setForm(emptyDriver); await load()
+      await api(editing ? `/conductores/${editing}` : '/conductores', token, {
+        method: editing ? 'PUT' : 'POST', body: JSON.stringify(form),
+      })
+      setNotice({ text: editing ? 'Conductor actualizado.' : 'Conductor registrado.', error: false })
+      setEditing(null); setForm(emptyDriver); await load()
     } catch (error) { setNotice({ text: (error as Error).message, error: true }) }
     finally { setBusy(false) }
   }
-  return <section><PageIntro number="03" title="Conductores" description="Consulta la disponibilidad del equipo y registra nuevos conductores." /><NoticeBox notice={notice} />
-    <div className="split"><div className="panel"><p className="panel-label">EQUIPO / FORMULARIO</p><h2>Registrar conductor</h2><p className="panel-description">Mantén la información de licencia y disponibilidad en un solo lugar.</p><form onSubmit={submit} className="form-grid">
+  async function deactivate(item: Driver) {
+    if (!window.confirm(`¿Desactivar al conductor ${item.nombres} ${item.apellidos}?`)) return
+    try {
+      await api(`/conductores/${item.conductor_id}/desactivar`, token, { method: 'PATCH' })
+      setNotice({ text: 'Conductor desactivado.', error: false }); await load()
+    } catch (error) { setNotice({ text: (error as Error).message, error: true }) }
+  }
+  return <section><PageIntro number="03" title="Conductores" description="Registra, consulta y mantén actualizada la disponibilidad del equipo." /><NoticeBox notice={notice} />
+    <div className="split"><div className="panel"><p className="panel-label">EQUIPO / FORMULARIO</p><h2>{editing ? 'Editar conductor' : 'Registrar conductor'}</h2><p className="panel-description">Mantén la información de licencia y disponibilidad en un solo lugar.</p><form onSubmit={submit} className="form-grid">
       <Field label="Nombres"><input required value={form.nombres} onChange={e => set('nombres', e.target.value)} /></Field>
       <Field label="Apellidos"><input required value={form.apellidos} onChange={e => set('apellidos', e.target.value)} /></Field>
       <Field label="Número de licencia"><input required value={form.numero_licencia} onChange={e => set('numero_licencia', e.target.value)} /></Field>
@@ -180,14 +192,74 @@ function DriversPage({ token }: { token: string }) {
       <Field label="Teléfono"><input value={form.telefono ?? ''} onChange={e => set('telefono', e.target.value || null)} /></Field>
       <Field label="Experiencia (años)"><input type="number" min="0" step="1" value={form.experiencia_anios ?? ''} onChange={e => set('experiencia_anios', e.target.value ? Number(e.target.value) : null)} /></Field>
       <Field label="Estado"><select value={form.estado} onChange={e => set('estado', e.target.value)}>
-        {['DISPONIBLE', 'ASIGNADO', 'DESCANSO', 'INACTIVO'].map(state => <option key={state}>{state}</option>)}
-      </select></Field><button disabled={busy}>Registrar</button>
+        {['DISPONIBLE', 'ASIGNADO', 'DESCANSO'].map(state => <option key={state}>{state}</option>)}
+      </select></Field><div className="actions"><button disabled={busy}>{editing ? 'Guardar cambios' : 'Registrar'}</button>
+        {editing && <button type="button" className="secondary" onClick={() => { setEditing(null); setForm(emptyDriver) }}>Cancelar edición</button>}
+      </div>
     </form></div><div className="panel"><p className="panel-label">EQUIPO / REGISTROS</p><div className="panel-heading"><h2>Conductores registrados</h2><span className="count-pill">{items.length}</span></div>
       <label className="check"><input type="checkbox" checked={onlyAvailable} onChange={e => setOnlyAvailable(e.target.checked)} /> Solo disponibles</label>
       {items.length === 0 ? <p className="empty-state">{onlyAvailable ? 'No hay conductores disponibles.' : 'No existen conductores registrados.'}</p> : <ul className="cards">
-        {items.map(item => <li key={item.conductor_id}><div className="card-heading"><strong>{item.nombres} {item.apellidos}</strong><span className="badge" data-state={item.estado}>{item.estado}</span></div><p className="card-subtitle">Licencia {item.numero_licencia} · {item.categoria_licencia}</p></li>)}
+        {items.map(item => <li key={item.conductor_id}><div className="card-heading"><strong>{item.nombres} {item.apellidos}</strong><span className="badge" data-state={item.estado}>{item.estado}</span></div><p className="card-subtitle">Licencia {item.numero_licencia} · {item.categoria_licencia}</p>
+          <p className="card-detail"><span>{item.telefono || 'Sin teléfono'}</span><span>{item.experiencia_anios ?? 0} años de experiencia</span></p>
+          {item.estado !== 'INACTIVO' && <div className="actions"><button type="button" className="secondary" onClick={() => { setEditing(item.conductor_id); setForm({ ...item }); window.scrollTo(0, 0) }}>Editar</button>
+            {item.estado !== 'ASIGNADO' && <button type="button" className="danger" onClick={() => void deactivate(item)}>Desactivar</button>}
+          </div>}
+        </li>)}
       </ul>}
     </div></div></section>
+}
+
+type ClientForm = Omit<Client, 'cliente_id' | 'creado_en'>
+const emptyClient: ClientForm = {
+  nombre: '', telefono: null, email: null, preferencia_entrega: null,
+  restriccion_acceso: null, estado: 'ACTIVO',
+}
+
+function ClientsPage({ token }: { token: string }) {
+  const [items, setItems] = useState<Client[]>([])
+  const [form, setForm] = useState<ClientForm>(emptyClient)
+  const [editing, setEditing] = useState<string | null>(null)
+  const [onlyActive, setOnlyActive] = useState(false)
+  const [notice, setNotice] = useState<Notice>(null)
+  const [busy, setBusy] = useState(false)
+  async function load() {
+    try { setItems(await api<Client[]>(`/clientes${onlyActive ? '?activo=true' : ''}`, token)) }
+    catch (error) { setNotice({ text: (error as Error).message, error: true }) }
+  }
+  useEffect(() => { void load() }, [token, onlyActive])
+  function set<K extends keyof ClientForm>(key: K, value: ClientForm[K]) { setForm(current => ({ ...current, [key]: value })) }
+  async function submit(event: FormEvent) {
+    event.preventDefault(); setBusy(true); setNotice(null)
+    try {
+      await api(editing ? `/clientes/${editing}` : '/clientes', token, {
+        method: editing ? 'PUT' : 'POST', body: JSON.stringify(form),
+      })
+      setNotice({ text: editing ? 'Cliente actualizado.' : 'Cliente registrado.', error: false })
+      setEditing(null); setForm(emptyClient); await load()
+    } catch (error) { setNotice({ text: (error as Error).message, error: true }) }
+    finally { setBusy(false) }
+  }
+  return <section><PageIntro number="04" title="Clientes" description="Administra los datos y las condiciones de entrega de cada cliente." /><NoticeBox notice={notice} />
+    <div className="split"><div className="panel"><p className="panel-label">CLIENTES / FORMULARIO</p><h2>{editing ? 'Editar cliente' : 'Registrar cliente'}</h2>
+      <p className="panel-description">Registra información de contacto, preferencias y restricciones de acceso.</p><form onSubmit={submit} className="form-grid">
+        <Field label="Nombre"><input required maxLength={180} value={form.nombre} onChange={e => set('nombre', e.target.value)} /></Field>
+        <Field label="Teléfono"><input maxLength={30} value={form.telefono ?? ''} onChange={e => set('telefono', e.target.value || null)} /></Field>
+        <Field label="Correo electrónico"><input type="email" maxLength={255} value={form.email ?? ''} onChange={e => set('email', e.target.value || null)} /></Field>
+        <Field label="Preferencia de entrega"><textarea maxLength={2000} rows={3} value={form.preferencia_entrega ?? ''} onChange={e => set('preferencia_entrega', e.target.value || null)} /></Field>
+        <Field label="Restricción de acceso"><textarea maxLength={2000} rows={3} value={form.restriccion_acceso ?? ''} onChange={e => set('restriccion_acceso', e.target.value || null)} /></Field>
+        <Field label="Estado"><select value={form.estado} onChange={e => set('estado', e.target.value as ClientForm['estado'])}><option>ACTIVO</option><option>INACTIVO</option></select></Field>
+        <div className="actions"><button disabled={busy}>{editing ? 'Guardar cambios' : 'Registrar'}</button>{editing && <button type="button" className="secondary" onClick={() => { setEditing(null); setForm(emptyClient) }}>Cancelar edición</button>}</div>
+      </form>
+    </div><div className="panel"><p className="panel-label">CLIENTES / REGISTROS</p><div className="panel-heading"><h2>Clientes registrados</h2><span className="count-pill">{items.length}</span></div>
+      <label className="check"><input type="checkbox" checked={onlyActive} onChange={e => setOnlyActive(e.target.checked)} /> Solo activos</label>
+      {items.length === 0 ? <p className="empty-state">{onlyActive ? 'No hay clientes activos.' : 'No existen clientes registrados.'}</p> : <ul className="cards">
+        {items.map(item => <li key={item.cliente_id}><div className="card-heading"><strong>{item.nombre}</strong><span className="badge" data-state={item.estado}>{item.estado}</span></div>
+          <p className="card-subtitle">{item.email || 'Sin correo'} · {item.telefono || 'Sin teléfono'}</p><p className="card-detail"><span>Preferencia: {item.preferencia_entrega || 'Sin especificar'}</span><span>Acceso: {item.restriccion_acceso || 'Sin restricciones'}</span></p>
+          <div className="actions"><button type="button" className="secondary" onClick={() => { setEditing(item.cliente_id); setForm({ nombre: item.nombre, telefono: item.telefono, email: item.email, preferencia_entrega: item.preferencia_entrega, restriccion_acceso: item.restriccion_acceso, estado: item.estado }); window.scrollTo(0, 0) }}>Editar</button></div>
+        </li>)}
+      </ul>}
+    </div></div>
+  </section>
 }
 
 type OrderForm = Omit<Order, 'pedido_id' | 'estado'>
@@ -216,7 +288,7 @@ function OrdersPage({ token }: { token: string }) {
   }
   useEffect(() => { void load() }, [token, filter])
   useEffect(() => {
-    void api<Client[]>('/clientes', token).then(setClients).catch(error => setNotice({ text: error.message, error: true }))
+    void api<Client[]>('/clientes?activo=true', token).then(setClients).catch(error => setNotice({ text: error.message, error: true }))
   }, [token])
   function set<K extends keyof OrderForm>(key: K, value: OrderForm[K]) { setForm(current => ({ ...current, [key]: value })) }
   async function submit(event: FormEvent) {
@@ -288,6 +360,7 @@ function HomePage({ onNavigate }: { onNavigate: (page: Page) => void }) {
     { number: '01', title: 'Vehículos', description: 'Gestiona la flota, sus capacidades y estados.' },
     { number: '02', title: 'Pedidos', description: 'Organiza las entregas y sus ventanas de tiempo.' },
     { number: '03', title: 'Conductores', description: 'Consulta quiénes están disponibles para operar.' },
+    { number: '04', title: 'Clientes', description: 'Gestiona contactos, preferencias y restricciones de entrega.' },
   ]
   return <section>
     <div className="home-hero"><p className="eyebrow"><span className="eyebrow-mark" /> PANEL / OPERACIÓN LOGÍSTICA</p>
@@ -295,7 +368,7 @@ function HomePage({ onNavigate }: { onNavigate: (page: Page) => void }) {
       <p>Un espacio para mantener tu operación en movimiento. Elige un módulo para empezar.</p>
       <div className="hero-decoration" aria-hidden="true"><span>EL</span><i /><i /><i /></div>
     </div>
-    <div className="module-section-heading"><div><p className="panel-label">ESPACIO DE TRABAJO</p><h2>Módulos operativos</h2></div><span className="edition-tag">03 MÓDULOS DISPONIBLES</span></div>
+    <div className="module-section-heading"><div><p className="panel-label">ESPACIO DE TRABAJO</p><h2>Módulos operativos</h2></div><span className="edition-tag">04 MÓDULOS DISPONIBLES</span></div>
     <div className="module-grid">{modules.map(module =>
       <article className="module-card" key={module.number}>
         <div className="module-card-top"><span className="module-index">/{module.number}</span><span className="module-arrow" aria-hidden="true">↗</span></div>
@@ -315,7 +388,7 @@ export function App() {
   }
   if (!token) return <Login onLogin={value => { setToken(value); window.scrollTo(0, 0) }} />
   return <div className="app-shell"><header className="topbar"><div className="brand"><span className="brand-mark" aria-hidden="true">EL<span>↗</span></span><span>EcoLogística<span className="brand-location">Lima / Perú</span></span></div>
-    <nav aria-label="Navegación principal">{(['Inicio', 'Vehículos', 'Pedidos', 'Conductores'] as Page[]).map(item =>
+    <nav aria-label="Navegación principal">{(['Inicio', 'Vehículos', 'Pedidos', 'Conductores', 'Clientes'] as Page[]).map(item =>
       <button key={item} type="button" className={page === item ? 'nav-active' : ''} aria-current={page === item ? 'page' : undefined} onClick={() => navigate(item)}>{item}</button>)}</nav>
     <button type="button" className="logout" onClick={() => { setToken(''); setPage('Inicio') }}>Salir</button>
   </header><main className="content">
@@ -323,5 +396,6 @@ export function App() {
     {page === 'Vehículos' && <VehiclesPage token={token} />}
     {page === 'Pedidos' && <OrdersPage token={token} />}
     {page === 'Conductores' && <DriversPage token={token} />}
+    {page === 'Clientes' && <ClientsPage token={token} />}
   </main></div>
 }

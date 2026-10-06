@@ -3,7 +3,7 @@ from decimal import Decimal
 from typing import Annotated, Literal
 from uuid import UUID
 
-from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, StringConstraints, model_validator
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, StringConstraints, field_validator, model_validator
 
 RequiredText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
 VehicleState = Literal["DISPONIBLE", "EN_RUTA", "MANTENIMIENTO", "INACTIVO"]
@@ -75,10 +75,34 @@ class OrderOut(OrderInput):
     actualizado_en: datetime
 
 
-class ClientOut(BaseModel):
+class ClientInput(BaseModel):
+    nombre: RequiredText = Field(max_length=180)
+    telefono: str | None = Field(default=None, max_length=30)
+    email: str | None = Field(default=None, max_length=255)
+    preferencia_entrega: str | None = Field(default=None, max_length=2000)
+    restriccion_acceso: str | None = Field(default=None, max_length=2000)
+    estado: Literal["ACTIVO", "INACTIVO"] = "ACTIVO"
+
+    @field_validator("telefono", "email", "preferencia_entrega", "restriccion_acceso", mode="before")
+    @classmethod
+    def normalize_optional_text(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        normalized = value.strip()
+        return normalized or None
+
+    @field_validator("email")
+    @classmethod
+    def valid_email(cls, value: str | None) -> str | None:
+        if value is not None and ("@" not in value or "." not in value.rsplit("@", 1)[-1]):
+            raise ValueError("El correo electrónico no tiene un formato válido")
+        return value.lower() if value else value
+
+
+class ClientOut(ClientInput):
     model_config = ConfigDict(from_attributes=True)
     cliente_id: UUID
-    nombre: str
+    creado_en: datetime
 
 
 class LoginInput(BaseModel):

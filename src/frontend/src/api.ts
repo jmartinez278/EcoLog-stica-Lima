@@ -38,7 +38,16 @@ export type Order = {
   estado: string
 }
 
-export type Client = { cliente_id: string; nombre: string }
+export type Client = {
+  cliente_id: string
+  nombre: string
+  telefono: string | null
+  email: string | null
+  preferencia_entrega: string | null
+  restriccion_acceso: string | null
+  estado: 'ACTIVO' | 'INACTIVO'
+  creado_en: string
+}
 
 export async function api<T>(path: string, token: string, init: RequestInit = {}): Promise<T> {
   const response = await fetch(`/api/v1${path}`, {

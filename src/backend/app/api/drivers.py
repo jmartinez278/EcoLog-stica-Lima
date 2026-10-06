@@ -26,3 +26,13 @@ def list_all(disponible: bool | None = None, db: Session = Depends(get_db), user
 @router.get("/{driver_id}", response_model=DriverOut)
 def get(driver_id: UUID, db: Session = Depends(get_db), user: User = Depends(require_read)):
     return service.get_driver(db, driver_id)
+
+
+@router.put("/{driver_id}", response_model=DriverOut)
+def update(driver_id: UUID, data: DriverInput, db: Session = Depends(get_db), user: User = Depends(require_write)):
+    return service.update(db, user, driver_id, data)
+
+
+@router.patch("/{driver_id}/desactivar", response_model=DriverOut)
+def deactivate(driver_id: UUID, db: Session = Depends(get_db), user: User = Depends(require_write)):
+    return service.deactivate(db, user, driver_id)

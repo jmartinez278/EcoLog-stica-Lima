@@ -9,7 +9,7 @@ from app.core.security import user_from_token
 from app.db.session import SessionLocal
 from app.models import Audit
 
-app = FastAPI(title="EcoLogística Lima", version="0.1.0")
+app = FastAPI(title="EcoLogística Lima", version="0.2.0")
 logger = logging.getLogger(__name__)
 for router in (auth.router, vehicles.router, drivers.router, orders.router, clients.router):
     app.include_router(router)
@@ -28,7 +28,7 @@ async def audit_failed_writes(request: Request, call_next):
     parts = request.url.path.split("/")
     if request.method not in {"POST", "PUT", "PATCH"} or response.status_code < 400:
         return response
-    if len(parts) < 4 or parts[:3] != ["", "api", "v1"] or parts[3] not in {"vehiculos", "pedidos", "conductores"}:
+    if len(parts) < 4 or parts[:3] != ["", "api", "v1"] or parts[3] not in {"vehiculos", "pedidos", "conductores", "clientes"}:
         return response
     try:
         with SessionLocal() as db:
@@ -43,7 +43,7 @@ async def audit_failed_writes(request: Request, call_next):
                     pass
             db.add(Audit(
                 usuario_id=user.usuario_id if user else None,
-                entidad={"vehiculos": "VEHICULO", "pedidos": "PEDIDO", "conductores": "CONDUCTOR"}[parts[3]],
+                entidad={"vehiculos": "VEHICULO", "pedidos": "PEDIDO", "conductores": "CONDUCTOR", "clientes": "CLIENTE"}[parts[3]],
                 entidad_id=entity_id,
                 accion=request.method,
                 resultado="FALLIDO",

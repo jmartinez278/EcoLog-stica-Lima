@@ -1,6 +1,6 @@
 # EcoLogística Lima
 
-**Versión de este README:** 1.0.4 · **Actualizado:** 29/09/2026
+**Versión de este README:** 1.1.0 · **Actualizado:** 06/10/2026
 
 **EcoLogística Lima** es un proyecto de software orientado a la optimización sostenible de rutas de distribución de última milla para el escenario empresarial de **DistriRápido S.A.C.**
 
@@ -213,7 +213,7 @@ PostgreSQL se utiliza como sistema gestor principal y se contempla **PostGIS** c
 
 El backend del Sprint 1 es una API REST desarrollada con FastAPI.
 
-Grupos de recursos de la arquitectura objetivo (solo `auth`, `vehiculos`, `conductores`, `clientes` de consulta y `pedidos` están implementados en Sprint 1):
+Grupos de recursos de la arquitectura objetivo (`auth`, `vehiculos`, `pedidos`, `conductores` y `clientes` están implementados hasta el Sprint 2):
 
 ```text
 /api/v1/auth
@@ -273,7 +273,7 @@ La lista actual de cinco integrantes fue confirmada por el usuario mediante una 
 
 ## Estado
 
-**Fase actual:** implementación técnica del Sprint 1; presentación, retrospectiva y aceptación formal pendientes a la fecha de corte.
+**Fase actual:** implementación técnica del Sprint 2 en la rama `sprint-2`. El incremento incorpora US-011 a US-015 sobre la base validada del Sprint 1.
 
 Los documentos de definición inicial se encuentran en `docs/01 Inicio/`, la planificación en `docs/02 Planificación/` y los entregables de esta iteración en `docs/03 Implementación/`.
 
@@ -286,6 +286,7 @@ Los documentos de definición inicial se encuentran en `docs/01 Inicio/`, la pla
 | 1.0.2 | 29/09/2026 | Actualización del equipo actual a cinco integrantes y referencia al análisis retrospectivo ampliado. |
 | 1.0.3 | 29/09/2026 | Ajuste de la descripción del análisis retrospectivo. |
 | 1.0.4 | 29/09/2026 | Revalidación técnica del Sprint y actualización del análisis retrospectivo y la revisión. |
+| 1.1.0 | 06/10/2026 | Implementación técnica de US-011 a US-015: gestión ampliada de conductores y clientes. |
 
 ---
 
