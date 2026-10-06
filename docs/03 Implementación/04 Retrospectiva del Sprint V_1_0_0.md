@@ -1,82 +1,61 @@
 [← Volver al README principal](../../README.md)
 
-# Retrospectiva del Sprint 1
+# Retrospectiva del Sprint 2 — análisis para validación del equipo
 
-| Campo | Detalle |
-|---|---|
-| Proyecto | EcoLogística Lima – Optimizador de Rutas Sostenibles para DistriRápido S.A.C. |
-| Sprint | ECO Sprint 1 |
-| Líder del proyecto | Marco Jhair Martinez Llanos, según el acta de constitución |
-| Fecha de elaboración | 29/09/2026 |
-| Reunión del equipo | Pendiente a la fecha de elaboración |
-| Versión del documento | 1.0.3 |
-| Estado | Análisis retrospectivo documentado; acuerdos del equipo pendientes de confirmación |
-| Base del análisis | [Informe de estado](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md), [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) y pruebas del Sprint 1 |
+**Nombre del Proyecto:** EcoLogística Lima – Optimizador de Rutas Sostenibles para DistriRápido S.A.C.
 
-## Equipo del proyecto
+**Líder del Proyecto:** Marco Jhair Martinez Llanos (según el acta de constitución)
 
-Los cinco integrantes indicados por el usuario son:
+**Fecha de elaboración:** 06/10/2026 · **Versión del documento:** 1.0.0
 
-1. Rodrigo Vladimir Arce Curi.
-2. Piero Pool Chauris Leguia.
-3. Luis Antony Gonzalo Guerrero.
-4. Marco Jhair Martinez Llanos.
-5. Jhon Robert Paitan Montes.
-
-La documentación inicial enumera cuatro integrantes y omite a Piero; no se conoce desde cuándo se incorporó. Este análisis no atribuye declaraciones a ninguno de ellos.
+**Estado de la reunión:** no hay evidencia de una retrospectiva del equipo realizada al corte. Este análisis se basa en la comparación de `sprint-1` y `sprint-2`, las pruebas backend ejecutadas, el [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) y la consulta de [Jira](../02%20Planificación/04%20Seguimiento%20Jira%20Sprint%202%20V_1_0_1.md). Las acciones son propuestas verificables; no se atribuyen opiniones ni acuerdos a integrantes sin confirmación.
 
 ## ¿Qué aprendimos?
 
-- El Sprint 1 puede demostrar US-001 a US-010 sin adelantar la gestión de clientes: la carga inicial idempotente y `GET /api/v1/clientes` permiten seleccionar un cliente para los pedidos. Esta solución limita la demo al cliente de ejemplo.
-- Las transiciones de estado requieren pruebas de rechazo: un pedido que ya no está `PENDIENTE` no debe editarse ni cancelarse; la desactivación de vehículos debe conservar el registro. Las pruebas automatizadas cubren estos casos.
-- Una configuración inválida puede impedir el acceso aunque la API esté implementada. El error HTTP 500 de login se relacionó con `JWT_SECRET` demasiado corto; la validación previa del entorno debe entrar en el guion de presentación.
-- El entorno de ejecución forma parte del resultado. Docker Desktop y la mezcla de dependencias Windows/WSL bloquearon temporalmente las verificaciones; al usar Compose y PostgreSQL aislado, el 29/09/2026 pasaron 9 pruebas backend con 91,35 % de cobertura, 4 pruebas frontend, el build y la navegación a 360 px.
-- Las pruebas y la navegación local acreditan funcionamiento técnico, pero no reemplazan la presentación a interesados, la revisión por pares, staging ni la aceptación formal del Definition of Done.
+- Reutilizar el modelo de datos y la secuencia router → servicio → repositorio permitió ampliar Conductores y Clientes sin rehacer Vehículos ni Pedidos. La validación de cliente activo del Sprint 1 se mantuvo y preserva la selección de clientes para pedidos.
+- La integración del código y la aceptación del sprint son pasos distintos: el PR #1 está integrado, pero las cinco historias siguen `To Do` en Jira y el DoD global exige más evidencias que una suite aprobada.
+- Es necesario actualizar documentos y tablero durante el sprint, no solo después del desarrollo. Al iniciar esta revisión, los cuatro entregables existentes aún describían el Sprint 1 y el Sprint 2 no tenía objetivo cargado en Jira; ambos puntos se corrigieron documentalmente y el objetivo ya quedó registrado.
+- Una suite backend verde en SQLite es útil para validar reglas, pero no demuestra el comportamiento de PostgreSQL ni de la interfaz en el entorno de presentación.
 
 ## ¿Qué estamos haciendo bien?
 
-- La división `router → servicio → repositorio → PostgreSQL` y las carpetas separadas de frontend y backend permiten localizar reglas, errores y pruebas.
-- El alcance implementado se mantuvo en US-001 a US-010. No se agregó el optimizador ni funcionalidades de sprints posteriores.
-- Las pruebas incluyen registros, consultas vacías, duplicados, permisos, auditoría y transiciones prohibidas. Una ejecución integrada en contenedores confirmó que API, base de datos e interfaz arrancan juntas.
-- Los impedimentos de login y herramientas se registraron y se repitió la comprobación tras corregir el entorno.
+- El alcance técnico siguió US-011 a US-015 de la planificación; no introdujo optimización, mapa ni funciones posteriores.
+- Se conservaron autenticación, permisos, auditoría y capas de la arquitectura del Sprint 1. Las escrituras de los nuevos módulos usan el servicio de transacción y auditoría existente.
+- Las pruebas nuevas cubren altas, consultas, cambios, duplicados, permisos y transiciones inválidas. En la revisión de esta versión pasaron 14 pruebas backend con 92,41 % de cobertura total.
+- El tablero ya contiene las cinco historias con estimaciones: 3, 2, 5, 2 y 3 puntos, respectivamente; no hizo falta duplicarlas.
 
 ## ¿Qué podemos hacer mejor?
 
 ### Personas
 
-La presentación concentra tareas de operación, explicación, registro de comentarios y respuesta a preguntas. Si una persona asume todo, puede omitir pasos o evidencias. Distribuir los papeles de presentador, apoyo técnico y relator, y practicar el guion. Un integrante distinto del autor debe revisar cada cambio técnico pendiente de aceptación. El cierre se comprobará con una asignación confirmada de los tres papeles y una revisión por pares registrada; ninguna de las dos consta todavía.
+Las cinco tarjetas del Sprint 2 carecen de responsable en Jira. Esto dificulta coordinar la validación, documentación y presentación. En la reunión, asignar responsable y revisor diferentes por historia o bloque, y dejar constancia de quién comprobará pruebas y criterios BDD. No se presupone que las asignaciones propuestas en el Sprint 1 sigan vigentes.
 
 ### Relaciones
 
-La evidencia técnica no recoge la opinión de docentes o interesados: faltan observaciones y decisiones sobre los diez flujos. Durante la revisión del Sprint, registrar por historia lo mostrado, la pregunta o comentario recibido, la decisión de aceptación o rechazo y cualquier compromiso con responsable y plazo. El cierre se comprobará con diez resultados trazables, incluso cuando alguno quede pendiente o sea rechazado.
+No constan comentarios ni decisiones de stakeholders sobre US-011 a US-015. La demostración debe recoger preguntas, cambios solicitados y aceptación por historia, y comunicar a todos los integrantes cualquier diferencia entre lo implementado y lo aprobado. La reunión retrospectiva deberá confirmar este análisis y cualquier desacuerdo.
 
 ### Procesos
 
-La dependencia de datos iniciales y variables de entorno puede interrumpir una demostración improvisada; el fallo de login y el bloqueo de Docker ya causaron retrasos de verificación. Antes de presentar, comprobar rama, Docker, `.env`, salud de la API, login y datos de ejemplo; después, ejecutar US-001 a US-010 y al menos un caso inválido con un guion común. Conservar comandos, fecha y resultados. Revisar los doce criterios del DoD por historia antes de marcarla `Done`, con especial atención a análisis estático, revisión por pares, staging, accesibilidad y aceptación BDD.
+El tablero no avanzó al ritmo del código: Sprint 2 figura `future` y sus cinco historias siguen `To Do`. El Sprint Goal ya se registró, pero aún falta acordar fechas, responsables y evidencias. Establecer una revisión breve de Jira y documentos antes de cada entrega, con evidencia para cada transición de estado. Antes de `Done`, contrastar los doce criterios del DoD, especialmente peer review, seguridad, staging, interfaz y aceptación BDD. Reservar el cierre del sprint para después de la demostración y los acuerdos reales.
 
 ### Herramientas
 
-La combinación de Node de Windows con `node_modules` de Linux produjo un fallo de dependencia nativa y Docker estuvo inicialmente inaccesible. Usar Compose como procedimiento compartido y verificar `docker info` al comenzar; el 29/09/2026 esta vía permitió repetir 9 pruebas backend, 4 frontend y el build. Mantener secretos únicamente en `.env`, validar la longitud de `JWT_SECRET`, conservar `.env.example` sin credenciales y usar una base PostgreSQL aislada para pruebas. La comprobación de cierre es un arranque reproducible y una suite sin fallos en el equipo de presentación.
+En el WSL usado para la revisión, Node se resolvió desde Windows y Docker no estuvo disponible; esto impidió repetir Vitest, build, Compose y PostgreSQL. Acordar un único procedimiento reproducible de verificación en un entorno con Docker Desktop integrado a WSL, registrar comandos y resultados y mantener una base de prueba aislada. Conservar el seguimiento Jira como fuente de estado y los Markdown como evidencia fechada, con enlaces en ambos sentidos.
 
-## Plan de acción derivado del análisis
+### Acciones a realizar
 
-La siguiente distribución de responsabilidades y plazos requiere validación del equipo.
+Las responsabilidades y fechas siguientes son **propuestas para confirmar** en la retrospectiva; el estado inicial es pendiente.
 
-| Acción concreta | Responsable propuesto | Plazo propuesto | Criterio verificable de cierre |
-|---|---|---|---|
-| Coordinar el ensayo y presentar el alcance real de US-001 a US-010; recopilar decisiones de los interesados. | Marco Jhair Martinez Llanos | Antes y durante la presentación del Sprint 1 | Guion practicado y revisión del Sprint actualizada con fecha, asistentes, comentarios y decisiones reales. |
-| Comprobar Docker Desktop, Compose, PostgreSQL, `/health`, variables y login en el equipo de la demo. | Rodrigo Vladimir Arce Curi | Antes de iniciar la presentación | `docker info` y `docker compose config --quiet` correctos; API y login accesibles sin mostrar secretos. |
-| Ejecutar y guardar las pruebas backend contra base aislada y revisar los casos negativos de vehículos, pedidos y conductores. | Luis Antony Gonzalo Guerrero | Antes de solicitar aceptación técnica | Resultado fechado de Pytest, cobertura ≥ 80 % y evidencia de rechazos esperados. |
-| Ejecutar Vitest, build y un recorrido de la interfaz a 360 px; anotar fallos de navegación y formularios. | Jhon Robert Paitan Montes | Antes de solicitar aceptación técnica | Resultado fechado de pruebas y build, más lista de flujos observados o defectos. |
-| Revisar el DoD y los documentos con un segundo integrante; registrar faltantes y notas de la presentación. | Piero Pool Chauris Leguia | Después de la presentación y antes de declarar historias `Done` | Registro de revisión por pares, criterios aún pendientes y notas incorporadas a los entregables. |
-
-**Estado de las acciones:** pendientes de validación. El equipo podrá confirmar o ajustar responsables y plazos en su reunión.
+| Acción concreta | Responsable a confirmar | Plazo propuesto | Evidencia de cierre | Estado |
+|---|---|---|---|---|
+| Revisar fechas y asignar ECO-17 a ECO-21 en Jira; registrar evidencia para mover estados. El Sprint Goal ya está registrado. | Líder del proyecto y equipo | 07/10/2026 | Jira muestra responsables y estados sustentados; fechas confirmadas. | Pendiente |
+| Repetir pruebas frontend, build, Compose y suite backend con PostgreSQL aislado. | Responsable técnico a designar | Antes de la presentación | Resultados fechados y fallos registrados en impedimentos. | Pendiente |
+| Revisar cada historia contra BDD y DoD con un segundo integrante, dejando comentarios de revisión. | Autor y revisor distintos por historia | Antes de marcar `Done` | Registro de aprobación o puntos abiertos por US. | Pendiente |
+| Demostrar US-011 a US-015 a interesados y documentar decisiones, comentarios y compromisos. | Presentador y relator a designar | Fecha de revisión del Sprint a confirmar | Acta con asistentes, historias mostradas y resultado por escenario. | Pendiente |
+| Celebrar la retrospectiva del equipo y validar o corregir este análisis y las acciones. | Equipo completo | Antes del cierre formal del Sprint 2 | Fecha, participantes, acuerdos, responsables y plazos efectivos añadidos a una nueva versión. | Pendiente |
 
 ## Historial de control de cambios
 
 | Versión | Fecha | Cambio |
 |---|---|---|
-| 1.0.0 | 29/09/2026 | Análisis inicial de la retrospectiva del Sprint 1. |
-| 1.0.1 | 29/09/2026 | Análisis estructurado en cuatro ejes, equipo de cinco integrantes y plan de acción con responsables sugeridos. |
-| 1.0.2 | 29/09/2026 | Redacción simplificada del análisis retrospectivo pendiente de validación. Se conserva el nombre del archivo exigido por la consigna. |
-| 1.0.3 | 29/09/2026 | Análisis de causas, efectos y comprobaciones de cierre en los cuatro ejes; acuerdos del equipo aún por confirmar. |
+| 1.0.0 | 06/10/2026 | Análisis del Sprint 2 en los cuatro ejes y plan de acción propuesto; reunión y acuerdos pendientes de validación. |
