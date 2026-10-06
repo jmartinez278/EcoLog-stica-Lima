@@ -1,6 +1,6 @@
 # EcoLogística Lima
 
-**Versión de este README:** 1.2.0 · **Actualizado:** 06/10/2026
+**Versión de este README:** 1.2.1 · **Actualizado:** 06/10/2026
 
 **EcoLogística Lima** es un proyecto de software orientado a la optimización sostenible de rutas de distribución de última milla para el escenario empresarial de **DistriRápido S.A.C.**
 
@@ -191,6 +191,7 @@ La revisión documenta el estado **antes** de la presentación del 29/09/2026. L
 | Registro de impedimentos | [02 Registro de Impedimentos V_1_0_0](<docs/03 Implementación/02 Registro de Impedimentos V_1_0_0.md>) |
 | Revisión del Sprint | [03 Revisión del Sprint V_1_0_0](<docs/03 Implementación/03 Revisión del Sprint V_1_0_0.md>) |
 | Retrospectiva del Sprint | [04 Retrospectiva del Sprint V_1_0_0](<docs/03 Implementación/04 Retrospectiva del Sprint V_1_0_0.md>) |
+| Informe de implementación | [05 Informe de implementación del Sprint 2 V_1_0_0](<docs/03 Implementación/05 Informe de implementación del Sprint 2 V_1_0_0.md>) |
 
 El [seguimiento Jira del Sprint 2](<docs/02 Planificación/04 Seguimiento Jira Sprint 2 V_1_0_1.md>) recoge las cinco historias, Story Points y estado del tablero consultado el 06/10/2026. La documentación distingue funcionalidades implementadas de historias formalmente aceptadas; la demostración y retrospectiva del equipo siguen sin evidencia de realización.
 
@@ -301,6 +302,7 @@ Los documentos de definición inicial se encuentran en `docs/01 Inicio/`, la pla
 | 1.0.4 | 29/09/2026 | Revalidación técnica del Sprint y actualización del análisis retrospectivo y la revisión. |
 | 1.1.0 | 06/10/2026 | Implementación técnica de US-011 a US-015: gestión ampliada de conductores y clientes. |
 | 1.2.0 | 06/10/2026 | Entregables del Sprint 2, conservación de los del Sprint 1, seguimiento del tablero Jira y distinción entre integración técnica y aceptación formal. |
+| 1.2.1 | 06/10/2026 | Incorporación del informe técnico de implementación del Sprint 2. |
 
 ---
 
