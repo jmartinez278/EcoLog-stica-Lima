@@ -6,11 +6,11 @@
 |---|---|
 | Proyecto | EcoLogística Lima – Optimizador de Rutas Sostenibles para DistriRápido S.A.C. |
 | Sprint | ECO Sprint 2 – Gestión ampliada de conductores y clientes |
-| Periodo registrado en Jira | 22/09/2026 al 06/10/2026 |
+| Periodo programado en Jira | 22/09/2026 19:59:45 al 06/10/2026 19:59:35, hora de Lima; Jira aún indicaba `future` al corte |
 | Fecha de corte técnico | 06/10/2026 (hora de Lima) |
 | Rama | `sprint-2` |
 | Commit publicado | `53642da` – `Implement Sprint 2 driver and client management` |
-| Versión del documento | 1.0.0 |
+| Versión interna del documento | 1.0.1; el nombre `V_1_0_0` se conserva por la consigna |
 | Estado | Implementación técnica publicada; revisión por pares y aceptación formal pendientes |
 
 ## Objetivo del Sprint
@@ -98,7 +98,7 @@ El modelo de datos del Sprint 1 ya contenía todos los campos requeridos en `con
 | Comprobación | Resultado |
 |---|---|
 | Pruebas backend | 14 pruebas aprobadas |
-| Cobertura backend | 92,41 %, superior al umbral de 80 % |
+| Cobertura backend total | 92,41 %; falta desglose del código afectado para acreditar DoD-01 |
 | Pruebas frontend | 5 pruebas aprobadas |
 | Build frontend | TypeScript y Vite completados correctamente |
 | Docker Compose | PostgreSQL, backend y frontend construidos y activos |
@@ -106,6 +106,8 @@ El modelo de datos del Sprint 1 ya contenía todos los campos requeridos en `con
 | Interfaz local | `http://localhost:5173` respondió HTTP 200 |
 | Contrato API | OpenAPI disponible con versión `0.2.0` |
 | Recorrido integrado | Registro y actualización de cliente, y registro y desactivación de conductor verificados sobre PostgreSQL local |
+
+La tabla conserva los resultados **registrados al elaborar la versión 1.0.0**. Esta revisión documental no recibió salidas fechadas ni repitió Vitest, build, Compose o PostgreSQL en su entorno WSL; por ello no los presenta como comprobaciones independientes. La ejecución local de Pytest de esta revisión sí confirmó 14 pruebas y 92,41 % de cobertura total sobre SQLite, según el [informe de estado](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md). La cobertura total no demuestra por sí sola el mínimo del 80 % sobre el código afectado exigido por DoD-01.
 
 Comandos principales utilizados:
 
@@ -130,7 +132,7 @@ Las pruebas backend están en `src/backend/tests/test_drivers.py` y `src/backend
 
 ## Estado frente al Definition of Done
 
-La implementación, las pruebas automatizadas, la cobertura, la documentación técnica, el contrato OpenAPI, el arranque con Docker y la auditoría aplicable cuentan con evidencia técnica. No obstante, este informe no declara las historias formalmente `Done` porque aún deben registrarse, según corresponda:
+La implementación y las pruebas backend ejecutadas en esta revisión cuentan con evidencia; los demás resultados de la tabla requieren conservar sus salidas para una verificación independiente. Este informe no declara las historias formalmente `Done`: el [Definition of Done](../02%20Planificación/01%20Transformando%20a%20ágil%20V_1_0_1.md) es el único criterio de cierre y exige cumplir todos los puntos aplicables. Los escenarios BDD se verifican dentro de DoD-10. Aún deben registrarse, según corresponda:
 
 1. Revisión y aprobación por otro integrante del equipo mediante Pull Request.
 2. Análisis estático o de seguridad acordado por el equipo.
@@ -141,10 +143,11 @@ La implementación, las pruebas automatizadas, la cobertura, la documentación t
 
 ## Publicación
 
-El incremento está disponible en la rama remota `sprint-2` del repositorio GitHub. La integración en `main` debe realizarse mediante Pull Request después de completar la revisión técnica y las comprobaciones pendientes del Definition of Done.
+El incremento está disponible en la rama remota `sprint-2` y fue integrado a `main` mediante el [PR #1](https://github.com/jmartinez278/EcoLog-stica-Lima/pull/1) el 06/10/2026 a las 16:23:33 (Lima). La consulta de GitHub no encontró aprobación de review ni ejecuciones de workflow para el commit `53642da`; el merge no acredita por sí solo el DoD. Jira mantenía ECO-17 a ECO-21 en `To Do` y sin responsable al corte. El commit de implementación data del 06/10/2026 a las 13:53:08; no hay evidencia para asignar desarrollo a días anteriores del intervalo programado.
 
 ## Historial de control de cambios
 
 | Versión | Fecha | Cambio |
 |---|---|---|
 | 1.0.0 | 06/10/2026 | Informe inicial de implementación de US-011 a US-015, evidencia técnica, trazabilidad y pendientes de aceptación. |
+| 1.0.1 | 06/10/2026 | Alineación con Jira y el PR fusionado, distinción entre resultados registrados y repetidos, y DoD como criterio único de cierre. |

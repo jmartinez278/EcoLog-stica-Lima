@@ -201,7 +201,7 @@ Para ejecutar el proyecto, consultar las instrucciones técnicas del [backend](s
 
 La verificación técnica del 29/09/2026 pasó con Docker Compose, PostgreSQL aislado, API y frontend: 9 pruebas backend (91,35 % de cobertura), 4 pruebas frontend, build y un recorrido HTTP de US-001 a US-010. La interfaz cargó y navegó sin desbordamiento horizontal a 360 px en el navegador probado. A las 15:04 (hora de Lima) se repitieron el arranque, las pruebas y el build en otro proyecto Compose aislado. La demostración ante interesados y la reunión de retrospectiva del equipo siguen sin evidencia de realización.
 
-Para Sprint 2, la revisión del 06/10/2026 ejecutó 14 pruebas backend con 92,41 % de cobertura sobre SQLite. En ese entorno no se pudieron repetir Vitest, build, Compose ni PostgreSQL; los resultados del Sprint 1 no se trasladan al Sprint 2. En Jira, ECO-17 a ECO-21 siguen `To Do`, sin responsable, y el sprint permanece `future`.
+Para Sprint 2, la revisión del 06/10/2026 ejecutó 14 pruebas backend con 92,41 % de cobertura total sobre SQLite. En ese entorno no se pudieron repetir Vitest, build, Compose ni PostgreSQL; el [informe técnico de implementación](<docs/03 Implementación/05 Informe de implementación del Sprint 2 V_1_0_0.md>) registra resultados de otra ejecución sin salidas adjuntas en esta revisión. La cobertura total no acredita por sí sola el umbral del código afectado. En Jira, ECO-17 a ECO-21 siguen `To Do`, sin responsable, y el sprint permanece `future`.
 
 ---
 
@@ -305,7 +305,7 @@ Los documentos de definición inicial se encuentran en `docs/01 Inicio/`, la pla
 | 1.1.0 | 06/10/2026 | Implementación técnica de US-011 a US-015: gestión ampliada de conductores y clientes. |
 | 1.2.0 | 06/10/2026 | Entregables del Sprint 2, conservación de los del Sprint 1, seguimiento del tablero Jira y distinción entre integración técnica y aceptación formal. |
 | 1.2.1 | 06/10/2026 | Incorporación del informe técnico de implementación del Sprint 2. |
-| 1.2.2 | 06/10/2026 | Calendario exacto de Jira, DoD como criterio único de cierre y enlace al seguimiento del Sprint 2 revisado. |
+| 1.2.2 | 06/10/2026 | Calendario exacto de Jira, DoD como criterio único de cierre, seguimiento revisado y alcance de las verificaciones del informe técnico. |
 
 ---
 
